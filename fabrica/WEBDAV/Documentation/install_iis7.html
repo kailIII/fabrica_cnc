@@ -1,0 +1,251 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>OfficeOpen installation for PHP</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script type="text/javascript" language="javascript">
+        function toggleBlock(id) {
+            if (document.getElementById(id).style.display == 'none') {
+                document.getElementById(id).style.display = 'block';
+            }
+            else {
+                document.getElementById(id).style.display = 'none';
+            }
+        }
+    </script>
+    
+<table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="400">
+
+                <span class="caption">OfficeOpen </span><span class="yellow">2.0</span>
+                <br /><span class="gray">Installation for on IIS 7.x server</span>
+            </td>
+            <td>&nbsp;
+                
+            </td>
+            <td align="char" width="200">
+
+               <img src="world.jpg" align="middle" hspace="5" /><b><a target="_blank" href="http://www.element-it.com/online-edit-in-openoffice-and-microsoft-office.aspx">Home
+                    page</a></b><br />
+                <img src="email.jpg" align="middle" hspace="5" /><b><a target="_blank" href="http://www.element-it.com/contacts.aspx">Contact
+                    support</a></b>
+            </td>
+        </tr>
+</table>
+ <br />
+     <p class="topic">
+        <a id="hcadsicomtopic">OfficeOpen application install at Windows 2008 (IIS 7 and 7.5).</a>    </p>
+	<br/>
+<p class="topic">
+        <a id="installationIIS">IIS and PHP installation </a>
+</p>
+   <p class="question">
+        <img id="webftp2k3_arrow" class="ulimg" src="Images/collapsed.jpg" style="width: 11px;
+            height: 11px" /><span id="webftp2k3_link" onClick="toggleBlock('iis2000'); return false;"
+                class="imglink">1. Installation IIS</span></p>
+<div id="iis2000" >
+       <ul>
+            <li>For detailed instruction about IIS installation, refer to <a href="http://learn.iis.net/page.aspx/29/installing-iis-7-on-windows-server-2008-or-windows-server-2008-r2/" target="_blank">Installing IIS 7 on Windows Server 2008 or Windows Server 2008 R2</a>, please.</li>
+            <li>For web service installation, open the <b>Server manager</b>, go to <b>Roles</b>
+                section, click <b>Add roles</b>, and check <b>Web server (IIS)</b> role.
+				</li>
+      <a target="_blank" href="Images/instweb2k8.png" onClick="toggleBlock('instweb2k8'); return false;" class="imglink">Screenshot</a>
+      <div id="instweb2k8" style="display: none;" >
+        <p class="screenshot">
+            &nbsp;<img src="Images/instweb2k8.png"/></p>
+      </div>
+<li>In the <strong>Add Roles Wizard</strong>  window select the <strong>CGI</strong> check box. <br />
+  If you have already  installed IIS7, go to <strong>Server Manager</strong> -&gt; <strong>Roles</strong> -&gt; <strong>Add Role Services</strong>. In the <strong>Select Role Services</strong> page, select the <strong>CGI</strong> check box. It enables both the CGI and FastCGI services.
+  </li>
+   <a target="_blank" href="Images/instweb2k8_cgi.png" onClick="toggleBlock('instweb2k8_cgi'); return false;" class="imglink">Screenshot</a>
+      <div id="instweb2k8_cgi" style="display: none;" >
+        <p class="screenshot">
+          &nbsp;<img src="Images/instweb2k8_cgi.png" /></p>
+      </div>
+  </ul>
+</div>
+
+    
+    <p class="question">
+        <img id="webftp2k3_arrow" class="ulimg" src="Images/collapsed.jpg" style="width: 11px;
+            height: 11px" /><span id="webftp2k3_link" onClick="toggleBlock('php'); return false;"
+                class="imglink">2. PHP Installation</span>
+</p>
+<div id="php" >
+        <ul>         
+For step-by-step instructions on how to install PHP on <strong>IIS7 (Windows Vista SP1 and Windows 2008)</strong> see, <a href="http://learn.iis.net/page.aspx/246/using-fastcgi-to-host-php-applications-on-iis7/" target="_blank">Using FastCGI to Host PHP Applications on IIS 7.0</a>
+.<br />
+It is recommended that you use a non-thread safe build of PHP with IIS 7 FastCGI. A non-thread safe build of PHP provides significant performance gains over the standard build by not doing any thread-safety checks, which are not necessary, since FastCGI ensures a single threaded execution environment.
+<p><strong>To install PHP:</strong>&nbsp;</p>
+
+<li>Download the latest non-thread safe zip package (or msi installer) with binaries of PHP: <a href="http://www.php.net/downloads.php" target="_blank">http://www.php.net/downloads.php</a>.</li>
+<li>Unpack the files to&nbsp;the directory of your choice (e.g. C:\PHP). Rename the php.ini-recommended file to php.ini. </li>
+
+<li>Open the php.ini file. Uncomment and modify the settings as follows: 
+<ul>
+<li>Set <strong>fastcgi.impersonate = 1</strong>. FastCGI under IIS supports the ability to impersonate security tokens of the calling client. It allows IIS to define the security context that the request runs under.</li>
+<li>Set <strong>cgi.fix_pathinfo=1</strong>. cgi.fix_pathinfo provides *real* PATH_INFO/PATH_TRANSLATED support for CGI. Previously, PHP&nbsp;behavior was to set PATH_TRANSLATED to SCRIPT_FILENAME, but not&nbsp;to define PATH_INFO. For more information about PATH_INFO, see the cgi specifications. Setting this value to 1 will cause PHP CGI to fix its paths to conform to the specifications.</li>
+<li>Set <strong>cgi.force_redirect</strong> = 0.</li>
+
+<li>Set <strong>open_basedir</strong> to point to&nbsp;the folder or network path where the content of the Web site(s) is located.</li>
+<li>Set <strong>extension_dir</strong> to point to&nbsp;the location where the PHP extensions are located. Typically, for PHP 5.2.X the value would be set as <strong>extension_dir = "./ext"</strong></li>
+<li>Enable the required PHP extension by un-commenting the corresponding lines, for example: <br><br>extension=php_mssql.dll<br>extension=php_mysql.dll</li></ul></li>
+
+<li>Open a command prompt, and run the following command to&nbsp;verify that&nbsp;PHP installed successfully:</li>
+        </ul>
+		
+
+</div>
+        <p class="question">
+        <img id="webftp2k3_arrow" class="ulimg" src="Images/collapsed.jpg" style="width: 11px;
+            height: 11px" /><span id="webftp2k3_link" onClick="toggleBlock('phpcfg'); return false;"
+                class="imglink">3. PHP Configuration</span>
+</p>
+<div id="phpcfg" >
+<ul>
+Configure IIS 7 to handle PHP requests by using IIS Manager.<br />
+For IIS 7 to host PHP applications,&nbsp;you must&nbsp;add a handler mapping that tells IIS to pass all PHP-specific requests to the PHP application framework by using the FastCGI protocol.</p>
+	  
+	 <li>Open IIS Manager. At the server level,&nbsp;double-click <strong>Handler Mappings</strong>.</p>
+<p>&nbsp;&nbsp;&nbsp; <a target="_blank" href="Images/instweb2k8_php.png" onClick="toggleBlock('instweb2k8_php'); return false;" class="imglink">Screenshot</a>
+      <div id="instweb2k8_php" style="display: none;" >
+        <p class="screenshot">
+          &nbsp;<img src="Images/instweb2k8_php.png"/></p>
+      </div>
+</li>
+
+
+<li>In the <strong>Actions</strong> pane, click <strong>Add Module Mapping...</strong> option. In the <strong>Add Module Mapping</strong> dialog box, specify the configuration settings as follows:</p>
+  <ol>
+<li>Request path: <strong>*.php</strong></li>
+<li>Module: <strong>FastCgiModule</strong></li>
+<li>Executable: <strong>"C:\[Path to your PHP installation]\php-cgi.exe"</strong></li>
+
+<li>Name: <strong>PHP via FastCGI</strong> </li>
+</ol>
+</li>
+
+<li>Click <strong>OK</strong>. </p>
+<p>&nbsp;&nbsp;&nbsp; <a target="_blank" href="Images/instweb2k8_php_mapping.png" onClick="toggleBlock('instweb2k8_php_mapping'); return false;" class="imglink">Screenshot</a>
+      <div id="instweb2k8_php_mapping" style="display: none;" >
+        <p class="screenshot">
+          &nbsp;<img src="Images/instweb2k8_php_mapping.png" /></p>
+      </div>
+	  </p>
+</li>
+<li>In the <strong>Add Module Mapping</strong> confirmation dialog box that asks if you want to create a FastCGI application for this executable, click <strong>Yes</strong>.
+
+
+<p><a target="_blank" href="Images/instweb2k8_php_question.png" onClick="toggleBlock('instweb2k8_php_question'); return false;" class="imglink">Screenshot</a>
+      <div id="instweb2k8_php_question" style="display: none;" >
+        <p class="screenshot">
+          &nbsp;<img src="Images/instweb2k8_php_question.png" /></p>
+      </div></p>
+</li>
+<li><p>Test that the handler mapping works correctly by creating a phpinfo.php file in the C:\inetpub\wwwroot folder that contains the following code:</p><samp>&lt;?php phpinfo(); ?&gt;</samp></li>
+<li>Open a browser and navigate to <span class="hyperlinktext">http://localhost/phpinfo.php</span>. If everything was setup correctly, you will see the standard PHP information page.</li>
+
+
+<p><strong>NOTE</strong>: If you do not see <strong>FastCgiModule</strong> in the <strong>Modules:</strong>&nbsp;list, the module is either not registered or not enabled. To check if the FastCGI module is registered, open the IIS configuration file that is located at&nbsp;%<em>windir</em>%\windows\system32\config\applicationHost.config and check that the following line is present in the&nbsp;&lt;globalModules&gt; section:</p><samp>&lt;add name="FastCgiModule" image="%windir%\System32\inetsrv\iisfcgi.dll" /&gt;</samp> 
+
+<p>In the same file, also check that the FastCGI module is added to the &lt;modules&gt; section:</p><samp>&lt;add name="FastCgiModule" /&gt;</samp> 
+
+<h3>Configure IIS 7 to handle PHP requests by using the command line</h3>
+<p>Alternatively,&nbsp;you can complete the steps above&nbsp;by using the&nbsp;command line tool A<strong>ppCmd</strong>.</p>
+<p>1. Create the FastCGI application process pool by&nbsp;running the following command:</p><samp>C:\&gt;%windir%\system32\inetsrv\appcmd set config /section:system.webServer/fastCGI /+[fullPath='c:\{php_folder}\php-cgi.exe']</samp> 
+
+<p>2. Create the handler mapping by running the following command:</p><samp>C:\&gt;%windir%\system32\inetsrv\appcmd set config /section:system.webServer/handlers /+[name='PHP_via_FastCGI',path='*.php',verb='*',modules='FastCgiModule',scriptProcessor='c:\{php_folder}\php-cgi.exe',resourceType='Unspecified']</samp> 
+<p><strong>Note: </strong>If you are using PHP version 4.X, you can use php.exe instead of php-cgi.exe.</p>
+</ul>
+</div>
+	  
+    
+<p class="question">
+        <img id="webftp2k3_arrow" class="ulimg" src="Images/collapsed.jpg" style="width: 11px;
+            height: 11px" /><span id="webftp2k3_link" onClick="toggleBlock('urlrewrite'); return false;"
+                class="imglink">4. URL Rewrite Module Installation</span></p>
+<div id="urlrewrite" >
+ <ul>For correct work of OfficeOpen you will need to have URL Rewrite module installed on your web server.<br />
+    For more information and to download the module, see <a href="http://www.iis.net/download/URLRewrite" target="_blank">URL Rewrite</a>. <br />
+    <a href="http://go.microsoft.com/?linkid=9722533" target="_blank">Download the x86 version of the URL Rewrite module</a>    <br />
+  <a href="http://go.microsoft.com/?linkid=9722532" target="_blank">Download the x64 version of the URL Rewrite module</a></ul>
+</div>    
+    
+<p class="topic">
+        <a id="installationHTTPCOM">OfficeOpen Installation</a>
+</p>
+     
+    
+<p class="question">
+        <img id="webftp2k3_arrow" class="ulimg" src="Images/collapsed.jpg" style="width: 11px;
+            height: 11px" /><span id="webftp2k3_link" onClick="toggleBlock('httpinst'); return false;"
+                class="imglink">5. OfficeOpen Installation...</span></p>
+<div id="httpinst" >
+
+
+    <ul style="list-style-type:lower-alpha;">
+      <li><b>Place OfficeOpen code on web server:</b>
+        <ul>
+        <li>Open  IIS server's root folder in Windows Explorer  (by default it is <b>c:\Inetpub\wwwroot\</b>)</li>
+        <li>Extract the OfficeOpen zip archive to a new <b>WEBDAV</b> folder inside the root folder. You can use any name for the folder. In this manual we use this directory and name as default. 
+        <br />
+	<a target="_blank" href="Images/placefolder.png" onClick="toggleBlock('placefolder'); return false;" class="imglink">Screenshot</a>
+      <div id="placefolder" style="display: none;">
+        <p class="screenshot">
+            &nbsp;<img src="Images/placefolder.png" style="width: 369px; height: 183px" /></p>
+      </div>
+       </li>
+    </ul>
+    </li>
+	<li><strong>Configure URL Rewrite module </strong>at new <b>WEBDAV</b> folder (created in the previous step) . 
+		<ul>
+				<li>Open <b>IIS console</b>: <b>Control panel</b>-&gt;<b>Administrative tools</b>-&gt;<BR>
+						<b>Internet Information   Services</b>-&gt;Expand <b>"Sites"</b> and then  <b>"Default web site"</b>	.			</li>
+				<li>Click on the "<strong>WEBDAV</strong>"   folder and select <b>"URL Rewrite"</b> in the <strong>IIS</strong> section of the <strong>&quot;Features view&quot;</strong>.
+				  <br />
+			<a target="_blank" href="Images/urlrewrite_folder.png" onClick="toggleBlock('urlrewrite_folder'); return false;" class="imglink">Screenshot</a>
+			  <div id="urlrewrite_folder" style="display: none;" >
+				<p class="screenshot">
+					&nbsp;<img src="Images/urlrewrite_folder.png" /></p>
+			  </div>	
+		  </li>		
+		  <li>Double-Click on the <b>&quot;URL Rewrite&quot;</b>. In the opened view click on the <strong>&quot;Import Rules&quot;</strong> link at the &quot;Actions&quot; panel. 
+				  <br />
+			<a target="_blank" href="Images/urlrewrite_rules_import.png" onClick="toggleBlock('urlrewrite_rules_import'); return false;" class="imglink">Screenshot</a>
+			  <div id="urlrewrite_rules_import" style="display: none;" >
+				<p class="screenshot">
+					&nbsp;<img src="Images/urlrewrite_rules_import.png" /></p>
+			  </div>	
+		  </li>		
+		  <li>In the opened view click on the browse button ("...") and select .htacess file from <b>c:\Inetpub\wwwroot\WEBDAV\</b> folder		    . <br />
+		    Click on <strong>&quot;Import&quot; </strong>button and then click <strong>&quot;Apply&quot;</strong> and <strong>&quot;Back to rules&quot;</strong>.<br />
+			<a target="_blank" href="Images/urlrewrite_rules_apply.png" onClick="toggleBlock('urlrewrite_rules_apply'); return false;" class="imglink">Screenshot</a>
+			  <div id="urlrewrite_rules_apply" style="display: none;" >
+				<p class="screenshot">
+					&nbsp;<img src="Images/urlrewrite_rules_apply.png" /></p>
+			  </div>	
+		  </li>	
+		 
+	  </ul>
+	</li> 
+  </ul>
+    </li>
+ 
+   
+
+    
+</div>
+<p>&nbsp;</p>
+<p>Now you can test the OfficeOpen. Open  the application URL in your browser, e.g. <strong>&quot;http://localhost/WEBDAV/index.html&quot;</strong>. You should see a list of test files from &quot;testfiles&quot; subdirectory. Now you should <a href="configuration.html">configure</a> OfficeOpen to get files from a necessary location.</p>
+<br/>
+<br/>
+
+ 
+    
+</body>
+</html>

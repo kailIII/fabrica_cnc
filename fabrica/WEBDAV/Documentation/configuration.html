@@ -1,0 +1,147 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>#PRODUCTNAME# features</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript">
+function buildZebraTable(tableId)
+{
+
+	var table=document.getElementById(tableId);
+	
+	if(!table){return};
+	
+	var evenFlag=false;
+	
+	var rows=table.getElementsByTagName('tr');
+	
+	for(var i=0;i<rows.length;i++){	
+		rows[i].className=!evenFlag?'oddrow':'evenrow';	
+		evenFlag=!evenFlag;	
+	}
+}
+
+window.onload=function()
+{	
+	if(document.getElementById && document.getElementsByTagName && document.createElement)
+	{
+		buildZebraTable('php_params');
+		buildZebraTable('js_params');
+	}	
+}
+
+
+</script>
+</head>
+
+<body>
+ <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="400">
+
+                <span class="caption">OfficeOpen </span><span class="yellow">2.0</span>
+                <br />
+                <span class="gray">Configuration</span>
+          </td>
+            <td>&nbsp;
+                
+            </td>
+            <td align="char" width="200">
+
+                <img src="world.jpg" align="middle" hspace="5" /><b><a target="_blank" href="http://www.element-it.com/online-edit-in-openoffice-and-microsoft-office.aspx">Home
+                    page</a></b><br />
+                <img src="email.jpg" align="middle" hspace="5" /><b><a target="_blank" href="http://www.element-it.com/contacts.aspx">Contact
+                    support</a></b>
+            </td>
+        </tr>
+</table>
+
+
+ <p class="topic">
+ OfficeOpen configuration </p>
+ OfficeOpen configuration is quite easy. It is devided into 3 parts:
+ <ul>
+ <li>the 
+   first part is related to the server configuration  and placed in the <strong>config.php</strong> file.<br />
+   </li>
+   <li>
+   the second part is related to the client side configuration and placed in the <strong>js/config.js</strong> file.   </li>
+   <li>To customize UI , edit <strong>index.html</strong>  and (or) css/style.css files. </li>
+</ul>
+ <p class="topic">
+<b>config.php</b></p>
+<table  id="php_params" class="list">
+	<tr height="20">
+	<th width="30%" height="20">Parameter name </th>
+    <th width="40%">Desciption</th>
+    <th width="30%">Default value </th>
+  </tr>
+<tr height="20">
+ <td><a    name="sourcePath"    id="sourcePath">sourcePath</a></td>
+ <td>Path to the directory which will be shared.</td>
+ <td>dirname($_SERVER['SCRIPT_FILENAME']).'/testfiles/'</td>
+</tr>
+<tr height="20">
+ <td><a    name="lockPath"    id="lockPath">lockPath</a></td>
+ <td>Path to the directory where information about file lock will be stored. The folder is not cleaned automatically, so you should configure cron job to clean it periodically. </td>
+ <td>dirname($_SERVER['SCRIPT_FILENAME']).'/locks/'</td>
+</tr>
+<tr height="20">
+ <td><a    name="foldersFirst"    id="foldersFirst">foldersFirst</a></td>
+ <td>The flag determines whether directories should be at the the top of the list.</td>
+ <td>true</td>
+</tr>
+<tr height="20">
+ <td><a    name="system_encoding"    id="system_encoding">system_encoding</a></td>
+ <td>If your server is Windows based,  you should set the value of the system_encoding option
+to your default system encoding. For example, ISO-8859-1. </td>
+ <td>null</td>
+</tr>
+</table>
+
+ <p class="topic">
+<b>js/config.js</b></p>
+ <table  id="js_params" class="list">
+	<tr height="20">
+	<th width="30%" height="20">Parameter name </th>
+    <th width="40%">Desciption</th>
+    <th width="30%">Default value </th>
+  </tr>
+  
+<tr height="20">
+ <td><a    name="serverUrl"    id="serverUrl">serverUrl</a></td>
+ <td>Url to the server script which should return correct JSON data. </td>
+ <td>index.php</td>
+</tr>
+<tr height="20">
+ <td><a    name="webdavUrl"    id="webdavUrl">webdavUrl</a></td>
+ <td>Url to the root folder of webdav application. Without ending backslash /
+	for example, absolute http://somadomain.com/webdav or relative to root /webdav.</td>
+ <td>Empty string (Auto detect) </td>
+</tr>
+<tr height="20">
+ <td><a    name="dateFormat"    id="dateFormat">dateFormat</a></td>
+ <td>Date format.</td>
+ <td>dd.MM.yyyy HH:mm:ss</td>
+</tr>
+<tr height="20">
+ <td><a    name="contextMenuItems"    id="contextMenuItems">contextMenuItems</a></td>
+ <td>Array of context menu items. You can edit it or disable some of context menu items to change default action. </td>
+ <td>[ <br />
+{'Download': { id:'download', onclick: function(menuItem,menu) { downloadFile(getItemByElement(this)); } } }, <br />
+{'Open': { id:'open', onclick:function(menuItem,menu) { openFile(getItemByElement(this)); } }},<br />
+{'Open in MS Office': { id:'open', onclick:function(menuItem,menu) { openFileMS(getItemByElement(this)); } }},<br />
+{'Open in OpenOffice': { id:'open', onclick:function(menuItem,menu) { openFileOO(getItemByElement(this)); } }} <br />
+]</td>
+</tr>
+</table>
+
+<!-- <p class="topic">
+<b>UI customization</b></p>
+-->
+
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Browse web dav server</title>	
+	<!--CSS style-->
+	<link rel="stylesheet" href="css/style.css">
+	<!--CSS style for context menu -->
+	<link rel="stylesheet" type="text/css" href="css/jquery.contextmenu.css" media="all">
+	<!--JQuery  engine-->
+	<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>	
+	<!--JQuery context menu-->
+	<script type="text/javascript" src="js/jquery.contextmenu.js"></script>
+	<!--JQuery blockUI plugin-->
+	<script type="text/javascript" src="js/jquery.blockUI.js"></script>
+	<!--JQuery date format plugin-->
+	<script type="text/javascript" src="js/date.f-0.5.0-min.js"></script>	
+	<!--JavaScript configuration code-->
+	<script type="text/javascript" src="js/config.js"></script>
+   <!--OfficeOpen core code-->
+    <script type="text/javascript" src="js/OfficeOpen.js"></script>
+	<!--main JavaScript code-->
+	<script type="text/javascript" src="js/main.js"></script>	
+</head>
+<body>
+
+<!--Template for file row in table -->
+<script id="tableRowFile" type="text/html">
+	<tr class='fileList_table'>
+		<td width ='250px' class='fileList_table'>
+			<a id='{id}' href='{href}' >{name}</a>
+		</td>
+		<td class='fileList_table'>
+			{size}
+		</td>
+		<td class='fileList_table'>
+			{date}
+		</td>
+	</tr>
+</script>
+
+<!--Template for folder row in table -->
+<script id="tableRowFolder" type="text/html">
+	<tr class='fileList_table'>
+		<td width ='250px' class='fileList_table'>
+			<a id='{id}' href='{href}' >{name}</a>
+		</td>
+		<td class='fileList_table'>-</td>
+		<td class='fileList_table'>-</td>
+	</tr>
+</script>
+
+<!--Template for header row in table -->
+<script id="tableRowHeader" type="text/html">
+	<thead class='fileList_table'>
+		<tr class='tableHeaderRow'>
+			<th width ='250px' class='fileList_table'>Name</th>
+			<th width ='75px' class='fileList_table'>Size</th>
+			<th width ='150px' class='fileList_table'>Date</th>
+		</tr>
+	</thead>
+</script>
+
+<center>
+<!-- div and table where contents will berendered-->
+<div id="filesList">
+<!--Div (placeholder) for applet-->
+<div id="appletHolder">
+</div>
+<div id="headerMessage">
+	<div id="phpMessage">
+		You can edit documents in the list online via Microsoft Office or free OpenOffice.org.
+		If you are using  OpenOffice.org you can save file with another name and format to the current folder:
+	</div>
+	<div id="aspNetMessage">
+		You can edit documents in the list online via Microsoft Office or free OpenOffice.org. You can save file with another name and format to the current folder. 
+You can also map network folder to your OS. Click in windows explorer "Tools->Map Network drive" and add network folder with the path from textbox below:
+	</div>
+	<input type="text" id="currentWebPath" size="80" value="">	
+</div>
+<div id="currentDirecory"></div>
+<input type="button" value="Refresh" onClick="javascript: refreshCurrentDir();"><br/>
+<table id="tableFilesList" class="fileList_table">	
+	<!--
+		Here will be listed files and folders.		
+	-->
+</table>
+</div>
+</center>
+
+<!--If loading of directory contents take some time ( more then 200 ms), UI elements will be blocked and contents of div will be displayed. -->
+<div id="waitMessage" style="display:none;"> 
+    Please wait...
+</div> 
+
+<!--If loading of directory contents take some time ( more then 200 ms), UI elements will be blocked and contents of div will be displayed. -->
+<div id="selectProgrammToOpen" style="display:none;"> 
+    We could not find Microsoft Office or Open Office on your computer, <br/>
+	if  one of them installed, please press button and select folder where MS Office or OpenOffice are installed.<br/>
+	Or press cancel button.	
+	<input type="button" value="Browse" onClick="javascript: showBrowseDialog();">
+	<input type="button" value="Cancel" onClick="javascript: cancelBrowseDialog();">
+</div> 
+
+</body>
+</html>

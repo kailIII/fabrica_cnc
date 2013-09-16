@@ -1,0 +1,72 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Browse web dav server</title>	
+	<!--CSS style-->
+	<link rel="stylesheet" href="css/style.css">
+	<!--JavaScript configuration code-->
+	<script type="text/javascript" src="js/config.js"></script>
+	<!--main JavaScript code-->
+	<script type="text/javascript" src="js/OfficeOpen.js"></script>
+	<style >
+	a:link, a:hover, a:active{
+	COLOR: #F73B14;	
+	font-size: 14pt;
+
+}
+
+a:visited
+{
+	COLOR: #FA7A5F;	
+}
+.imglink
+{
+	color: #333399;
+	text-decoration:underline;
+	font-size: 10pt;
+	font-weight: bold;
+	cursor:pointer; 
+}
+code
+{
+	color:#090;
+}
+
+body,td,table,th {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #414b50;
+	border-color:  #5c6d75;
+	
+}
+	</style>
+</head>
+<body>
+<p>&nbsp;</p>
+<p>OfficeOpen can be easily integrated into your existing application to extend functionality with document editing. </p>
+<p>You can use build-in  or external web dav server. </p>
+<p><strong>Here are steps to integrate OfficeOpen into any html page</strong>:<br>
+  <strong>1.</strong> Include config.js and OfficeOpen.js script files into html page. 
+    <br>
+    <em>&lt;!--JavaScript configuration code--&gt;<br>
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/config.js&quot;&gt;&lt;/script&gt;<br>
+&lt;!--main JavaScript code--&gt;<br>
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/OfficeOpen.js&quot;&gt;&lt;/script&gt;</em></p>
+<p><strong>2.</strong> Use openFile(fileName) method too pen file for view/edit. <br>
+  fileName here is relative path to file on web dav server. <br>
+  Note: Url to web dav server configured in config.js file with webdavUrl and webdavUrlPrefix properties. <br>
+Full url to file will be combined webdavUrl+webdavUrlPrefix+fileName. </p>
+<p><em>&lt;a href=&quot;#&quot; onClick=&quot;javascript: OfficeOpen.OpenFileWith('Testdoc.docx',0); &quot;&gt; Open file Testdoc.docx&lt;/a&gt;</em>\<br>
+</p>
+<p align="center">  
+<a href="#" onClick="javascript: OfficeOpen.OpenFileWith('Testdoc.docx',0); ">Open file Testdoc.docx</a><br />
+<a href="" onClick="OfficeOpen.OpenFileWith('Testodt.odt', 3); return false;">Open file Testodt.odt</a>
+  
+  <!--Div (placeholder) for applet-->
+</p>
+<div id="appletHolder">
+</div>
+
+
+</body>
+</html>

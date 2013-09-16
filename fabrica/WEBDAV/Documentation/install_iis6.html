@@ -1,0 +1,213 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Installation at win 2003</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <script type="text/javascript" language="javascript">
+        function toggleBlock(id) {
+            if (document.getElementById(id).style.display == 'none') {
+                document.getElementById(id).style.display = 'block';
+            }
+            else {
+                document.getElementById(id).style.display = 'none';
+            }
+        }
+    </script>
+<table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="400">
+
+                <span class="caption">OfficeOpen </span><span class="yellow">2.0</span>
+            <br /><span class="gray">Installation on IIS 6</span></td>
+            <td>&nbsp;
+                
+            </td>
+            <td align="char" width="200">
+
+               <img src="world.jpg" align="middle" hspace="5" /><b><a target="_blank" href="http://www.element-it.com/online-edit-in-openoffice-and-microsoft-office.aspx">Home
+                    page</a></b><br />
+                <img src="email.jpg" align="middle" hspace="5" /><b><a target="_blank" href="http://www.element-it.com/contacts.aspx">Contact
+                    support</a></b>
+            </td>
+        </tr>
+</table>
+ <br />
+    <p class="topic">
+        <a id="hcadsicomtopic">OfficeOpen application install at Windows 2003 (IIS 6)</a>
+    </p>
+<br/>
+<p class="topic">
+        <a id="installationIIS">IIS and PHP Installation</a>
+</p>
+   <p class="question">
+        <img id="webftp2k3_arrow" class="ulimg" src="Images/collapsed.jpg" style="width: 11px;
+            height: 11px" /><span id="webftp2k3_link" onClick="toggleBlock('iis2000'); return false;"
+                class="imglink">1. Installation IIS...</span></p>
+<div id="iis2000">
+        <ul>
+            <li>Open <b>Contol Panel</b>, navigate to <b>Add or Remove Programs</b>, <b>Add/Remove
+                Windows Components</b> and select <b>Application Server</b> option.</li>
+				<br />
+	<a target="_blank" href="Images/instappsrv2k3.png" onClick="toggleBlock('instappsrv2k3'); return false;" class="imglink">Screenshot</a>
+      <div id="instappsrv2k3" style="display: none;">
+        <p class="screenshot">
+            &nbsp;<img src="Images/instappsrv2k3.png" style="width: 730px; height: 530px" /></p>
+      </div>
+        </ul>
+		
+
+        <ul>
+            <li>Click <b>Details</b> button and select <b>Internet Information Services (IIS)</b>
+                option.</li>
+				<br />
+	<a target="_blank" href="Images/instiis2k3.png" onClick="toggleBlock('instiis2k3'); return false;" class="imglink">Screenshot</a>
+      <div id="instiis2k3" style="display: none;">
+        <p class="screenshot">
+            &nbsp;<img src="Images/instiis2k3.png" style="width: 449px; height: 344px" /></p>
+      </div>
+        </ul>
+		
+	  
+
+        <ul>
+            <li>Click <b>Details</b> button again and check <b>World Wide Web Service</b> option. Click <b>OK</b>
+            button and apply the  changes (Windows installation disk can be required).
+  </ul>
+
+</div>      
+    <p class="question">
+        <img id="webftp2k3_arrow" class="ulimg" src="Images/collapsed.jpg" style="width: 11px;
+            height: 11px" /><span id="webftp2k3_link" onClick="toggleBlock('netframe'); return false;"
+                class="imglink">2. FastCGI and PHP installation </span></p>
+    <div id="netframe">
+<strong>Note!</strong> You should Install the FastCGI Extension for IIS 6.0.
+        <ul>
+            <li>Download the FastCGI extension for 32-bit and 64-bit Windows XP and Windows Server 2003 from <a href="http://www.iis.net/extensions/fastcgi"
+            target="_blank">here</a>.			</li>
+		    <li>		      Download and Install PHP 5. You can get it <a href="http://windows.php.net/download"         target="_blank">here</a>.			 Since the FastCGI extension hosts and executes php processes in a   single threaded manner, it is recommended to download and install   the non-thread-safe PHP build that is available for Windows.</li>
+	    </ul>
+</div>
+
+<p class="question">
+        <img id="webftp2k3_arrow" class="ulimg" src="Images/collapsed.jpg" style="width: 11px;
+            height: 11px" /><span id="webftp2k3_link" onClick="toggleBlock('phpcgicfg'); return false;"
+                class="imglink">3. Configure the FastCGI Extension to Work with PHP </span></p>
+    <div id="phpcgicfg">
+
+  For step-by-step instructions on how to install PHP on <strong>IIS6, 5.1 (Windows XP and Windows 2003)</strong> see, <a href="http://learn.iis.net/page.aspx/247/using-fastcgi-to-host-php-applications-on-iis-60/" target="_blank">Using FastCGI to Host PHP Applications on IIS 6.0</a> .<br />
+  Once PHP is installed on Windows, you have two options to configure FastCGI: use the configuration script that is provided with the installation of the FastCGI extension, or perform all the configuration tasks manually by modifying IIS configuration settings and the fcgiext.ini file. 
+
+<ul>
+            <li><strong>
+			Configure the FastCGI Extension to Work with PHP by Using the Configuration Script
+				</strong>
+              <p>The configuration script with the name fcgconfig.js is provided with the installation of the FastCGI extension.&nbsp;It is located in %<em>windir</em>%\system32\inetsrv. </p>				
+				<ol>
+				<li>Open a command prompt. </li>
+				<li>Change the current directory to %<em>windir</em>%\system32\inetsrv.</li>
+				<li>Register the PHP CGI program as the one that will be processing .php extensions by running the following configuration script: </li>
+				</ol>
+				<pre>cscript fcgiconfig.js -add -section:"PHP" -extension:php -path:"C:\PHP\php-cgi.exe"</pre>
+				<p>Replace C:\PHP\php-cgi.exe with the path to php-cgi.exe if you installed it in a directory different from C:\PHP. </p>
+				<p><b>Note</b>: If you do not want to register the PHP extension to be processed by the FastCGI component on your entire server, and only want to register it for a specific Web site, add a "–site:[siteId]" argument, for example:</p><pre class="code language-SOMETHING">cscript fcgiconfig.js -add -section:"PHP" -extension:php -path:"C:\PHP\php-cgi.exe" –site:1
+				</pre>
+				<p><b>Note</b>: For a complete list of configuration parameters that are&nbsp;supported by the FastCGI extension,&nbsp;see the FastCGI extension documentation.</p>
+		  </li>
+		    <li>
+			  <strong>Manually Configure the&nbsp;FastCGI Extension to Work with PHP </strong>
+			  <p>To manually configure the IIS and FastCGI extension, you&nbsp;must create script mappings for the PHP extension in the IIS metabase, and modify the&nbsp;fcgiext.ini file that is located in %<em>windir</em>%\system32\inetsrv.</p>
+<p>To create script mapping:</p>
+<ol>
+<li>Launch inetmgr.exe. </li>
+<li>Double-click the machine icon for the local computer. </li>
+
+<li>Right-click <strong>Web Sites</strong> and click <strong>Properties</strong>. </li>
+<li>Click the <strong>Home Directory</strong> tab.&nbsp; </li>
+<li>Click the <strong>Configuration…</strong> button. </li>
+
+<li>Click the <strong>Add…</strong> button. </li>
+<li>In the <strong>Add/Edit Application Extension Mapping</strong> dialog box, click <strong>Browse...</strong>. Navigate to the fcgiext.dll file that is located in %<em>windir</em>%\system32\inetsrv.&nbsp;&nbsp;</li></ol>
+<p><strong>Note:</strong> If you need to use FastCGI in 32-bit mode on a&nbsp;64-bit machine, navigate to %<em>windir</em>%\SysWOW64\inetsrv. </p>
+
+<p>&nbsp;&nbsp;&nbsp; 8.&nbsp; In the <strong>Extension</strong> text box, insert <strong>&quot;.php&quot; </strong>text. </p>
+<p>&nbsp;&nbsp;&nbsp; 9.&nbsp; Under <strong>Verbs</strong>, in the <strong>Limit to</strong> text box, enter <strong>GET,HEAD,POST</strong>.</p>
+
+<p>&nbsp;&nbsp;10.&nbsp; Make sure that the&nbsp;<strong>Script engine</strong> and <strong>Verify that file exists</strong> check boxes are selected. </p>
+
+<p>&nbsp;&nbsp;&nbsp; 11.&nbsp; Click <strong>OK</strong>.</p>
+
+<p><b>To modify the fcigext.ini file:</b></p>
+<p>Once the script mapping has been added, modify the fcgiext.ini file.</p>
+<ol>
+<li>Add an extension to <strong>application mapping (php=PHP)</strong> to the <strong>[Types]</strong> section. </li>
+<li>Add a <strong>[PHP]</strong> section with <strong>ExePath=c:\php\php-cgi.exe</strong> (if the PHP files are installed into the&nbsp;C:\PHP folder).
+  <pre >[Types]
+…
+php=PHP
+…
+[PHP]
+ExePath=c:\php\php-cgi.exe
+</pre>
+</li>
+<li>
+ After you save the changes to the&nbsp;fcgiext.ini file, restart the application pool that is&nbsp;associated with the Web site that hosts your PHP applications.
+</li></ol>
+		  </li>
+      </ul>
+</div>
+      
+ <p class="question">
+        <img id="webftp2k3_arrow" class="ulimg" src="Images/collapsed.jpg" style="width: 11px;
+            height: 11px" /><span id="webftp2k3_link" onClick="toggleBlock('rewritemodule'); return false;"
+                class="imglink">4. Rewrite module installation </span></p>
+    <div id="rewritemodule">
+<strong>Note!</strong> You should Install the rewrite module for correct work of OfficeOpen application. We recommend to use free and powerfull <a href="http://iirf.codeplex.com/" target="_blank">Ionic's Isapi Rewrite Filter</a>.
+        <ul>
+            <li>The easiest way to install <strong>IIRF</strong> is to <span sdata="link">run the IIRF MSI file.</span> You can get it <a href="http://iirf.codeplex.com/releases/view/36814" target="_blank">here</a>. </li>
+		    <li>Installation of <strong>IIRF</strong> is quite          simple,	but	if you have any problems with it, you can get more detailed installation instructions <a href="http://iirf.codeplex.com/documentation" target="_blank">here</a>.</li>
+      </ul>
+</div>    
+   <p class="topic">
+        <a id="installationHTTPCOM">OfficeOpen Installation</a>
+</p>
+     
+    
+<p class="question">
+        <img id="webftp2k3_arrow" class="ulimg" src="Images/collapsed.jpg" style="width: 11px;
+            height: 11px" /><span id="webftp2k3_link" onClick="toggleBlock('httpinst'); return false;"
+                class="imglink">5. OfficeOpen Installation...</span></p>
+<div id="httpinst" >
+
+
+    <ul style="list-style-type:lower-alpha;">
+      <li><b>Place OfficeOpen code on web server:</b>
+        <ul>
+        <li>Open  IIS server's root folder in Windows Explorer  (by default it is <b>c:\Inetpub\wwwroot\</b>)</li>
+        <li>Extract the OfficeOpen zip archive to a new <b>WEBDAV</b> folder inside the root folder. You can use any name for the folder. In this manual we use this directory and name as default. 
+        <br />
+	<a target="_blank" href="Images/placefolder.png" onClick="toggleBlock('placefolder'); return false;" class="imglink">Screenshot</a>
+      <div id="placefolder" style="display: none;">
+        <p class="screenshot">
+            &nbsp;<img src="Images/placefolder.png" style="width: 369px; height: 183px" /></p>
+      </div>
+       </li>
+    </ul>
+    </li>
+	
+  </ul>
+    </li>
+ 
+   
+
+    
+</div>
+<p>&nbsp;</p>
+<p>Now you can test the OfficeOpen. Open  the application URL in your browser, e.g. <strong>&quot;http://localhost/WEBDAV/index.html&quot;</strong>. You should see a list of test files from "testfiles" subdirectory. Now you should <a href="configuration.html">configure</a> OfficeOpen to get files from a necessary location.</p>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,14 @@
+﻿OfficeOpen 2.0.0 PHP by Element-IT
+
+[2.0.2 2012/12/11] 
+	* Fixed issue with save files from OpenOffice.org 3.4.1 .
+	* Fixed issue with mapping shared folder under Windows
+[2.0.1 2012/10/16] 
+	* Added support of Microsoft Publisher
+[2.0.0 2012/10/2] 
+    * Optimized code for integration into any existing html page. 
+[1.0.2 2012/7/11]
+	* fixed width="1" height="1" for OfficeLauncher.jar in js/config.js (Firefox in MacOS)
+[1.0.1 2012/7/5]	
+	* fixed bug with open files with special characters in file name. 
+	* updated OfficeLauncher.jar

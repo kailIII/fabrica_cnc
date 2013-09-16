@@ -1,0 +1,125 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>#PRODUCTNAME# features</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript">
+function buildZebraTable(tableId)
+{
+
+	var table=document.getElementById(tableId);
+	
+	if(!table){return};
+	
+	var evenFlag=false;
+	
+	var rows=table.getElementsByTagName('tr');
+	
+	for(var i=0;i<rows.length;i++){	
+		rows[i].className=!evenFlag?'oddrow':'evenrow';	
+		evenFlag=!evenFlag;	
+	}
+}
+
+window.onload=function()
+{	
+	if(document.getElementById && document.getElementsByTagName && document.createElement)
+	{
+		buildZebraTable('php_params');
+		buildZebraTable('js_params');
+	}	
+}
+
+
+</script>
+</head>
+
+<body>
+ <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="400">
+
+                <span class="caption">OfficeOpen </span><span class="yellow">2.0</span>
+                <br />
+                <span class="gray">Integration</span>
+          </td>
+            <td>&nbsp;
+                
+            </td>
+            <td align="char" width="200">
+
+                <img src="world.jpg" align="middle" hspace="5" /><b><a target="_blank" href="http://www.element-it.com/online-edit-in-openoffice-and-microsoft-office.aspx">Home
+                    page</a></b><br />
+                <img src="email.jpg" align="middle" hspace="5" /><b><a target="_blank" href="http://www.element-it.com/contacts.aspx">Contact
+                    support</a></b>
+            </td>
+        </tr>
+</table>
+
+
+ <p class="topic">
+ OfficeOpen integration </p>
+ <p>OfficeOpen can be easily integrated into your existing application to extend functionality with document editing. </p>
+ <p>You can use build-in  or external webdav server. If you decide to use webdav server build into OfficeOpen , please follow apropriate installation guide:<br />
+   at <a href="install.html">install</a> section. Perform <a href="configuration">configuration</a> of control. If you decide to use external webdav server, then you should specify absolute url to the initial folder in config.js file with webdavUrl property. <br />
+</p>
+ <p><strong>Here are steps to integrate OfficeOpen into any html page</strong>:<br />
+   <strong>1.</strong> Include <strong>config.js</strong> and <strong>OfficeOpen.js</strong> script files into html page. <br />
+   <em>&lt;!--JavaScript configuration code--&gt;<br />
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/config.js&quot;&gt;&lt;/script&gt;<br />
+&lt;!--main JavaScript code--&gt;<br />
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/OfficeOpen.js&quot;&gt;&lt;/script&gt;</em></p>
+ <p><strong>2.</strong> Use <strong>OfficeOpen.OpenFileWith(fileName, mode) </strong>method to open file for view/edit. <br />
+   fileName here is relative path to file on web dav server. <br />
+   <strong>Note:</strong> Url to web dav server configured in config.js file with webdavUrl and webdavUrlPrefix properties. <br />
+   Full url to file will be combined webdavUrl+webdavUrlPrefix+fileName. </p>
+ <p><em>&lt;a href=&quot;#&quot; onClick=&quot;javascript: OfficeOpen.OpenFileWith('Testdoc.docx', 0); &quot;&gt; Open file Testdoc.docx&lt;/a&gt;</em><!-- <p class="topic">
+<b>UI customization</b></p>
+-->
+</p>
+ <p class="topic">
+<b>Java script methods </b></p>
+ <table  id="js_params" class="list">
+	<tr height="20">
+	<th width="30%" height="20">Parameter name </th>
+    <th width="40%">Desciption</th>
+    <th width="30%">Parameters</th>
+  </tr>
+<tr height="20">
+ <td><a    name="webdavUrl"    id="webdavUrl">OfficeOpen.OpenFileWith(filePath, mode)</a></td>
+ <td>Open specified file with associated application. Application priority determined by mode parameter. </td>
+ <td><p><strong>filePath</strong> - path to file relatiove to webdav initial folder. Full url to file will be combined from following variables webdavUrl+webdavUrlPrefix+fileName. </p>
+   <p><strong>mode</strong> - determine application priority.<br />
+   Possible values: <br />
+     0 - Use Microsoft Office firstly, if it not installed use OpenOffice.<br />
+     1 - Use OpenOffice (or LibreOffice), if it not installed , use MS office.<br />
+     2 - Use Microsoft Office. If not installed do nothing<br />
+     3 - Use OpenOffice (or LibreOffice). If not installed do nothing. </p>   </td>
+</tr>
+<!--<tr height="20">
+ <td><a    name="dateFormat"    id="dateFormat">openFileMO(filePath)</a></td>
+ <td>The same as openFileWith(filePath, 0) </td>
+ <td>&nbsp;</td>
+</tr>
+<tr height="20">
+  <td><a    name="dateFormat"    id="dateFormat">openFileMS(filePath)</a></td>
+  <td>The same as openFileWith(filePath, 2) </td>
+  <td>&nbsp;</td>
+</tr>
+<tr height="20">
+  <td><a    name="dateFormat"    id="dateFormat">openFileOO(filePath)</a></td>
+  <td>The same as openFileWith(filePath, 3) </td>
+  <td>&nbsp;</td>
+</tr>
+<tr height="20">
+  <td><a    name="dateFormat"    id="dateFormat">downloadFile(filePath)</a></td>
+  <td>Initiate download process of specified file. </td>
+  <td><strong>filePath</strong> - path to file relatiove to webdav initial folder.</td>
+</tr>
+-->
+</table>
+ <p>&nbsp;</p>
+</body>
+</html>

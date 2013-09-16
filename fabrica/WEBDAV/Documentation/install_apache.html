@@ -1,0 +1,110 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Installation at win 2003</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <script type="text/javascript" language="javascript">
+        function toggleBlock(id) {
+            if (document.getElementById(id).style.display == 'none') {
+                document.getElementById(id).style.display = 'block';
+            }
+            else {
+                document.getElementById(id).style.display = 'none';
+            }
+        }
+    </script>
+<table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="400">
+
+                <span class="caption">OfficeOpen </span><span class="yellow">2.0</span>
+            <br />
+            <span class="gray">Installation on Apache </span></td>
+            <td>&nbsp;
+                
+            </td>
+            <td align="char" width="200">
+
+               <img src="world.jpg" align="middle" hspace="5" /><b><a target="_blank" href="http://www.element-it.com/online-edit-in-openoffice-and-microsoft-office.aspx">Home
+                    page</a></b><br />
+                <img src="email.jpg" align="middle" hspace="5" /><b><a target="_blank" href="http://www.element-it.com/contacts.aspx">Contact
+                    support</a></b>
+            </td>
+        </tr>
+</table>
+ <br />
+    <p class="topic">
+        <a id="hcadsicomtopic">OfficeOpen application install at Apache web server </a></p>
+    <p class="topic">
+        <a id="installationIIS">Apache and PHP Installation</a>
+</p>
+   <p class="question">
+        <img id="webftp2k3_arrow" class="ulimg" src="Images/collapsed.jpg" style="width: 11px;
+            height: 11px" /><span id="webftp2k3_link" onClick="toggleBlock('apache'); return false;"
+                class="imglink">1. Apache Installation </span></p>
+   <div id="apache">
+        <ul>
+            <li>Please refer to the official Apache documentation for detailed instruction on how to install Apache web server for your OS: <a href="http://httpd.apache.org/docs/current/en/install.html" target="_blank">http://httpd.apache.org/docs/current/en/install.html</a> .</li>
+				</ul>
+</div>     
+  <p class="question">
+        <img id="webftp2k3_arrow" class="ulimg" src="Images/collapsed.jpg" style="width: 11px;
+            height: 11px" /><span id="webftp2k3_link" onClick="toggleBlock('apachephp'); return false;"
+                class="imglink">2. PHP Installation </span></p>
+   <div id="apachephp">
+        <ul>
+            <li>Please refer to the official PHP documentation for detailed instruction on how to install PHP for APACHE on your OS: <a href="http://php.net/manual/en/install.php" target="_blank">http://php.net/manual/en/install.php</a> .</li>
+	 </ul>
+</div>      
+    <p class="question">
+        <img id="webftp2k3_arrow" class="ulimg" src="Images/collapsed.jpg" style="width: 11px;
+            height: 11px" /><span id="webftp2k3_link" onClick="toggleBlock('netframe'); return false;"
+                class="imglink">2. Enable mod_rewrite module </span></p>
+    <div id="netframe">
+	Apache by default comes with the mod_rewrite module installed but not enabled. If you have Apache installed on your own server, you should enable it .
+      <ul>
+            <li>Find the <strong>httpd.conf</strong> file (usually you will find it in a folder called conf)			</li>
+			<li>Inside the <strong>httpd.conf</strong> file uncomment the line <strong>LoadModule rewrite_module modules/mod_rewrite.so</strong> (remove '#' sign  in beginning of the line)
+      </ul>
+</div>
+
+<div id="rewritemodule"></div>    
+   <p class="topic">
+        <a id="installationHTTPCOM">OfficeOpen Installation</a>
+</p>
+     
+    
+<p class="question">
+        <img id="webftp2k3_arrow" class="ulimg" src="Images/collapsed.jpg" style="width: 11px;
+            height: 11px" /><span id="webftp2k3_link" onClick="toggleBlock('httpinst'); return false;"
+                class="imglink">3. OfficeOpen Installation...</span></p>
+<div id="httpinst" >
+
+
+    <ul style="list-style-type:lower-alpha;">
+      <li><b>Place OfficeOpen code on web server:</b>
+        <ul>
+        <li>Open  Apache server's root folder (various for different OS and apache installations <b>/usr/local/apache/htdocs.</b>)
+		</li>
+        <li>Extract the OfficeOpen zip archive to a new <b>WEBDAV</b> folder inside the root folder. You can use any name for the folder. In this manual we use these diarectory and name as default. 
+       </li>
+    </ul>
+    </li>
+	
+  </ul>
+    </li>
+ 
+   
+
+    
+</div>
+<p>&nbsp;</p>
+<p>Now you can test the OfficeOpen. Open  the application URL in your browser, e.g. <strong>&quot;http://localhost/WEBDAV/index.html&quot;</strong>. You should see a list of test files from "testfiles" subdirectory. Now you should <a href="configuration.html">configure</a> OfficeOpen to get files from a necessary location.</p>
+<p>&nbsp;</p>
+</body>
+</html>

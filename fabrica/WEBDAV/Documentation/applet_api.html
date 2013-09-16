@@ -1,0 +1,144 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>#PRODUCTNAME# Applet API reference</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript">
+function buildZebraTable(tableId)
+{
+
+	var table=document.getElementById(tableId);
+	
+	if(!table){return};
+	
+	var evenFlag=false;
+	
+	var rows=table.getElementsByTagName('tr');
+	
+	for(var i=0;i<rows.length;i++){	
+		rows[i].className=!evenFlag?'oddrow':'evenrow';	
+		evenFlag=!evenFlag;	
+	}
+}
+
+window.onload=function()
+{	
+	if(document.getElementById && document.getElementsByTagName && document.createElement)
+	{
+		buildZebraTable('php_params');
+		buildZebraTable('js_params');
+	}	
+}
+
+
+</script>
+</head>
+
+<body>
+ <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="400">
+
+                <span class="caption">OfficeOpen </span><span class="yellow">2.0</span>
+                <br />
+                <span class="gray">Applet API reference</span>
+          </td>
+            <td>&nbsp;
+                
+            </td>
+            <td align="char" width="200">
+
+                <img src="world.jpg" align="middle" hspace="5" /><b><a target="_blank" href="http://www.element-it.com/online-edit-in-openoffice-and-microsoft-office.aspx">Home
+                    page</a></b><br />
+                <img src="email.jpg" align="middle" hspace="5" /><b><a target="_blank" href="http://www.element-it.com/contacts.aspx">Contact
+                    support</a></b>
+            </td>
+        </tr>
+</table>
+
+
+ <p class="topic">
+ OfficeOpen applet API reference </p>
+In case there is no MS office plugin installed in a user browser and it is impossible to create ActiveX objects,  OfficeOpen uses applet to launch Microsoft Office or Open Office on user computer. The applet has several usefull events and methods listed below.
+ <p class="topic">
+<b>Events</b></p>
+ <table  id="php_params" class="list">
+	<tr height="20">
+	<th width="30%" height="20">Parameter name </th>
+    <th width="40%">Desciption</th>
+    <th width="30%">Parameters </th>
+  </tr>
+<tr height="20">
+ <td><a    name="onOfficePathNotDetected "    id="onOfficePathNotDetected ">onOfficePathNotDetected </a></td>
+ <td>It is invoked when there are no any office applications found on user computer.</td>
+ <td>-</td>
+</tr>
+<tr height="20">
+ <td><a    name="onOfficePathDetected "    id="onOfficePathDetected ">onOfficePathDetected </a></td>
+ <td>It is invoked when the applet has found some of Microsoft Office or Open Office installed on user computer. </td>
+ <td>int <strong>whatIsFound</strong> - possible values: <br />
+   0 - nothing found <br />
+ 	1 - Microsoft office path detected<br />
+ 	2 - Open office path detected<br />
+   3 - both of Microsoft and open office detected</td>
+</tr>
+<tr height="20">
+ <td><a    name="onLauncherInited "    id="onLauncherInited ">onLauncherInited </a></td>
+ <td>It is invoked when the applet is initialized and ready for work.</td>
+ <td>int <strong>whatIsFound</strong> - the same as for onOfficePathDetected event </td>
+</tr>
+</table>
+
+ <p class="topic">
+<b>Methods</b></p>
+<table  id="js_params" class="list">
+	<tr height="20">
+	<th width="30%" height="20">Parameter name </th>
+    <th width="40%">Desciption</th>
+    <th width="30%">Parameters </th>
+  </tr>
+  
+<tr height="20">
+ <td><a    name="openDocument"    id="openDocument">openDocument</a></td>
+ <td>The method opens a document with the specified option </td>
+ <td><p>string <strong>urlToFile</strong> - url to the file on web dav (http) server.<br />
+ int <strong>option</strong> - determines how to open this document. Possible values:<br />
+   0 - First, try to open  in MS office, then in OO<br />
+1 - First, try to open in OO, then in MS<br />
+2 - open in MS<br />
+3 - open in OO<br />
+4 - Show the browse dialog and then try to open the document using the selected application.</p>
+   <p>int <strong>msApp</strong> - which Microsoft application use to open specified document. Possible values:<br />
+     -1
+      - Auto detect based on file extension. <br />
+     0 - open with Microsoft Word <br />
+     1 - open with Microsoft Excel <br />
+     2 - open with Microsoft Outlook <br />
+     3 - open with Microsoft PowerPoint <br />
+     4 - open with Microsoft Outlook<br />
+     5
+      - open with Microsoft FrontPage </p>
+   </td>
+</tr>
+<tr height="20">
+ <td><a    name="openDocument"    id="openDocument">openDocument</a></td>
+ <td>The method opens a specified document. First, try to open  in MS office, then in OO. The same as openDocument(urlToFile,0,-1); </td>
+ <td>string <strong>urlToFile</strong> - url to the file on web dav (http) server.</td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+ <p class="topic">
+<b>Example</b></p>
+ <pre>
+//init Applet JavaScript object
+var officeLauncher;
+officeLauncher = document.getElementById("officeLauncher");
+//where "officeLauncher" is id attribute of applet tag
+//Now we can use officeLauncher methods,
+officeLauncher.openDocument("http://localhost/webdav/hcwebdav/doc.docx"); 
+</pre>
+</body>
+</html>

@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule ^/*(.*/*)hcwebdav(/*.*) $1index.php$2

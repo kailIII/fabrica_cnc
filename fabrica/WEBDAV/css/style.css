@@ -1,0 +1,3 @@
+table.fileList_table 	{ margin: 1em; border-collapse: collapse; }
+tr.fileList_table, td.fileList_table, th.fileList_table { padding: .3em; border: 1px #ccc solid; }
+thead.fileList_table{ background: #fc9; } 

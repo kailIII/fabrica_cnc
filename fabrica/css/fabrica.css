@@ -1,0 +1,422 @@
+#prodsTable td input[type=text] {
+	width: 100%;
+}
+
+#metWarning{
+	overflow: hidden;
+	margin: auto;
+	width: 730px;
+}
+
+#metWarning p,#metWarning img{
+	float: left;
+}
+
+#metWarning img{
+	width: 81px;
+	height: 81px;
+}
+
+#metWarning p{
+	color:#003882;
+	font-weight: bold;
+	margin-top: 31px
+}
+
+.met-container{
+	overflow: hidden;
+	margin-bottom: 25px;
+}
+
+.met-title{
+	padding: 8px;
+	color:#FFF;
+	background: #376091;
+	font-weight: bold;
+}
+
+.met-fields{
+	padding: 12px;
+}
+
+.form-block{
+	overflow: hidden;
+}
+
+.form-col-left{
+	float:left;
+}
+
+.form-col-right{
+	float:left;
+}
+
+.met-fields table tr td:first-child{
+	width:20%;
+	color: #5F5F5F;
+	font-size: 14px;
+}
+
+.met-fields table tr{
+	border-bottom:1px solid #CCC;
+}
+
+.met-fields table td{
+	padding:3px;
+	vertical-align: top;
+}
+
+.met-fields input[type=text], .met-fields textarea, .met-fields select, .met-fields input[type=number] {
+	padding:3px;
+	color:#333;
+}
+
+.met-fields input[type=text]{
+	width:500px;
+}
+
+.w90{
+	width:90% !important;
+}
+
+.met-field-temas{
+	height: 65px;
+	width: 1278px;
+}
+
+.met-fields select{
+	width: 511px;
+}
+
+.met_other_marco, .met_incidencia{
+	display: none;
+}
+
+.probabilistic_data{
+	display: none;
+}
+
+.met-fields #met_cols{
+	width:250px;
+}
+
+.generateTable{
+	background: #828282;
+	padding: 4px 5px;
+	color: #FFF !important;
+	font-weight: bold;
+	border: 1px solid #000;
+}
+
+.metTableWrapper{
+	overflow: hidden;
+}
+
+.metTableWrapper .metTable{
+	margin:0 auto;
+	border-collapse: collapse;
+}
+
+.metTableWrapper .metTable tr{
+	border-left: 1px solid #CCC;
+}
+
+.metTableWrapper .metTable tr td{
+	border-right: 1px solid #CCC;
+	border-top: 1px solid #CCC;
+	padding:2px;
+	text-align: center;
+}
+
+.metTableWrapper .metTable tr:first-child{
+	font-weight: bold;
+}
+
+.metTableWrapper .metTable tr:first-child td{
+	text-align: center;
+}
+
+.metTableWrapper .metTable tr td:first-child{
+	text-align: left;
+}
+
+.metTableWrapper .metTable tr td.met_zonas_wraper{
+	border:none !important;
+}
+
+.metTableWrapper .metTable tr:last-child td{
+	border-bottom: 1px solid #CCC;
+}
+
+.metTableWrapper .metTable td input[type=text]{
+
+}
+
+#page1ClientsContainer .clientBlock{
+	float:left;
+	padding:0 10px;
+	margin:4px;
+	border: 1px dashed #CCC;
+	border-radius: 3px;
+}
+
+#page1ClientsContainer .clientBlock h4{
+	color: #5F5F5F;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 7px 0px;
+}
+
+#page1ClientsContainer .clientBlock table tr td:first-child{
+	color: #5F5F5F;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+#page1ClientsContainer .clientBlock input[type=text] {
+	padding: 3px 5px;
+	width:435px;
+}
+
+#empresa_cliente{
+	padding: 3px 5px;
+	width:350px;	
+}
+
+a.button{
+	margin: 0px;
+	margin-top: 7px;
+	margin-bottom: 7px;
+	padding: 1px;
+	Color: white;
+	border: 1px solid black;
+	Background-Color: #828282;
+	Font-Weight: bold;
+}
+
+#addContact{
+	display: block;
+	width: 94px;
+	margin-left: 12px;
+	padding: 4px
+}
+
+.cal-nom-proceso{
+	width:98%;
+	padding:3px;
+}
+
+#page9AddProcess{
+	margin-top: 10px;
+	margin-left: 14px;
+}
+
+.OptionsContainer{
+	width: 500px;
+	margin: auto;
+	text-align: left;
+	/*padding-left: 196px;*/
+}
+
+.OptionsContainer .colOpt{
+	overflow: hidden;
+}
+
+.OptionsContainer .colOpt .col1,
+.OptionsContainer .colOpt .col2{
+	float:left;
+	padding:2px;
+}
+
+
+.OptionsContainer .colOpt .col1{
+	width:170px;
+}
+
+.OptionsContainer .colOpt .col2{
+
+}
+
+.OptionsContainer .colOpt label{
+	cursor:pointer;
+}
+
+.OptionsContainer .colOpt input[type=radio]{
+	position: relative;
+	bottom: 3px;
+}
+
+#docxRecipentWraper{
+	display:none;
+}
+
+.OptionsContainer .colOpt input[type=text]{
+	width: 250px;
+	position: relative;
+	bottom: 3px;
+}
+
+.OptionsContainer h3{
+	border-bottom: 1px dotted #CCC;
+	padding-bottom: 5px;
+}
+
+#rCriticaTitle{
+	padding: 5px;
+	font-size: 14px;
+}
+
+#rCriticaWrapper{
+	padding:5px;
+}
+
+#rCriticaWrapper textarea{
+	width:80%;
+	height: 260px;
+}
+
+#estadoLoader{
+	display: none;
+}
+
+#filtersWraper{
+	text-align: left;
+}
+
+#filtersWraper #filter_titulo{
+	width:453px;
+}
+
+.clients-list{
+	margin: 0;
+	padding-left: 18px;
+}
+
+.clients-list li{
+	list-style: circle;
+}
+
+#noResult{
+	padding: 10px;
+	color: #666;
+	font-size: 25px;
+}
+
+.makemeAwesome{
+	width:170px;
+}
+
+#pptDownload{
+	text-align: center;
+}
+
+#sub_metodologia{
+	padding: 5px;
+	width: 100%;
+	display:none;	
+}
+
+#sub_metodologia_label{
+	display:none;
+}
+
+.remove-proceso{
+	cursor: pointer;
+}
+
+#navBarMain table td.selected{
+	border-top: 3px solid #D76F19;
+}
+
+#revisionWrapper{
+	width:800px;
+	margin:auto;
+}
+
+#revisionWrapper .downloadProp a{
+	color:#36C;
+	font-weight: bold;
+}
+
+#revisionWrapper #newComment{
+	overflow: hidden;
+}
+
+#revisionWrapper #newComment textarea{
+	width:490px;
+	height: 110px;
+	border-radius: 6px;
+	border: 1px solid #CCC;
+	font-family: inherit;
+	color: #333;
+}
+
+#revisionWrapper #newComment button[type=submit]{
+	float:right;
+}
+
+#revisionWrapper .commentWrapper{
+	margin: 15px 0;
+}
+
+#revisionWrapper .commentWrapper .who{
+	font-weight: bold
+}
+
+#revisionWrapper .commentWrapper .who,
+#revisionWrapper .commentWrapper .date{
+	color:#333;
+}
+
+#revisionWrapper .commentWrapper .date{
+	font-style: italic;
+}
+
+#revisionWrapper .commentWrapper .comment{
+	border-radius: 6px;
+	border: 1px solid #CCC;
+	font-family: inherit;
+	color: #333;
+	width:480px;
+	padding:5px;
+	margin-top: 5px;
+}
+
+.linkF{
+	color:#036 !important;
+}
+
+#revisionWrapper .OptionsContainer{
+	position: relative;
+}
+
+#revisionWrapper #loader_est_prop{
+	position: absolute;
+	display: none;
+}
+
+#revisionWrapper #ok_est_prop{
+	display: none;
+	position: absolute;
+	left: 233px;
+	top: 5px;
+}
+
+.delete-met-selected {
+	cursor:pointer;
+	border:none;
+	float: right;
+	position: relative;
+	bottom: 3px;
+}
+
+.notacc-row input[type=checkbox]{
+	float: right;
+	position: relative;
+	bottom: 50px;
+	right: 15px;
+}
+
+#add_metodologia_trigger{
+	cursor: pointer;
+}
