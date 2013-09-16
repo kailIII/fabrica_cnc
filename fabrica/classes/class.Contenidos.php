@@ -197,7 +197,31 @@ Class Contenidos extends SqlConnections {
 
     	return mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $this->enc_key, $content, MCRYPT_MODE_ECB, $iv);
     	
-
+	}
+	
+	public function getMetodologia( $id_metodologia ){
+		$query = "SELECT * FROM prop_metodologia WHERE id_metodologia = '{$id_metodologia}' ";
+		return $this->adoDbFab->GetRow( $query );
+	}
+	
+	public function getDuracion( $id_duracion ) {
+		$query = "SELECT * FROM prop_duracion WHERE id_duracion = '{$id_duracion}' ";
+		return $this->adoDbFab->GetRow( $query );
+	}
+	
+	public function getPobObjetivo( $id_pob_objetivo ){
+		$query = "SELECT * FROM prop_pob_objetivo WHERE id_pob_objetivo = '{$id_pob_objetivo}'";
+		return $this->adoDbFab->GetRow( $query );
+	}
+	
+	public function getOrigenDbById( $id_origen_db ){
+		$query = "SELECT * FROM prop_origen_db WHERE id_origen_db = '{$id_origen_db}'";
+		return $this->adoDbFab->GetRow( $query );
+	}
+	
+	public function getNivelAceptacionById( $id_nivel_aceptacion ){
+		$query = "SELECT * FROM prop_nivel_aceptacion WHERE id_nivel_aceptacion = '{$id_nivel_aceptacion}' ";
+		return $this->adoDbFab->GetRow($query);
 	}
 	
 

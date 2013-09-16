@@ -5,6 +5,12 @@
 require_once dirname(__FILE__).'/classes/class.Propuesta.php';
 $PropuestaDoc = new Propuesta(  $idPropuesta );
 
+require_once dirname(__FILE__).'/classes/class.Contenidos.php';
+$ContenidosDoc = new Contenidos;
+
+require_once dirname(__FILE__).'/classes/class.Metodologia.php';
+$Metodologia = new Metodologia( $idPropuesta );
+
 $info_prop = $PropuestaDoc->getProp();
 
 include_once("../connection.php");
@@ -545,6 +551,8 @@ while($campos			= mysql_fetch_array($con)){
 	$universo			= $campos["universo"];
 	$marco_estadistico	= $campos["marco_estadistico"];
 	$id_tipo_metodologia	= $campos["id_tipo_metodologia"];
+	
+	$met_selected = $Metodologia->getMetSelected( $campos["new_id_row_metodologia"] );
 
 	$fontStyleTit		= array('bold'=>true, 'name'=>'Arial', 'size'=>12, 'color'=>'333333');
 
@@ -560,12 +568,57 @@ while($campos			= mysql_fetch_array($con)){
 	$table->addCell(4000, $cellStyle)->addText(utf8_decode('Metodología:'));
 	$table->addCell(6000, $cellStyle)->addText($nom_metodologia);
 
-	if($id_tipo_metodologia==3){
-		if(!empty($universo)){
+	if(!empty($universo)){
+		$table->addRow();
+		$table->addCell(0, $cellStyle)->addText( $campos["titulo_universo"].':');
+		$table->addCell(0, $cellStyle)->addText($universo);
+	}
+	
+	if( $campos["a_tam_poblacion"] == 1 && !empty( $met_selected["tamano_poblacion"] ) ){
+		$table->addRow();
+		$table->addCell(0, $cellStyle)->addText( $campos["titulo_tam_poblacion"].':' );
+		$table->addCell(0, $cellStyle)->addText( $met_selected["tamano_poblacion"] );
+	}
+	
+	if( $campos["a_tecnica_recoleccion"] == 1 && !empty( $met_selected["id_pob_objetivo"] ) && $met_selected["id_pob_objetivo"] != 0 ){
+			
+		$pob_objetivo_str = $ContenidosDoc->getPobObjetivo( $met_selected["id_pob_objetivo"] );
+		$pob_objetivo_str = $pob_objetivo_str["des_pob_objetivo"];
+			
+		if( !empty( $pob_objetivo_str ) ){
 			$table->addRow();
-			$table->addCell(0, $cellStyle)->addText('Universo:');
-			$table->addCell(0, $cellStyle)->addText($universo);
+			$table->addCell(0, $cellStyle)->addText( $campos["titulo_tecnica_recoleccion"].':' );
+			$table->addCell(0, $cellStyle)->addText( $pob_objetivo_str );
 		}
+	}
+	
+	if( $campos["a_marco_muestral"] == 1 && !empty( $met_selected["id_origen_db"] ) && $met_selected["id_origen_db"] != 0 ){
+			
+		$origen_db_str = $ContenidosDoc->getOrigenDbById( $met_selected["id_origen_db"] );
+		$origen_db_str = $origen_db_str["nom_origen_db"];
+			
+		if( !empty( $origen_db_str ) ){
+			$table->addRow();
+			$table->addCell(0, $cellStyle)->addText( $campos["titulo_marco_muestral"].':' );
+			$table->addCell(0, $cellStyle)->addText( $origen_db_str );
+		}
+	}
+	
+	if( $campos["a_dificultad"] == 1 && !empty( $met_selected["id_nivel_aceptacion"] ) && $met_selected["id_nivel_aceptacion"] != 0 ){
+			
+		$dificultad_str = $ContenidosDoc->getNivelAceptacionById( $met_selected["id_nivel_aceptacion"] );
+		$dificultad_str = $dificultad_str["des_nivel_aceptacion"];
+		
+			
+		if( !empty( $dificultad_str ) ){
+			$table->addRow();
+			$table->addCell(0, $cellStyle)->addText( $campos["titulo_dificultad"].':' );
+			$table->addCell(0, $cellStyle)->addText( $dificultad_str );
+		}
+	}
+
+	if($id_tipo_metodologia==3){
+		
 		if(!empty($marco_estadistico)){
 			$table->addRow();
 			$table->addCell(0, $cellStyle)->addText(utf8_decode('Marco estadístico:'));
@@ -585,13 +638,74 @@ while($campos			= mysql_fetch_array($con)){
 		$error_muestral			= $camposR["error_muestral"];
 		$lugar					= $camposR["lugar"];
 		$duracion				= $camposR["duracion"];
+		$id_duracion 			= $camposR["id_duracion"];
 		
 		$id_pob_objetivo_r		= $camposR["id_pob_objetivo"];
 		$id_duracion_r			= $camposR["id_duracion"];
 		$id_nivel_aceptacion_r	= $camposR["id_nivel_aceptacion"];
 		$id_cobertura_r			= $camposR["id_cobertura"];
+		
+		$id_metodologia 		= $camposR["id_metodologia"];
+		
+		$met_info 				= $ContenidosDoc->getMetodologia($id_metodologia);
+		
+		
+		
+		// cualitativos
+		if( $id_tipo_metodologia == 2 ){
+			
+			if(!empty($nom_segmento)){
+				$table->addRow();
+				$table->addCell(0, $cellStyle)->addText(utf8_decode('Ciudad:'));
+				$table->addCell(0, $cellStyle)->addText($nom_segmento);
+			}
+			
+			
+			if(!empty($muestra)){
+				$table->addRow();
+				$table->addCell(0, $cellStyle)->addText(utf8_decode('Número de sesiones:'));
+				$table->addCell(0, $cellStyle)->addText($muestra);
+			}
+		}
+		
+		// cuantitativos
+		if( $id_tipo_metodologia ==3 ){
+			if(!empty($nom_segmento)){
+				$table->addRow();
+				$table->addCell(0, $cellStyle)->addText(utf8_decode('Segmento:'));
+				$table->addCell(0, $cellStyle)->addText($nom_segmento);
+			}
+			
+			if(!empty($muestra)){
+				$table->addRow();
+				$table->addCell(0, $cellStyle)->addText(utf8_decode('Muestra:'));
+				$table->addCell(0, $cellStyle)->addText($muestra);
+			}
+			
+			if(!empty($error_muestral)){
+				$table->addRow();
+				$table->addCell(0, $cellStyle)->addText(utf8_decode('Error muestral:'));
+				$table->addCell(0, $cellStyle)->addText($error_muestral.'%');
+			}
+		}
+		
+		if( $met_info['a_duracion'] == 1 && !empty( $id_duracion ) && $id_duracion != 0 ){
+			
+			$duracion_str = $ContenidosDoc->getDuracion($id_duracion);
+			$duracion_str = $duracion_str["duracion"];
+			
+			
+			if( !empty($duracion_str) ){
+				
+				$table->addRow();
+				$table->addCell(0, $cellStyle)->addText( $campos["titulo_duracion"] );
+				$table->addCell(0, $cellStyle)->addText( $duracion_str );	
+			}
+			
+		}
+				
 
-		if($id_tipo_metodologia==1){
+		/*if($id_tipo_metodologia==1){
 			if(!empty($nom_segmento)){
 				$table->addRow();
 				$table->addCell(0, $cellStyle)->addText(utf8_decode('Ciudad:'));
@@ -646,7 +760,7 @@ while($campos			= mysql_fetch_array($con)){
 				$table->addCell(0, $cellStyle)->addText(utf8_decode('Muestra:'));
 				$table->addCell(0, $cellStyle)->addText($muestra);
 			}
-		}
+		}*/
 	}
 
 	$table->addRow();
