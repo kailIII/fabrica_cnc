@@ -509,7 +509,7 @@ if( !empty( $objetivos_especificos ) ):
 	$cellStyle = array('name'=>'Arial', 'size'=>14);
 	if(!empty($objetivos_especificos)){
 		$objetivos_especificos	= explode('||',$objetivos_especificos);
-		$numberStyleList = array('listType' => \PHPWord_Style_ListItem::TYPE_NUMBER);
+		$numberStyleList = array('listType' => PHPWord_Style_ListItem::TYPE_NUMBER);
 		foreach($objetivos_especificos as $ind => $vbObjetivo){
 			//echo '<BR>ind: '.$ind.' vbObjetivo: '.$vbObjetivo;
 			
