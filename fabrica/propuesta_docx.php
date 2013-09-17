@@ -159,7 +159,7 @@ $footer->addPreserveText(utf8_decode('Página | ').'{PAGE}', $cellStyle, array('
 
 
 //----
-$PHPWord->addFontStyle('titleStyle', array('name'=>'Arial', 'size'=>35, 'color'=>'808080'));
+$PHPWord->addFontStyle('titleStyle', array('name'=>'Arial', 'size'=>35, 'color'=>'808080', 'bold' => true ));
 $PHPWord->addFontStyle('empStyle', array('name'=>'Arial', 'size'=>28, 'color'=>'808080'));
 
 //----
@@ -185,12 +185,12 @@ $table->addCell($longLinea)->addText('');
 
 $tamano_titulo = strlen( $titulo );
 
-if( $tamano_titulo <= 35 ){
-	$PHPWord->addFontStyle('mainTitleStyle', array('name'=>'Arial', 'size'=>35, 'color'=>'808080'));
+if( $tamano_titulo <= 50 ){
+	$PHPWord->addFontStyle('mainTitleStyle', array('name'=>'Arial', 'size'=>35, 'color'=>'000000', 'bold' => true ));
 } else if( $tamano_titulo <= 82 ){
-	$PHPWord->addFontStyle('mainTitleStyle', array('name'=>'Arial', 'size'=>26, 'color'=>'808080'));
+	$PHPWord->addFontStyle('mainTitleStyle', array('name'=>'Arial', 'size'=>28, 'color'=>'000000', 'bold' => true ));
 } else {
-	$PHPWord->addFontStyle('mainTitleStyle', array('name'=>'Arial', 'size'=>14, 'color'=>'808080'));
+	$PHPWord->addFontStyle('mainTitleStyle', array('name'=>'Arial', 'size'=>14, 'color'=>'000000', 'bold' => true ));
 }
 
 //$section->addTextBreak();
@@ -209,55 +209,57 @@ $table->addRow(-1);
 // Add cells
 $table->addCell($longLinea)->addText('');
 
-$cellStyle = array('name'=>'Arial', 'size'=>12, 'color'=>'333333');
+$cellStyle = array('name'=>'Arial', 'size'=>12, 'color'=>'808080', 'bold' => true );
 $table = $section->addTable();
 $table->addRow(-330);
-$table->addCell(6000, $cellStyle)->addText('Presentada a:');
-$table->addCell(6000, $cellStyle)->addText('');
+$table->addCell(6000)->addText('SOLICITUD/CONTACTOS', $cellStyle );
+$table->addCell(6000)->addText('');
 
 $clientes = $PropuestaDoc->getPropClientes();
 $num_clientes = count($clientes);
 
 
+$cellStyle = array('name'=>'Arial', 'size'=>12, 'color'=>'808080');
+
 for( $i = 0; $i < $num_clientes; ){
 
 	$table->addRow(-330);	
 	
-	$table->addCell(6000, $cellStyle)->addText($clientes[$i]['nombre']);
+	$table->addCell(6000)->addText($clientes[$i]['nombre'], $cellStyle );
 	if( isset( $clientes[$i+1]['nombre'] ) ){
-		$table->addCell(6000, $cellStyle)->addText($clientes[$i+1]['nombre']);		
+		$table->addCell(6000)->addText($clientes[$i+1]['nombre'], $cellStyle );		
 	} else{
-		$table->addCell(6000, $cellStyle)->addText('');
+		$table->addCell(6000)->addText('');
 	}
 
 	$table->addRow(-330);
-	$table->addCell(6000, $cellStyle)->addText($clientes[$i]['cargo']);
+	$table->addCell(6000)->addText($clientes[$i]['cargo'], $cellStyle );
 	if( isset( $clientes[$i+1]['cargo'] ) ){
-		$table->addCell(6000, $cellStyle)->addText($clientes[$i+1]['cargo']);		
+		$table->addCell(6000)->addText($clientes[$i+1]['cargo'], $cellStyle );		
 	} else{
-		$table->addCell(6000, $cellStyle)->addText('');
+		$table->addCell(6000)->addText('');
 	}
 
 	$table->addRow(-330);
-	$table->addCell(6000, $cellStyle)->addText($clientes[$i]['email']);
+	$table->addCell(6000)->addText($clientes[$i]['email'], $cellStyle );
 	if( isset( $clientes[$i+1]['email'] ) ){
-		$table->addCell(6000, $cellStyle)->addText($clientes[$i+1]['email']);		
+		$table->addCell(6000)->addText($clientes[$i+1]['email'], $cellStyle );		
 	} else{
-		$table->addCell(6000, $cellStyle)->addText('');
+		$table->addCell(6000)->addText('');
 	}
 
 
 	$table->addRow(-330);
-	$table->addCell(6000, $cellStyle)->addText($clientes[$i]['telefono'].' - '.$clientes[$i]['celular']);
+	$table->addCell(6000)->addText($clientes[$i]['telefono'].' - '.$clientes[$i]['celular'], $cellStyle );
 	if( isset( $clientes[$i+1]['telefono'] ) && isset( $clientes[$i+1]['celular']  )){
-		$table->addCell(6000, $cellStyle)->addText( $clientes[$i+1]['telefono'].' - '.$clientes[$i+1]['celular'] );		
+		$table->addCell(6000)->addText( $clientes[$i+1]['telefono'].' - '.$clientes[$i+1]['celular'], $cellStyle );		
 	} else{
-		$table->addCell(6000, $cellStyle)->addText('');
+		$table->addCell(6000)->addText('');
 	}
 
 	$table->addRow(-330);
-	$table->addCell(6000, $cellStyle)->addText('');
-	$table->addCell(6000, $cellStyle)->addText('');
+	$table->addCell(6000)->addText('');
+	$table->addCell(6000)->addText('');
 
 	$i+=2;
 }
@@ -282,33 +284,34 @@ for( $i = 0; $i < $num_clientes; ){
 //----
 $section->addTextBreak();
 
-$cellStyle = array('name'=>'Arial', 'size'=>12, 'color'=>'333333');
+$cellStyle = array('name'=>'Arial', 'size'=>9.5, 'color'=>'808080');
 $table = $section->addTable();
 $table->addRow(-330);
-$table->addCell(6000, $cellStyle)->addText('Presentada por:');
-$table->addCell(6000, $cellStyle)->addText('Revisada por:');
+$table->addCell(6000)->addText('Presentada por: ' . $nombreE , $cellStyle );
+$table->addCell(6000)->addText('Revisada por: ' . $nombreR , $cellStyle );
+// $table->addRow(-330);
+// $table->addCell(6000)->addText($nombreE, $cellStyle );
+// $table->addCell(6000)->addText($nombreR, $cellStyle );
 $table->addRow(-330);
-$table->addCell(6000, $cellStyle)->addText($nombreE);
-$table->addCell(6000, $cellStyle)->addText($nombreR);
+$table->addCell(6000)->addText($cargoE, $cellStyle );
+$table->addCell(6000)->addText($cargoR, $cellStyle );
 $table->addRow(-330);
-$table->addCell(6000, $cellStyle)->addText($cargoE);
-$table->addCell(6000, $cellStyle)->addText($cargoR);
+$table->addCell(6000)->addText($emailE, $cellStyle );
+$table->addCell(6000)->addText($emailR, $cellStyle );
 $table->addRow(-330);
-$table->addCell(6000, $cellStyle)->addText($emailE);
-$table->addCell(6000, $cellStyle)->addText($emailR);
-$table->addRow(-330);
-$table->addCell(6000, $cellStyle)->addText($telefonoE.' - '.$celularE);
-$table->addCell(6000, $cellStyle)->addText($telefonoR.' - '.$celularR);
+$table->addCell(6000)->addText($telefonoE.' - '.$celularE, $cellStyle );
+$table->addCell(6000)->addText($telefonoR.' - '.$celularR, $cellStyle );
 
 //----
 $arryaFechaP	= explode('-',$fechaPropuesta);
-$anioP	= $arryaFechaP[0];
-$mesP	= $arryaFechaP[1];
-$diaP	= $arryaFechaP[2];
-$nomMes	= strtolower($arrayNomMes[$mesP]);
+$anioP		= $arryaFechaP[0];
+$mesP		= $arryaFechaP[1];
+$diaP		= $arryaFechaP[2];
+$nomMes		= strtolower($arrayNomMes[$mesP]);
+$fecha_text = utf8_decode("Bogotá, $diaP de $nomMes de $anioP"); 
 //----
-$section->addTextBreak(4);
-$section->addText(utf8_decode("Bogotá, $diaP de $nomMes de $anioP"), array('align'=>'left'));
+$section->addTextBreak(2);
+$section->addText($fecha_text, array('align'=>'left','color' => '808080', 'bold' => true ));
 $srcFoto	='address.jpeg';
 $imageStyle = array('width'=>690, 'height'=>69, 'align'=>'left');
 $section->addImage($srcFoto, $imageStyle);
@@ -370,11 +373,21 @@ $textStyle = array('bold'=>true, 'name'=>'Arial', 'size'=>21, 'color'=>'000000')
 $section->addText(utf8_decode('investigación + conversación = acción'), $textStyle);
 $section->addTextBreak(3);
 $textStyle = array('name'=>'Arial', 'size'=>14, 'color'=>'000000');
-$section->addText($texto1, $textStyle);
+
+
+// $section->addText($texto1, $textStyle);
+
+$textrun = $section->createTextRun();
+$textrun->addText( 'El ', $textStyle );
+$textrun->addText( utf8_decode('Centro Nacional de Consultoría ') , array('name'=>'Arial', 'size'=>14, 'color'=>'000000', 'bold' => true ));
+$textrun->addText( utf8_decode( 'es una firma de investigación y consultoría, centrada en la creación de valor a través de la escucha generosa de sus necesidades, el estudio cuidadoso de sus problemas y el desarrollo de soluciones comercialmente viables que les garanticen el progreso.' ), $textStyle );
+
 
 $textStyle = array('name'=>'Arial', 'size'=>14, 'color'=>'000000');
 $section->addText($texto2, $textStyle);
 
+// si el contexto esta vacio no genera la pagina
+if( !empty( $contexto ) ):
 //---- Página 3
 $section->addPageBreak();
 
@@ -425,6 +438,10 @@ foreach($arrayLiTexto as $ind => $vbIntMed){
 	}
 }
 //----
+endif;
+// page 4 objetivos
+// si hay objetivo general 
+if( !empty( $objetivo_general ) ):
 $section->addPageBreak();
 
 //---- consulta las páginas
@@ -450,36 +467,69 @@ while($campos	= mysql_fetch_array($con)){
 }
 $section->addTextBreak(1);
 
-$section->addText('OBJETIVOS', 'titleStyle');
-$section->addTextBreak(1);
-$cellStyle = array('name'=>'Arial', 'size'=>14, 'bold'=>true);
-$section->addText('GENERAL:', $cellStyle);
-$cellStyle = array('name'=>'Arial', 'size'=>14);
-$section->addText($objetivo_general, $cellStyle);
-$section->addTextBreak(1);
-$cellStyle = array('name'=>'Arial', 'size'=>14, 'bold'=>true);
-$section->addText('ESPECIFICOS:', $cellStyle);
 
-$cellStyle = array('name'=>'Arial', 'size'=>14);
-if(!empty($objetivos_especificos)){
-	$objetivos_especificos	= explode('||',$objetivos_especificos);
-	foreach($objetivos_especificos as $ind => $vbObjetivo){
-		//echo '<BR>ind: '.$ind.' vbObjetivo: '.$vbObjetivo;
-		
-		// añade subniveles cada enter \n seguido de un *
-		$spaced_obj = explode("\n", $vbObjetivo);
-		foreach( $spaced_obj as $txt ){
-			if( $txt[0] == '*' ){
+	$section->addText('OBJETIVOS', 'titleStyle');
+	$section->addTextBreak(1);
+	$cellStyle = array('name'=>'Arial', 'size'=>14);
+	$section->addText($objetivo_general, $cellStyle);
+	$section->addTextBreak(1);
+	$cellStyle = array('name'=>'Arial', 'size'=>14, 'bold'=>true);
 
-				$txt_2 = substr_replace($txt ,"",0,1);
-				$section->addListItem($txt_2, 1, $cellStyle);
+endif; // fin emtpy obj_gen obj_esps
 
-			} else{
-				$section->addListItem($txt, 0, $cellStyle);
-			}
+if( !empty( $objetivos_especificos ) ):
+	$section->addPageBreak();
+	
+	//---- consulta las páginas
+	$table = $section->addTable();
+	// Add row
+	$table->addRow();
+	// Add cells
+	$table->addCell(5000, $styleCell)->addText('', $fontStylePag);
+	$pagAct	= 2;
+	$sql = "SELECT * FROM ".tablaPagina." ORDER BY 1";
+	//echo '<BR>'.$sql;
+	$con			= mysql_query($sql);
+	while($campos	= mysql_fetch_array($con)){
+		$id_pagina	= $campos["id_pagina"];
+		$nom_pagina	= $campos["nom_pagina"];
+		$vb_pagina	= $id_pagina.'.'.$nom_pagina;
+	
+		if($id_pagina==$pagAct){
+			$table->addCell(1500, $styleCellPag)->addText($vb_pagina, $fontStylePagAct);
+		}else{
+			$table->addCell(1500, $styleCellPag)->addText($vb_pagina, $fontStylePag);
 		}
 	}
-}
+	$section->addTextBreak(1);
+	
+	$section->addText('OBJETIVOS ESPECIFICOS', 'titleStyle' );
+	$section->addTextBreak(1);
+	
+	$cellStyle = array('name'=>'Arial', 'size'=>14);
+	if(!empty($objetivos_especificos)){
+		$objetivos_especificos	= explode('||',$objetivos_especificos);
+		$numberStyleList = array('listType' => \PHPWord_Style_ListItem::TYPE_NUMBER);
+		foreach($objetivos_especificos as $ind => $vbObjetivo){
+			//echo '<BR>ind: '.$ind.' vbObjetivo: '.$vbObjetivo;
+			
+			// añade subniveles cada enter \n seguido de un *
+			$spaced_obj = explode("\n", $vbObjetivo);
+			foreach( $spaced_obj as $txt ){
+				if( $txt[0] == '*' ){
+	
+					$txt_2 = substr_replace($txt ,"",0,1);
+					$section->addListItem($txt_2, 1, $cellStyle);
+	
+				} else{
+					$section->addListItem($txt, 0, $cellStyle, $numberStyleList );
+				}
+			}
+			
+			$section->addTextBreak(1);
+		}
+	}
+endif;
 
 //---- metodologías
 $section->addPageBreak();
@@ -527,6 +577,7 @@ foreach($arrayLiTexto as $ind => $vbIntMed){
 	else{
 		$section->addTextBreak();
 	}
+	
 }
 
 $section->addTextBreak();
@@ -543,6 +594,7 @@ $sql = "SELECT *
 $filasMetodologias		= NULL;
 $con					= mysql_query($sql);
 while($campos			= mysql_fetch_array($con)){
+	
 	$id_metodologia		= $campos["id_metodologia"];
 	$nom_metodologia	= $campos["nom_metodologia"];
 	$id_row_metodologia	= $campos["id_row_metodologia"];
@@ -705,62 +757,7 @@ while($campos			= mysql_fetch_array($con)){
 		}
 				
 
-		/*if($id_tipo_metodologia==1){
-			if(!empty($nom_segmento)){
-				$table->addRow();
-				$table->addCell(0, $cellStyle)->addText(utf8_decode('Ciudad:'));
-				$table->addCell(0, $cellStyle)->addText($nom_segmento);
-			}
-			if(!empty($muestra)){
-				$table->addRow();
-				$table->addCell(0, $cellStyle)->addText(utf8_decode('Número de sesiones:'));
-				$table->addCell(0, $cellStyle)->addText($muestra);
-			}
-			if(!empty($lugar)){
-				$table->addRow();
-				$table->addCell(0, $cellStyle)->addText(utf8_decode('Lugar donde se va a realizar:'));
-				$table->addCell(0, $cellStyle)->addText($lugar);
-			}
-			if(!empty($duracion)){
-				$table->addRow();
-				$table->addCell(0, $cellStyle)->addText(utf8_decode('Duración:'));
-				$table->addCell(0, $cellStyle)->addText($duracion);
-			}
-		}
-		elseif($id_tipo_metodologia==3){
-			if(!empty($nom_segmento)){
-				$table->addRow();
-				$table->addCell(0, $cellStyle)->addText(utf8_decode('Segmento:'));
-				$table->addCell(0, $cellStyle)->addText($nom_segmento);
-			}
-			if(!empty($universo)){
-				$table->addRow();
-				$table->addCell(0, $cellStyle)->addText(utf8_decode('Universo:'));
-				$table->addCell(0, $cellStyle)->addText($universo);
-			}
-			if(!empty($muestra)){
-				$table->addRow();
-				$table->addCell(0, $cellStyle)->addText(utf8_decode('Muestra:'));
-				$table->addCell(0, $cellStyle)->addText($muestra);
-			}
-			if(!empty($error_muestral)){
-				$table->addRow();
-				$table->addCell(0, $cellStyle)->addText(utf8_decode('Error muestral:'));
-				$table->addCell(0, $cellStyle)->addText($error_muestral.'%');
-			}
-		}
-		else{
-			if(!empty($nom_segmento)){
-				$table->addRow();
-				$table->addCell(0, $cellStyle)->addText(utf8_decode('Segmento:'));
-				$table->addCell(0, $cellStyle)->addText($nom_segmento);
-			}
-			if(!empty($muestra)){
-				$table->addRow();
-				$table->addCell(0, $cellStyle)->addText(utf8_decode('Muestra:'));
-				$table->addCell(0, $cellStyle)->addText($muestra);
-			}
-		}*/
+		
 	}
 
 	$table->addRow();
@@ -894,7 +891,8 @@ foreach( $spaced_txt as $txt ){
 	if( $txt[0] == '*' ) {
 
 		$item = substr_replace($txt ,"",0,1);
-		$section->addListItem($item, 0, $cellStyle);		
+		$section->addListItem($item, 0, $cellStyle);
+		$section->addTextBreak(1);		
 	} else {
 		$item = $txt;
 		$section->addText($item, $cellStyle);
@@ -958,8 +956,8 @@ while($campos		= mysql_fetch_array($con)){
 	$des_cv			= $campos["des_cv"];
 	$nomFoto		= $campos["nom_foto"];
 	$nom_rol		= $campos["nom_rol"];
-
-	$srcFoto	='../fotos_equipo/'.$nomFoto.'.jpg';
+	
+	$srcFoto	= dirname(__FILE__).'/../fotos_equipo/'.$nomFoto.'.jpg';
 	$imageStyle = array('width'=>230, 'height'=>150, 'align'=>'left');
 	$section->addImage($srcFoto, $imageStyle);
 
@@ -973,6 +971,7 @@ while($campos		= mysql_fetch_array($con)){
 	$section->addText($des_cv, $cellStyle);
 	
 	$section->addPageBreak();
+	$section->addTextBreak(1);
 }
 
 //---- Inversión
@@ -1113,9 +1112,9 @@ while($campos			= mysql_fetch_array($con)){
 				}
 				//echo '<BR>vrUnitario: '.$vrUnitario;
 			}//---- Si tiene definido muestra
-			$vbMuestra		= number_format($muestra);
-			$vbVrUnitario	= number_format($vrUnitario);
-			$vbVrTotal		= number_format($vrTotal);
+			@$vbMuestra		= number_format($muestra);
+			@$vbVrUnitario	= number_format($vrUnitario);
+			@$vbVrTotal		= number_format($vrTotal);
 
 			$descripcion	= "$nom_metodologia - $nom_segmento";
 
@@ -1420,19 +1419,29 @@ while($campos	= mysql_fetch_array($con)){
 $section->addTextBreak(1);
 $section->addText('CONTROL DE CALIDAD', 'titleStyle');
 
-$cellStyle = array('name'=>'Arial', 'size'=>14);
+$cellStyle = array('name'=>'Arial', 'size'=>11);
 $section->addText(utf8_decode('El Centro Nacional de Consultoría:'), $cellStyle);
 
 $sql = "SELECT * FROM ".tablaNotasCalidadRTA." WHERE id_propuesta=$idPropuesta AND activo_nota_calidad = 1 ORDER BY 1";
 //echo '<BR>'.$sql;
+$count_control_c = 0;
 $con					= mysql_query($sql);
 while($campos			= mysql_fetch_array($con)){
+	
+	$count_control_c++;
+	
 	$id_nota_calidad	= $campos["id_nota_calidad"];
 	$des_nota_calidad	= $campos["des_nota_calidad"];
 
 //	$listStyle = array('listType' => PHPWord_Style_ListItem::TYPE_NUMBER);
 //	$section->addListItem($des_nota_calidad, 0, null, $listStyle);
 	$section->addListItem($des_nota_calidad, 0, $cellStyle);
+	
+	$section->addTextBreak(1);
+	
+	if( $count_control_c % 7 == 0 ){
+		$section->addTextBreak(1);
+	}
 }
 
 // Save File
