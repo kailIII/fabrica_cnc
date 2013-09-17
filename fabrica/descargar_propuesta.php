@@ -24,8 +24,17 @@ $fabrica_dev = explode('/', $_SERVER['PHP_SELF'] );
 $fabrica_dev = $fabrica_dev[2];
 
 
-$PropPpt = new PropuestaPpt( $idPropuesta );
-// $PropPpt->makePpt();
+
+require_once dirname( __FILE__ ).'/classes/class.Usuario.php';
+$Usuario = new Usuario( $_SESSION['userAdmin'] );
+
+$this_usuer_id = $Usuario->getIdEquipo();
+
+if(  $this_usuer_id == 24 || $this_usuer_id == 46 ){
+
+	$PropPpt = new PropuestaPpt( $idPropuesta );
+	$PropPpt->makePpt();
+}
 
 //include("sql_vista_previa.php");
 include("propuesta_docx.php");
@@ -94,12 +103,16 @@ include("propuesta_docx.php");
 	<TABLE cellSpacing='0' cellPadding='0' width='100%' align='center' border='0'>
 	  <TR>
 	   <TD align='right' width="49%"><div style="padding-top:20px;"><a href="<?=$pathPropuesta?>" title="Descargar la propuesta" id="downloadProp" ><IMG src='../word_icono.jpg' height='100' border="0"></a></div></TD>
-	   <!-- <TD align="left" width="10%"><div style="padding-top:20px; text-align: center; "><a href="<?=$pathPropuestaPpt?>" title="Descargar la propuesta" ><IMG src='../imagenes/logo_powerpoint.png' height='100' width="100" border="0"></a></div></TD> -->
+	    <?php if(  $this_usuer_id == 24 || $this_usuer_id == 46 ): ?>
+	   		<TD align="left" width="10%"><div style="padding-top:20px; text-align: center; "><a href="<?=$pathPropuestaPpt?>" title="Descargar la propuesta" ><IMG src='../imagenes/logo_powerpoint.png' height='100' width="100" border="0"></a></div></TD>
+		<?php endif; ?>
 	   <TD align="left" width="49%"><div style="padding-top:20px;"><a href="./?idPropuesta=<?=$idPropuesta?>" title="Editar la propuesta"><IMG src='/imagenes/icoblg_blogs.png' height='120' border="0"></a></div></TD>
 	  </TR>
 	  <TR>
 	   <TD align='right'><div><a href="<?=$pathPropuesta?>" title="Descargar la propuesta"><span style="color:#36C"><B>Descargar la propuesta</B></span></a></div></TD>
-	   <!-- <TD align="left"> <div id="pptDownload" ><a href="<?=$pathPropuestaPpt?>" title="Descargar la propuesta"><span style="color:#36C"><B>Descargar la propuesta</B></span></a></div> </TD> -->
+	    <?php if(  $this_usuer_id == 24 || $this_usuer_id == 46 ): ?>
+	   		<TD align="left"> <div id="pptDownload" ><a href="<?=$pathPropuestaPpt?>" title="Descargar la propuesta"><span style="color:#36C"><B>Descargar la propuesta  (en desarollo) </B></span></a></div> </TD>
+	   	<?php endif; ?>
 	   <TD align="left"><div><a href="./?idPropuesta=<?=$idPropuesta?>" title="Editar la propuesta"><span style="color:#36C"><B>Editar la propuesta</B></span></a></div></TD>
 	  </TR>
 	</TABLE>
