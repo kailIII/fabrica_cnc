@@ -25,7 +25,7 @@ $fabrica_dev = $fabrica_dev[2];
 
 
 $PropPpt = new PropuestaPpt( $idPropuesta );
-$PropPpt->makePpt();
+// $PropPpt->makePpt();
 
 //include("sql_vista_previa.php");
 include("propuesta_docx.php");
