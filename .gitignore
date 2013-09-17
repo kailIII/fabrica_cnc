@@ -46,6 +46,7 @@ propuesta/fabrica_dev/propuestas/
 propuesta/fabrica_dev/propuestas/*
 propuesta/fabrica_dev/propuestas/**
 
+*.docx
 *.ppt
 *.pptx
 *.zip
