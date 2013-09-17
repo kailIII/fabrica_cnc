@@ -16,15 +16,15 @@ $rowBg[$idMenu]		= " bgcolor='#282828'";
 
 	  <TD width="1%" align='center' valign='middle'><div style='color:#FFFFFF;'>|</div></TD>
 
-	  <TD width="10%" align='center' valign='middle' nowrap="nowrap" style=" <?=$rowAtrib[1]?>"<?=$rowBg[1]?>><div class="padding5"><a href="/propuesta/fabrica/?idMenu=1"><span style='color:#FFFFFF;'>Nueva</span></a></div></TD>
+	  <TD width="10%" align='center' valign='middle' nowrap="nowrap" style=" <?=$rowAtrib[1]?>"<?=$rowBg[1]?>><div class="padding5"><a href="?idMenu=1"><span style='color:#FFFFFF;'>Nueva</span></a></div></TD>
 
 	  <TD width="1%" align='center' valign='middle'><div style='color:#FFFFFF;'>|</div></TD>
 
-	  <TD width="10%" align='center' valign='middle' nowrap="nowrap" style=" <?=$rowAtrib[2]?>"<?=$rowBg[2]?>><div class="padding5"><a href="/propuesta/fabrica/lista_propuestas.php?idMenu=2"><span style='color:#FFFFFF;'>Propuestas realizadas</span></a></div></TD>
+	  <TD width="10%" align='center' valign='middle' nowrap="nowrap" style=" <?=$rowAtrib[2]?>"<?=$rowBg[2]?>><div class="padding5"><a href="lista_propuestas.php?idMenu=2"><span style='color:#FFFFFF;'>Propuestas realizadas</span></a></div></TD>
       
        
 	  <TD width="1%" align='center' valign='middle'><div style='color:#FFFFFF;'>|</div></TD>
-		<TD width="10%" align='center' valign='middle' nowrap="nowrap" style=" <?=$rowAtrib[3]?>" ><div class="padding5"><a href="/propuesta/fabrica/propuestas_por_revisar.php?idMenu=3"><span style='color:#FFFFFF;'>Propuestas por revisar</span></a></div></TD>
+		<TD width="10%" align='center' valign='middle' nowrap="nowrap" style=" <?=$rowAtrib[3]?>" ><div class="padding5"><a href="propuestas_por_revisar.php?idMenu=3"><span style='color:#FFFFFF;'>Propuestas por revisar</span></a></div></TD>
 	  <TD width="1%" align='center' valign='middle'><div style='color:#FFFFFF;'>|</div></TD>
 
 
