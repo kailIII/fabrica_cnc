@@ -50,6 +50,8 @@ propuesta/fabrica_dev/propuestas/**
 *.ppt
 *.pptx
 *.zip
+*.xls
+*.xlsx
  
 # build script local files
 build/buildinfo.properties
