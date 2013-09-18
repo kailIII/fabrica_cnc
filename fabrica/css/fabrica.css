@@ -281,6 +281,8 @@ a.button{
 
 #filtersWraper{
 	text-align: left;
+	position:relative;
+	overflow:visible;
 }
 
 #filtersWraper #filter_titulo{
@@ -419,4 +421,15 @@ a.button{
 
 #add_metodologia_trigger{
 	cursor: pointer;
+}
+
+#filtersWraper #reportBtnWrapper{
+	float: right;
+	position: relative;
+	right: 21px;
+	bottom: 88px;
+}
+
+.btn-success {
+  color: #ffffff !important;
 }

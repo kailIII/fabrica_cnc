@@ -606,18 +606,25 @@ class Metodologia extends Propuesta{
 		
 	}
 	
-	/*public function getAvailableCobertura( $id_row_met, $id_pob_objetivo, $id_origen_db, $id_duracion, $id_nivel_aceptacion ){
-		$met_selected = $this->getMetSelected($id_row_met);
+	/* Consultas respuesta metodologia (tabla inverson) */
+	public function getMetodologiaRta(){
 		
-		echo $query = "SELECT *  FROM  prop_tarifario 
-		WHERE  id_tipo_metodologia = '{$met_selected['id_tipo_metodologia']}' AND  id_pob_objetivo = '{$id_pob_objetivo}'
-		AND id_origen_db = '{$id_origen_db}' AND id_duracion = '{$id_duracion}' AND id_nivel_aceptacion = '{$id_nivel_aceptacion}' ";
+		$idPropuesta = $this->id_propuesta;
 		
+		$sql = "SELECT *
+		 FROM ".tablaMetodologia." M INNER JOIN ".tablaMetodologiaRTA." R USING(id_metodologia)
+		  WHERE R.id_propuesta=$idPropuesta
+		   ORDER BY 1";
 		
-	}*/
+		return $this->adoDbFab->GetAll($sql);
+	}
 	
-	
-	
-	
-
+	public function getMetologiaSegmentoRta($idRowMetodologia){
+		$sqlR = "SELECT *
+		 FROM ".tablaSegmentoMetodologiaRTA." R
+		  WHERE R.id_row_metodologia=$idRowMetodologia
+		   ORDER BY 1";
+		   
+		return $this->adoDbFab->GetAll($sqlR);
+	}
 }
