@@ -13,7 +13,9 @@ class ReporteSemanal extends SqlConnections{
 	
 	public function getPropuestas( $fecha_ini = '', $fecha_final = '' ){
 		
-		// $fecha_final == '' ? $fecha_final = date('Y-m-d h:i:s')
+		if( $fecha_final == '' ){
+			$fecha_final = date('Y-m-d');
+		}
 		
 		$query ="SELECT * FROM prop_propuesta prop
 		LEFT JOIN prop_tipo_prop ptp ON ptp.id_tipo_prop = prop.id_tipo_prop 
