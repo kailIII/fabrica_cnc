@@ -11,6 +11,9 @@ $ContenidosDoc = new Contenidos;
 require_once dirname(__FILE__).'/classes/class.Metodologia.php';
 $Metodologia = new Metodologia( $idPropuesta );
 
+require_once dirname(__FILE__).'/classes/class.SqlQuery.php';
+$SqlQuery = new SqlQuery;
+
 $info_prop = $PropuestaDoc->getProp();
 
 include_once("../connection.php");
@@ -612,9 +615,10 @@ while($campos			= mysql_fetch_array($con)){
 	$temas				= $campos["temas"];
 	$universo			= $campos["universo"];
 	$marco_estadistico	= $campos["marco_estadistico"];
-	$id_tipo_metodologia	= $campos["id_tipo_metodologia"];
 	
-	$met_selected = $Metodologia->getMetSelected( $campos["new_id_row_metodologia"] );
+	$id_tipo_metodologia	= $campos["id_tipo_metodologia"];
+	$met_info 				= $ContenidosDoc->getMetodologia($id_metodologia);
+	$met_selected 	= $Metodologia->getMetSelected( $campos["new_id_row_metodologia"] );
 
 	$fontStyleTit		= array('bold'=>true, 'name'=>'Arial', 'size'=>12, 'color'=>'333333');
 
@@ -687,6 +691,29 @@ while($campos			= mysql_fetch_array($con)){
 			$table->addCell(0, $cellStyle)->addText($marco_estadistico);
 		}
 	}
+	
+	$sqlR = "SELECT *
+	 FROM ".tablaSegmentoMetodologiaRTA." R
+	  WHERE R.id_propuesta=$idPropuesta AND R.id_row_metodologia=$id_row_metodologia";
+	  
+	$prev_seg_met = $SqlQuery->GetRow( $sqlR );
+	$id_duracion = $prev_seg_met["id_duracion"];
+	
+	if( $met_info['a_duracion'] == 1 && !empty( $id_duracion ) && $id_duracion != 0 ){
+		
+		$duracion_str = $ContenidosDoc->getDuracion($id_duracion);
+		$duracion_str = $duracion_str["duracion"];
+		
+		
+		if( !empty($duracion_str) ){
+			
+			$table->addRow();
+			$table->addCell(0, $cellStyle)->addText( $campos["titulo_duracion"] );
+			$table->addCell(0, $cellStyle)->addText( $duracion_str );	
+		}
+		
+	}
+	
 	//---- consulta los segmentos de la metodología
 	$sqlR = "SELECT *
 	 FROM ".tablaSegmentoMetodologiaRTA." R
@@ -714,7 +741,7 @@ while($campos			= mysql_fetch_array($con)){
 		
 		
 		// cualitativos
-		if( $id_tipo_metodologia == 2 ){
+		/*if( $id_tipo_metodologia == 2 ){
 			
 			if(!empty($nom_segmento)){
 				$table->addRow();
@@ -728,11 +755,11 @@ while($campos			= mysql_fetch_array($con)){
 				$table->addCell(0, $cellStyle)->addText(utf8_decode('Número de sesiones:'));
 				$table->addCell(0, $cellStyle)->addText($muestra);
 			}
-		}
+		}*/
 		
 		// cuantitativos
-		if( $id_tipo_metodologia ==3 ){
-			if(!empty($nom_segmento)){
+		/*if( $id_tipo_metodologia ==3 ){
+			if( !empty($nom_segmento) ){
 				$table->addRow();
 				$table->addCell(0, $cellStyle)->addText(utf8_decode('Segmento:'));
 				$table->addCell(0, $cellStyle)->addText($nom_segmento);
@@ -749,31 +776,136 @@ while($campos			= mysql_fetch_array($con)){
 				$table->addCell(0, $cellStyle)->addText(utf8_decode('Error muestral:'));
 				$table->addCell(0, $cellStyle)->addText($error_muestral.'%');
 			}
-		}
+		}*/
 		
-		if( $met_info['a_duracion'] == 1 && !empty( $id_duracion ) && $id_duracion != 0 ){
-			
-			$duracion_str = $ContenidosDoc->getDuracion($id_duracion);
-			$duracion_str = $duracion_str["duracion"];
-			
-			
-			if( !empty($duracion_str) ){
+		
 				
-				$table->addRow();
-				$table->addCell(0, $cellStyle)->addText( $campos["titulo_duracion"] );
-				$table->addCell(0, $cellStyle)->addText( $duracion_str );	
-			}
-			
-		}
-				
-
 		
 	}
 
 	$table->addRow();
 	$table->addCell(0, $cellStyle)->addText('');
 	$table->addCell(0, $cellStyle)->addText('');
+	
+	
+	
 }
+
+
+
+// tabla de segmentos y metodologias
+$section->addPageBreak();
+// Define table style arrays
+$styleTable 	= array('borderSize'=>1, 'borderColor'=>'CCCCCC', 'cellMargin'=>20);
+
+// Define cell style arrays
+$styleCell 		= array('valign'=>'center', 'align'=>'center');
+$styleCellBTLR 	= array('valign'=>'center', 'textDirection'=>PHPWord_Style_Cell::TEXT_DIR_BTLR);
+
+// Define font style for first row
+$fontStyle 		= array('bold'=>true, 'size'=>11, 'align'=>'center');
+
+// Add table style
+$PHPWord->addTableStyle('tablaSegmentosStyle', $styleTable);
+
+
+$metodologias_prop 		= $Metodologia->getPropMetodologias();
+$fontStyle 				= array('name'=>'Arial', 'size'=>9, 'align' => 'center' );
+$titleStyle 			= array('name'=>'Arial', 'size'=>9, 'align' => 'center', 'bold' => true );
+$paragraphStyleCenter 	= array('align'=>'center', 'spaceBefore'=>20, 'spacing'=>30);
+$cell_width 			= 1500;
+
+foreach( $metodologias_prop as $met_selected ){
+	
+	$section->addText( $met_selected["nom_metodologia"].': '.$met_selected["titulo"] );
+		
+	$table = $section->addTable('tablaSegmentosStyle');		
+	$is_presencial = $met_selected['is_presencial'];
+	
+	$query 				= "SELECT * FROM prop_tipo_cuantitativo WHERE id_tipo_cuantitativo = {$met_selected['id_tipo_cuantitativo']}";
+	$tipo_cuant 		= $SqlQuery->GetRow($query);
+	$is_probabilistico 	= $tipo_cuant['probabilistico'];
+	$id_row_met 		= $met_selected["id_row_metodologia"];
+	
+	// fase 1 header//
+	$table->addRow();
+	$table->addCell( $cell_width, $styleCell )->addText('Segmento', $titleStyle, $paragraphStyleCenter );
+	
+	foreach( $Metodologia->getTableVarianzas($id_row_met) as $varianza ){
+		$table->addCell( $cell_width, $styleCell )->addText( $varianza["nombre_var"], $titleStyle, $paragraphStyleCenter );	
+	}
+	
+	$table->addCell( $cell_width, $styleCell )->addText('Total', $titleStyle, $paragraphStyleCenter );
+	
+	if( $is_probabilistico == 1 ){
+		$table->addCell( $cell_width, $styleCell )->addText('Error', $titleStyle, $paragraphStyleCenter );
+	}
+	
+	if( $is_presencial == 1 ){
+		$table->addCell( $cell_width, $styleCell )->addText('Cobertura', $titleStyle, $paragraphStyleCenter );
+	}
+
+	// fase 2 body segmentos
+	foreach( $Metodologia->getTableSegmentos($id_row_met) as $seg_info ){
+		$table->addRow();
+		$table->addCell($cell_width, $styleCell )->addText( $seg_info['nombre_segmento'], $fontStyle, $paragraphStyleCenter );
+		
+		foreach( $seg_info['values'] as $seg_val ){
+			$table->addCell($cell_width, $styleCell )->addText( $seg_val['value'] , $fontStyle, $paragraphStyleCenter );
+		}
+
+		$table->addCell($cell_width, $styleCell )->addText( $seg_info['total_segmento'] , $fontStyle, $paragraphStyleCenter );
+		
+		if( $Metodologia->isProbabilistico($id_row_met) ){
+			$table->addCell( $cell_width, $styleCell )->addText( $seg_info['error_segmento'].'%' , $fontStyle, $paragraphStyleCenter );
+		}
+		
+		if( $is_presencial == 1 ){
+			$cobertura = $ContenidosDoc->getCoberturaById( $seg_info['id_cobertura'] );
+			$table->addCell( $cell_width, $styleCell )->addText( $cobertura["nom_cobertura"] , $fontStyle, $paragraphStyleCenter ); 
+		}
+	}
+	
+	// fase 3 resultados //
+	$table->addRow();
+	$table->addCell( $cell_width, $styleCell )->addText( 'Total' , $fontStyle, $paragraphStyleCenter );
+	$totales = $Metodologia->getTableTotales( $id_row_met );
+	
+	foreach( $totales as $tot_val ){
+		$table->addCell( $cell_width, $styleCell )->addText( $tot_val['value'] , $fontStyle, $paragraphStyleCenter );
+	}
+
+	$table->addCell( $cell_width, $styleCell )->addText( $totales[0]['total'] , $fontStyle, $paragraphStyleCenter );
+	
+	if( $Metodologia->isProbabilistico($id_row_met) ){
+		$table->addCell( $cell_width, $styleCell )->addText( $totales[0]['error'].'%' , $fontStyle, $paragraphStyleCenter );
+	}
+
+	if( $is_presencial == 1 ){
+		$table->addCell( $cell_width, $styleCell )->addText( '-' , $fontStyle, $paragraphStyleCenter );
+	}
+	
+	if( $Metodologia->isProbabilistico($id_row_met) ){
+		$table->addRow();
+		$table->addCell( $cell_width, $styleCell )->addText( 'Error' , $fontStyle, $paragraphStyleCenter );
+		
+		$errores = $Metodologia->getTableErrores($id_row_met);
+		
+		foreach( $errores as $error ){
+			$table->addCell( $cell_width, $styleCell )->addText( $error['value'].'%' , $fontStyle, $paragraphStyleCenter );
+		}
+		
+		$table->addCell( $cell_width, $styleCell )->addText( $error['total'].'%' , $fontStyle, $paragraphStyleCenter );
+		$table->addCell( $cell_width, $styleCell )->addText( '-' , $fontStyle, $paragraphStyleCenter );
+		
+		if( $is_presencial == 1 ){
+			$table->addCell( $cell_width, $styleCell )->addText( '-' , $fontStyle, $paragraphStyleCenter );
+		}
+	}
+	
+	$section->addTextBreak();
+}	
+
 
 //---- calendario
 $section->addPageBreak();

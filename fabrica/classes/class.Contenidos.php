@@ -65,6 +65,11 @@ Class Contenidos extends SqlConnections {
 		$query = "SELECT * FROM prop_cobertura WHERE activo = 1";
 		return $this->adoDbFab->GetAll($query);
 	}
+	
+	public function getCoberturaById( $id_cobertura ){
+		$query = "SELECT * FROM prop_cobertura WHERE id_cobertura = '{$id_cobertura}' ";
+		return $this->adoDbFab->GetRow( $query );
+	}
 
 	public function getPobOjetivo(){
 		$query  = "SELECT * FROM prop_pob_objetivo WHERE activo = 1";
