@@ -299,8 +299,18 @@ $table->addRow(-330);
 $table->addCell(6000)->addText($emailE, $cellStyle );
 $table->addCell(6000)->addText($emailR, $cellStyle );
 $table->addRow(-330);
-$table->addCell(6000)->addText($telefonoE.' - '.$celularE, $cellStyle );
-$table->addCell(6000)->addText($telefonoR.' - '.$celularR, $cellStyle );
+
+if( !empty( $celularE ) ){
+	$table->addCell(6000)->addText($telefonoE.' - Cel: '.$celularE, $cellStyle );	
+} else {
+	$table->addCell(6000)->addText($telefonoE, $cellStyle );	
+}
+
+if( !empty( $celularR ) ){
+	$table->addCell(6000)->addText($telefonoR.' - Cel: '.$celularR, $cellStyle );
+} else {
+	$table->addCell(6000)->addText($telefonoR, $cellStyle );	
+}
 
 //----
 $arryaFechaP	= explode('-',$fechaPropuesta);
