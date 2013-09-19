@@ -60,8 +60,16 @@ $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(50);
 $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(50);			
 			
 
+if( isset($_POST["fecha_desde"]) ){
+	$propuestas 	= $Reporte->getPropuestas( $_POST["fecha_desde"], $_POST["fecha_hasta"] );
+	$nombre_archivo = 'reporte_propuestas_'.$_POST["fecha_desde"].'_'.$_POST["fecha_hasta"];
+} else {
+	$propuestas 	= $Reporte->getPropuestas();
+	$nombre_archivo = 'reporte_propuestas';
+}
 
-foreach( $Reporte->getPropuestas() as $key_p => $prop ){
+
+foreach( $propuestas as $key_p => $prop ){
 	
 	$current_row 	= $key_p+2;
 	
@@ -137,7 +145,7 @@ $objPHPExcel->getActiveSheet()
 $current_row 	= 2; // Datos inician en fila 2 
 $total_vendido 	= 0;
 
-foreach( $Reporte->getPropuestas() as $key_p => $prop ){
+foreach( $propuestas as $key_p => $prop ){
 	
 	$id_propuesta 	= $prop["id_propuesta"];
 	$nom_prop 		= $prop["titulo"];
@@ -314,7 +322,7 @@ $objPHPExcel->getActiveSheet()->getStyle( 'G'.$current_row )->getNumberFormat()
 
 
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="reporte_propuestas.xlsx"');
+header('Content-Disposition: attachment;filename="' . $nombre_archivo . '.xlsx"');
 header('Cache-Control: max-age=0');
 
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');

@@ -433,3 +433,7 @@ a.button{
 .btn-success {
   color: #ffffff !important;
 }
+
+.ui-datepicker{
+	font-size:1em;
+}

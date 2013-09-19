@@ -124,7 +124,6 @@ while($campos			= mysql_fetch_array($con)){
 -->
 <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <LINK rel="stylesheet" href="/css/style.css" type="text/css">
-<link rel="stylesheet" href="css/fabrica.css" />
 
 <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
 
@@ -132,8 +131,14 @@ while($campos			= mysql_fetch_array($con)){
 <script src="js/jquery-1.10.2.min.js" ></script>
 <script src="js/lista_prop.js?<?=time();?>" ></script>
 
+<!-- jQuery UI -->
+<link rel="stylesheet" href="js/jquery-ui-1.10.3/themes/base/jquery-ui.css" />
+<script src="js/jquery-ui-1.10.3/ui/jquery-ui.js" ></script>
+
 <link rel="stylesheet" href="js/chosen_v1.0.0/chosen.css" />
 <script src="js/chosen_v1.0.0/chosen.jquery.min.js" ></script>
+
+<link rel="stylesheet" href="css/fabrica.css" />
 
 <style>
 .textLabel	{
@@ -216,8 +221,20 @@ a:hover {
  					<td> <a href="limpiar_filtros_listado.php" class="btn">Limpiar filtros</a> </td>
  				</tr>
  			</table>
- 			<?php if( $info_usuario['super'] == 1 ){ ?>
- 				<div id="reportBtnWrapper" ><a href="reporte_semanal.php" class="btn btn-success">Reporte Semanal</a></div>
+ 			<?php
+ 				if( $info_usuario['super'] == 1 ){
+
+ 				// calculo fecha 7 dias atras desde la fecha actual
+ 				$fecha_previa = new DateTime( date('Y-m-d') );
+ 				$fecha_previa->sub( new DateInterval('P7D') );
+ 			?>
+ 				<div id="reportBtnWrapper" >
+ 					<form action="reporte_semanal.php" method="POST" >
+ 						<label>Desde: <input type="text" name="fecha_desde" class="fab-datepicker" value="<?php echo $fecha_previa->format('Y-m-d'); ?>" /></label>
+ 						<label>Hasta: <input type="text" name="fecha_hasta" class="fab-datepicker" value="<?php echo date('Y-m-d') ?>" /></label>
+ 						<button type="submit" class="btn btn-success" >Generar Reporte</button>
+ 					</form>
+ 				</div>
  			<?php } ?>
  		</div>
  	</td>

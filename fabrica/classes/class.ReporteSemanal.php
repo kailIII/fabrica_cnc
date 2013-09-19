@@ -11,12 +11,15 @@ class ReporteSemanal extends SqlConnections{
 	}
 	
 	
-	public function getPropuestas(){
+	public function getPropuestas( $fecha_ini = '', $fecha_final = '' ){
+		
+		// $fecha_final == '' ? $fecha_final = date('Y-m-d h:i:s')
 		
 		$query ="SELECT * FROM prop_propuesta prop
 		LEFT JOIN prop_tipo_prop ptp ON ptp.id_tipo_prop = prop.id_tipo_prop 
-		WHERE prop.fecha_creacion >= NOW() - INTERVAL 7 DAY 
+		WHERE prop.fecha_creacion >= '{$fecha_ini}' AND prop.fecha_creacion <= '{$fecha_final}' 
 		ORDER BY prop.id_propuesta DESC ";
+		
 		return $this->adoDbFab->GetAll($query);
 	}
 
