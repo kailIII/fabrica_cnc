@@ -225,12 +225,12 @@ a:hover {
  				if( $info_usuario['super'] == 1 ){
 
  				// calculo fecha 7 dias atras desde la fecha actual
- 				$fecha_previa = new DateTime( date('Y-m-d') );
- 				$fecha_previa->sub( new DateInterval('P7D') );
+ 				$dias_atras 	= time() - (7*24*60*60);
+ 				$fecha_previa 	= date('Y-m-d', $dias_atras );
  			?>
  				<div id="reportBtnWrapper" >
  					<form action="reporte_semanal.php" method="POST" >
- 						<label>Desde: <input type="text" name="fecha_desde" class="fab-datepicker" value="<?php echo $fecha_previa->format('Y-m-d'); ?>" /></label>
+ 						<label>Desde: <input type="text" name="fecha_desde" class="fab-datepicker" value="<?php echo $fecha_previa; ?>" /></label>
  						<label>Hasta: <input type="text" name="fecha_hasta" class="fab-datepicker" value="<?php echo date('Y-m-d') ?>" /></label>
  						<button type="submit" class="btn btn-success" >Generar Reporte</button>
  					</form>
