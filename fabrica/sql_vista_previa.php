@@ -41,7 +41,14 @@ while($campos		= mysql_fetch_array($con)){
 	$nombreE		= $campos["nombre"];
 	$cargoE			= $campos["cargo"];
 	$emailE			= $campos["email"];
-	$telefonoE		= $campos["telefono"].' Ext. '.$campos["ext"];
+
+	// si la ciudad es diferente a bogota se incluye el telefono, de lo contrario solo la extension
+	if( $campos["id_ciudad"] != 1 ){
+		$telefonoE	= $campos["telefono"].' Ext. '.$campos["ext"];
+	} else {
+		$telefonoE	= 'Ext. '.$campos["ext"];
+	}
+
 	$celularE		= $campos["celular"];
 }
 
@@ -54,7 +61,15 @@ while($campos		= mysql_fetch_array($con)){
 	$nombreR		= $campos["nombre"];
 	$cargoR			= $campos["cargo"];
 	$emailR			= $campos["email"];
-	$telefonoR		= $campos["telefono"].' Ext. '.$campos["ext"];
+
+	// si la ciudad es diferente a bogota se incluye el telefono, de lo contrario solo la extension
+	if( $campos["id_ciudad"] != 1 ){
+		$telefonoR	= $campos["telefono"].' Ext. '.$campos["ext"];
+	} else {
+		$telefonoR	= 'Ext. '.$campos["ext"];
+	}
+
+	$celularE		= $campos["celular"];
 	$celularR		= $campos["celular"];
 }
 
