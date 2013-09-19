@@ -216,7 +216,9 @@ a:hover {
  					<td> <a href="limpiar_filtros_listado.php" class="btn">Limpiar filtros</a> </td>
  				</tr>
  			</table>
- 			<div id="reportBtnWrapper" ><a href="reporte_semanal.php" class="btn btn-success">Reporte Semanal</a></div>
+ 			<?php if( $info_usuario['super'] == 1 ){ ?>
+ 				<div id="reportBtnWrapper" ><a href="reporte_semanal.php" class="btn btn-success">Reporte Semanal</a></div>
+ 			<?php } ?>
  		</div>
  	</td>
  </tr>

@@ -3,17 +3,25 @@
 require_once dirname(__FILE__).'/classes/class.ReporteSemanal.php';
 require_once dirname(__FILE__).'/classes/class.Metodologia.php';
 require_once dirname(__FILE__).'/PHPExcel_1.7.9/Classes/PHPExcel.php';
+require_once dirname(__FILE__).'/classes/class.Usuario.php';
+
+session_start();
+
+$Usuario = new Usuario( $_SESSION['userAdmin'] );
+$info_usuario = $Usuario->getUsuario();
+
+if( $info_usuario['super'] != 1 ){ exit('Acceso limitado a super usuarios');  } 
 
 $Reporte = new ReporteSemanal;
 
 $objPHPExcel = new PHPExcel();
 $objPHPExcel->getProperties()->setCreator("CNC")
 							 ->setLastModifiedBy("CNC")
-							 ->setTitle("Reporte semanal")
-							 ->setSubject("Reporte semanal")
-							 ->setDescription("Reporte semanal")
-							 ->setKeywords("Reporte semanal")
-							 ->setCategory("Reporte semanal");
+							 ->setTitle("Reporte")
+							 ->setSubject("Reporte")
+							 ->setDescription("Reporte")
+							 ->setKeywords("Reporte")
+							 ->setCategory("Reporte");
 
 $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('A1', 'Propuesta')
@@ -306,7 +314,7 @@ $objPHPExcel->getActiveSheet()->getStyle( 'G'.$current_row )->getNumberFormat()
 
 
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="reporte_semanal_' . date('Y_m_d') . '.xlsx"');
+header('Content-Disposition: attachment;filename="reporte_propuestas.xlsx"');
 header('Cache-Control: max-age=0');
 
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
