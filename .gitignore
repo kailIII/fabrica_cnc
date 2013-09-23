@@ -45,6 +45,8 @@ PHPWord_0.6.2_Beta/**
 propuesta/fabrica_dev/propuestas/
 propuesta/fabrica_dev/propuestas/*
 propuesta/fabrica_dev/propuestas/**
+propuesta/fabrica_dev/propuestas/registros/*
+propuesta/fabrica_dev/propuestas/registros/**
 
 *.docx
 *.ppt
