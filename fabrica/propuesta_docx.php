@@ -21,6 +21,7 @@ include_once("../libreria.php");
 
 include_once("sql_vista_previa.php");
 
+
 require_once '../PHPWord.php';
 // New Word Document
 $PHPWord = new PHPWord();
@@ -1586,8 +1587,11 @@ while($campos			= mysql_fetch_array($con)){
 	}
 }
 
+$PropuestaDoc->creacion_propuesta_enviar( );
+
 // Save File
 $objWriter = PHPWord_IOFactory::createWriter($PHPWord, 'Word2007');
 $objWriter->save( $pathPropuesta );
 $objWriter->save( $path_propuesta_envio );
+
 ?>

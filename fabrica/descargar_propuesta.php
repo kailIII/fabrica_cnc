@@ -2,13 +2,14 @@
 
 include_once( "../ctl_login_admin.php" );
 include_once( "funciones.php" );
+require_once dirname(__FILE__) . '/classes/class.Contenidos.php';
 
 $idPropuesta	= $_REQUEST['idPropuesta'];
 $nomFile		= 'Propuesta_Id'.$idPropuesta.'.docx';
+$Contenidos 	= new Contenidos;
 
-$md5_archivo 			= md5( date( "Ymdhis" ) . 'Propuesta_Id'.$idPropuesta.'.docx' );
-$nombre_archivo_envio 	= "$md5_archivo.docx";
-$path_propuesta_envio 	= pathPropuestas_docx . '/registros/' . $nombre_archivo_envio;
+$crypt_archivo 			= $Contenidos->encryptData( date( "Ymdhis" ) . 'Propuesta_Id' . $idPropuesta );
+$path_propuesta_envio 	= pathPropuestas_docx . '/registros/' . $crypt_archivo;
 
 if( !is_dir( ) ){
 	mkdir( pathPropuestas_docx . '/registros/' );
