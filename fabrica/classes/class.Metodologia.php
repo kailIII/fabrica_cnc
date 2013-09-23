@@ -246,10 +246,9 @@ class Metodologia extends Propuesta{
 
 		// fase 2 body -- segmentos // 
 
-		$i = 1; // represntando las filas
-		$j = 1; // representado las columnas
-		
+		$i = 1; // represntando las filas		
 		foreach( $this->getTableSegmentos($id_row_met) as $seg_info ){
+			$j = 1; // representado las columnas
 			$html.='<tr>';
 			$html.='<td><input type="text" id_met="'. $id_row_met .'" name="segmento['. $id_row_met .'][]" value="'. $seg_info['nombre_segmento'] .'" ></td>';
 
