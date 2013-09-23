@@ -507,7 +507,7 @@ Class Propuesta extends SqlConnections{
 			$mailBody = str_replace( "{lista_idoneidades}" , $lista_idoneidades , $mailBody );
 			
 			$from_name = "CNC - Fábrica";
-			$from_email = "noreply@cnc.com";
+			$from_email = "comercial@cnccol.com";
 		
 			sendMail( $emails, $subject, $mailBody, $from_name, $from_email);
 		}
@@ -532,6 +532,12 @@ Class Propuesta extends SqlConnections{
 			
 			$this->adoDbFab->Execute($query_rta);
 		}
+	}
+	
+	public function creacion_propuesta_enviar( ){
+		
+		// pr( $this );die( );
+		$query = "INSERT INTO prop_envio_email( id_propuesta ) VALUES ( 1 )";
 	}
 
 

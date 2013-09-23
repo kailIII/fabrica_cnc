@@ -11,7 +11,7 @@ $Contenidos 	= new Contenidos;
 $crypt_archivo 			= $Contenidos->encryptData( date( "Ymdhis" ) . 'Propuesta_Id' . $idPropuesta );
 $path_propuesta_envio 	= pathPropuestas_docx . '/registros/' . $crypt_archivo;
 
-if( !is_dir( ) ){
+if( !is_dir( pathPropuestas_docx . '/registros/' ) ){
 	mkdir( pathPropuestas_docx . '/registros/' );
 } 
 
