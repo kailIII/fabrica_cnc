@@ -1,7 +1,19 @@
 <?
-include("../ctl_login_admin.php");
+
+include_once( "../ctl_login_admin.php" );
+include_once( "funciones.php" );
+
 $idPropuesta	= $_REQUEST['idPropuesta'];
 $nomFile		= 'Propuesta_Id'.$idPropuesta.'.docx';
+
+$md5_archivo 			= md5( date( "Ymdhis" ) . 'Propuesta_Id'.$idPropuesta.'.docx' );
+$nombre_archivo_envio 	= "$md5_archivo.docx";
+$path_propuesta_envio 	= pathPropuestas_docx . '/registros/' . $nombre_archivo_envio;
+
+if( !is_dir( ) ){
+	mkdir( pathPropuestas_docx . '/registros/' );
+} 
+
 $pathPropuesta	= pathPropuestas_docx.'/'.$nomFile;
 
 $pathPropuestaPpt = pathPropuestas_docx.'/propuesta_Id'.$idPropuesta.'.pptx';
@@ -16,7 +28,6 @@ $info_prop = $Propuesta->getProp();
 require_once dirname(__FILE__).'/classes/class.Usuario.php';
 $Usuario = new Usuario(false, $info_prop['revisada_por'] );
 
-include("funciones.php");
 
 $usr_revisa = $Usuario->getUsuario();
 

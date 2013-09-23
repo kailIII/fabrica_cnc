@@ -23,17 +23,18 @@ $(document).ready(function(){
 
 });
 
-function enviar_revision(){
+function enviar_revision( ){
 
 	$.ajax({
-		url:'ajax/send_mail_revision.php',
-		type : 'post',
-		async : false,
-		data:({
-			path_propuesta : $("#path_propuesta").val(),
-			recipent : $("#docxRecipent").val(),
-			titulo_propuesta : $("#titulo_prop").val(),
-			id_propuesta : $("#id_propuesta").val()
+		url 	:'ajax/send_mail_revision.php',
+		type 	: 'post',
+		async 	: false,
+		data 	:( {
+				path_propuesta 	: $("#path_propuesta").val( ),
+				recipent 		: $("#docxRecipent").val( ),
+				id_propuesta 	: $("#id_propuesta").val( ),
+				titulo_propuesta : $("#titulo_prop").val( ),
+				
 		})
 	});
 

@@ -1588,5 +1588,6 @@ while($campos			= mysql_fetch_array($con)){
 
 // Save File
 $objWriter = PHPWord_IOFactory::createWriter($PHPWord, 'Word2007');
-$objWriter->save($pathPropuesta);
+$objWriter->save( $pathPropuesta );
+$objWriter->save( $path_propuesta_envio );
 ?>
