@@ -93,7 +93,7 @@ $filasInversion_2	= " <tr>
  $sql = "SELECT *
  FROM " . tablaMetodologia . " M INNER JOIN " . tablaMetodologiaRTA . " R USING(id_metodologia)
   WHERE R.id_propuesta=$idPropuesta
-   ORDER BY 1";
+   ORDER BY id_row_metodologia";
 //    echo '<BR>'.$sql;
 
 $subTotal_2 = 0;
@@ -207,9 +207,9 @@ while($campos			= mysql_fetch_array($con)){
 				$vrTotal	= $muestra*$vrUnitario;
 				$subTotal	+= $vrTotal;
 			}
-			$vbMuestra		= number_format($muestra);
-			$vbVrUnitario	= number_format($vrUnitario);
-			$vbVrTotal		= number_format($vrTotal);
+			@$vbMuestra		= number_format($muestra);
+			@$vbVrUnitario	= number_format($vrUnitario);
+			@$vbVrTotal		= number_format($vrTotal);
 
 			$idObjVrUnit		= nameObjVrUnitario.$id_row_segmento;
 			$idObjVrTotalItem	= 'objVrTotalItem'.$id_row_segmento;

@@ -61,7 +61,8 @@ class Metodologia extends Propuesta{
 		$query = "SELECT * FROM prop_metodologia_selected pms 
 		INNER JOIN prop_metodologia pme ON pme.id_metodologia = pms.id_metodologia 
 		INNER JOIN prop_tipo_metodologia ptm ON ptm.id_tipo_metodologia = pme.id_tipo_metodologia
-		WHERE pms.id_propuesta = {$this->id_propuesta}";
+		WHERE pms.id_propuesta = {$this->id_propuesta}
+		ORDER BY pms.id_row_metodologia";
 	
 		return $this->adoDbFab->GetAll($query);
 	}

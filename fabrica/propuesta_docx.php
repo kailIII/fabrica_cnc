@@ -603,7 +603,7 @@ $table = $section->addTable();
 $sql = "SELECT *
  FROM ".tablaMetodologia." M INNER JOIN ".tablaMetodologiaRTA." R USING(id_metodologia)
   WHERE R.id_propuesta=$idPropuesta
-   ORDER BY 1";
+   ORDER BY id_row_metodologia";
 //echo '<BR>'.$sql;
 $filasMetodologias		= NULL;
 $con					= mysql_query($sql);
@@ -1195,7 +1195,7 @@ $table->addCell(2000,$styleCell)->addText('$ '.$vbVrDirEstudio.' ', $fontStyle, 
 $sql = "SELECT *
  FROM ".tablaMetodologia." M INNER JOIN ".tablaMetodologiaRTA." R USING(id_metodologia)
   WHERE R.id_propuesta=$idPropuesta
-   ORDER BY 1";
+   ORDER BY id_row_metodologia";
 //echo '<BR>'.$sql;
 $filasInversion		= NULL;
 $cont					= 1;
