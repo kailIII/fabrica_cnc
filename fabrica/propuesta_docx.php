@@ -47,7 +47,7 @@ $properties->setKeywords('my, key, word');
 $sectionStyle = array('orientation' => null,
 			    'marginLeft' => 1100,
 			    'marginRight' => 1100,
-			    'marginTop' => 600,
+			    'marginTop' => 2000,
 			    'marginBottom' => 900,
 				'pageSizeW'=>12240,
 				'pageSizeH'=>15940);
