@@ -47,7 +47,7 @@ $properties->setKeywords('my, key, word');
 $sectionStyle = array('orientation' => null,
 			    'marginLeft' => 1100,
 			    'marginRight' => 1100,
-			    'marginTop' => 600,
+			    'marginTop' => 2000,
 			    'marginBottom' => 900,
 				'pageSizeW'=>12240,
 				'pageSizeH'=>15940);
@@ -523,7 +523,7 @@ if( !empty( $objetivos_especificos ) ):
 	$cellStyle = array('name'=>'Arial', 'size'=>14);
 	if(!empty($objetivos_especificos)){
 		$objetivos_especificos	= explode('||',$objetivos_especificos);
-		$numberStyleList = array('listType' => PHPWord_Style_ListItem::TYPE_NUMBER);
+		$numberStyleList = array('listType' => PHPWord_Style_ListItem::TYPE_NUMBER_NESTED);
 		foreach($objetivos_especificos as $ind => $vbObjetivo){
 			//echo '<BR>ind: '.$ind.' vbObjetivo: '.$vbObjetivo;
 			
@@ -533,7 +533,7 @@ if( !empty( $objetivos_especificos ) ):
 				if( $txt[0] == '*' ){
 	
 					$txt_2 = substr_replace($txt ,"",0,1);
-					$section->addListItem($txt_2, 1, $cellStyle);
+					$section->addListItem($txt_2, 1, $cellStyle, $numberStyleList );
 	
 				} else{
 					$section->addListItem($txt, 0, $cellStyle, $numberStyleList );
@@ -629,7 +629,31 @@ while($campos			= mysql_fetch_array($con)){
 	if(!empty($temas)){
 		$table->addRow();
 		$table->addCell(0, $cellStyle)->addText('Temas:');
-		$table->addCell(0, $cellStyle)->addText($temas);
+		// $table->addCell(0, $cellStyle)->addText($temas);
+		
+		$this_cell = $table->addCell(0, $cellStyle);		
+		$temas = trim($temas);
+		$spaced_txt = explode("\n", $temas);
+		foreach( $spaced_txt as $txt ){
+				
+			
+			if( $txt[0] == '*' ) {
+		
+				$item = substr_replace($txt ,"",0,1);
+				$this_cell->addListItem($item,0);
+				$section->addTextBreak(1);		
+			} else if ( $txt[1] == '*' ){
+				
+				$item = substr_replace($txt ,"",0,2);
+				$this_cell->addListItem($item,0);
+				$section->addTextBreak(1);
+				
+			} else {
+				$item = $txt;
+				$this_cell->addText($item);
+			}
+		}
+		
 	}
 	$table->addRow();
 	$table->addCell(4000, $cellStyle)->addText(utf8_decode('Metodología:'));
