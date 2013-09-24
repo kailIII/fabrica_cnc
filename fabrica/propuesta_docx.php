@@ -1097,7 +1097,7 @@ $sql = "SELECT *
  FROM ".tablaEquipoTrabajo." A INNER JOIN ".tablaEquipoTrabajoRTA." B USING(id_persona)
   LEFT JOIN ".tablaRol." C USING(id_rol)
  WHERE id_propuesta=".$idPropuesta."
-  ORDER BY C.orden";
+  ORDER BY A.orden";
 //echo '<BR>'.$sql;
 $con				= mysql_query($sql);
 while($campos		= mysql_fetch_array($con)){
