@@ -523,7 +523,7 @@ if( !empty( $objetivos_especificos ) ):
 	$cellStyle = array('name'=>'Arial', 'size'=>14);
 	if(!empty($objetivos_especificos)){
 		$objetivos_especificos	= explode('||',$objetivos_especificos);
-		$numberStyleList = array('listType' => PHPWord_Style_ListItem::TYPE_NUMBER);
+		$numberStyleList = array('listType' => PHPWord_Style_ListItem::TYPE_NUMBER_NESTED);
 		foreach($objetivos_especificos as $ind => $vbObjetivo){
 			//echo '<BR>ind: '.$ind.' vbObjetivo: '.$vbObjetivo;
 			
@@ -533,7 +533,7 @@ if( !empty( $objetivos_especificos ) ):
 				if( $txt[0] == '*' ){
 	
 					$txt_2 = substr_replace($txt ,"",0,1);
-					$section->addListItem($txt_2, 1, $cellStyle);
+					$section->addListItem($txt_2, 1, $cellStyle, $numberStyleList );
 	
 				} else{
 					$section->addListItem($txt, 0, $cellStyle, $numberStyleList );
