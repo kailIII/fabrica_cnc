@@ -817,10 +817,7 @@ $paragraphStyleCenter 	= array('align'=>'center', 'spaceBefore'=>20, 'spacing'=>
 $cell_width 			= 1500;
 
 foreach( $metodologias_prop as $met_selected ){
-	
-	$section->addText( $met_selected["nom_metodologia"].': '.$met_selected["titulo"] );
-		
-	$table = $section->addTable('tablaSegmentosStyle');		
+
 	$is_presencial = $met_selected['is_presencial'];
 	
 	$query 				= "SELECT * FROM prop_tipo_cuantitativo WHERE id_tipo_cuantitativo = {$met_selected['id_tipo_cuantitativo']}";
@@ -830,83 +827,92 @@ foreach( $metodologias_prop as $met_selected ){
 
 	$is_presencial = FALSE; // anula la cobertura
 	
-	// fase 1 header//
-	$table->addRow();
-	$table->addCell( $cell_width, $styleCell )->addText('Segmento', $titleStyle, $paragraphStyleCenter );
-	
-	foreach( $Metodologia->getTableVarianzas($id_row_met) as $varianza ){
-		$table->addCell( $cell_width, $styleCell )->addText( $varianza["nombre_var"], $titleStyle, $paragraphStyleCenter );	
-	}
-	
-	$table->addCell( $cell_width, $styleCell )->addText('Total', $titleStyle, $paragraphStyleCenter );
-	
-	if( $is_probabilistico == 1 ){
-		$table->addCell( $cell_width, $styleCell )->addText('Error', $titleStyle, $paragraphStyleCenter );
-	}
-	
-	if( $is_presencial == 1 ){
-		$table->addCell( $cell_width, $styleCell )->addText('Cobertura', $titleStyle, $paragraphStyleCenter );
-	}
 
-	// fase 2 body segmentos
-	foreach( $Metodologia->getTableSegmentos($id_row_met) as $seg_info ){
+	// si la tabla es de 1 x 1 no se muestra en el output
+	if( count( $Metodologia->getTableVarianzas($id_row_met) ) > 1  && count( $Metodologia->getTableSegmentos($id_row_met) > 1) ){
+
+		$section->addText( $met_selected["nom_metodologia"].': '.$met_selected["titulo"] );
+		$table = $section->addTable('tablaSegmentosStyle');		
+		
+		// fase 1 header//
 		$table->addRow();
-		$table->addCell($cell_width, $styleCell )->addText( $seg_info['nombre_segmento'], $fontStyle, $paragraphStyleCenter );
+		$table->addCell( $cell_width, $styleCell )->addText('Segmento', $titleStyle, $paragraphStyleCenter );
 		
-		foreach( $seg_info['values'] as $seg_val ){
-			$table->addCell($cell_width, $styleCell )->addText( $seg_val['value'] , $fontStyle, $paragraphStyleCenter );
+		foreach( $Metodologia->getTableVarianzas($id_row_met) as $varianza ){
+			$table->addCell( $cell_width, $styleCell )->addText( $varianza["nombre_var"], $titleStyle, $paragraphStyleCenter );	
 		}
-
-		$table->addCell($cell_width, $styleCell )->addText( $seg_info['total_segmento'] , $fontStyle, $paragraphStyleCenter );
 		
-		if( $Metodologia->isProbabilistico($id_row_met) ){
-			$table->addCell( $cell_width, $styleCell )->addText( $seg_info['error_segmento'].'%' , $fontStyle, $paragraphStyleCenter );
+		$table->addCell( $cell_width, $styleCell )->addText('Total', $titleStyle, $paragraphStyleCenter );
+		
+		if( $is_probabilistico == 1 ){
+			$table->addCell( $cell_width, $styleCell )->addText('Error', $titleStyle, $paragraphStyleCenter );
 		}
 		
 		if( $is_presencial == 1 ){
-			$cobertura = $ContenidosDoc->getCoberturaById( $seg_info['id_cobertura'] );
-			$table->addCell( $cell_width, $styleCell )->addText( $cobertura["nom_cobertura"] , $fontStyle, $paragraphStyleCenter ); 
+			$table->addCell( $cell_width, $styleCell )->addText('Cobertura', $titleStyle, $paragraphStyleCenter );
 		}
-	}
-	
-	// fase 3 resultados //
-	$table->addRow();
-	$table->addCell( $cell_width, $styleCell )->addText( 'Total' , $fontStyle, $paragraphStyleCenter );
-	$totales = $Metodologia->getTableTotales( $id_row_met );
-	
-	foreach( $totales as $tot_val ){
-		$table->addCell( $cell_width, $styleCell )->addText( $tot_val['value'] , $fontStyle, $paragraphStyleCenter );
-	}
 
-	$table->addCell( $cell_width, $styleCell )->addText( $totales[0]['total'] , $fontStyle, $paragraphStyleCenter );
-	
-	if( $Metodologia->isProbabilistico($id_row_met) ){
-		$table->addCell( $cell_width, $styleCell )->addText( $totales[0]['error'].'%' , $fontStyle, $paragraphStyleCenter );
-	}
+		// fase 2 body segmentos
+		foreach( $Metodologia->getTableSegmentos($id_row_met) as $seg_info ){
+			$table->addRow();
+			$table->addCell($cell_width, $styleCell )->addText( $seg_info['nombre_segmento'], $fontStyle, $paragraphStyleCenter );
+			
+			foreach( $seg_info['values'] as $seg_val ){
+				$table->addCell($cell_width, $styleCell )->addText( $seg_val['value'] , $fontStyle, $paragraphStyleCenter );
+			}
 
-	if( $is_presencial == 1 ){
-		$table->addCell( $cell_width, $styleCell )->addText( '-' , $fontStyle, $paragraphStyleCenter );
-	}
-	
-	if( $Metodologia->isProbabilistico($id_row_met) ){
+			$table->addCell($cell_width, $styleCell )->addText( $seg_info['total_segmento'] , $fontStyle, $paragraphStyleCenter );
+			
+			if( $Metodologia->isProbabilistico($id_row_met) ){
+				$table->addCell( $cell_width, $styleCell )->addText( $seg_info['error_segmento'].'%' , $fontStyle, $paragraphStyleCenter );
+			}
+			
+			if( $is_presencial == 1 ){
+				$cobertura = $ContenidosDoc->getCoberturaById( $seg_info['id_cobertura'] );
+				$table->addCell( $cell_width, $styleCell )->addText( $cobertura["nom_cobertura"] , $fontStyle, $paragraphStyleCenter ); 
+			}
+		}
+		
+		// fase 3 resultados //
 		$table->addRow();
-		$table->addCell( $cell_width, $styleCell )->addText( 'Error' , $fontStyle, $paragraphStyleCenter );
+		$table->addCell( $cell_width, $styleCell )->addText( 'Total' , $fontStyle, $paragraphStyleCenter );
+		$totales = $Metodologia->getTableTotales( $id_row_met );
 		
-		$errores = $Metodologia->getTableErrores($id_row_met);
-		
-		foreach( $errores as $error ){
-			$table->addCell( $cell_width, $styleCell )->addText( $error['value'].'%' , $fontStyle, $paragraphStyleCenter );
+		foreach( $totales as $tot_val ){
+			$table->addCell( $cell_width, $styleCell )->addText( $tot_val['value'] , $fontStyle, $paragraphStyleCenter );
 		}
+
+		$table->addCell( $cell_width, $styleCell )->addText( $totales[0]['total'] , $fontStyle, $paragraphStyleCenter );
 		
-		$table->addCell( $cell_width, $styleCell )->addText( $error['total'].'%' , $fontStyle, $paragraphStyleCenter );
-		$table->addCell( $cell_width, $styleCell )->addText( '-' , $fontStyle, $paragraphStyleCenter );
-		
+		if( $Metodologia->isProbabilistico($id_row_met) ){
+			$table->addCell( $cell_width, $styleCell )->addText( $totales[0]['error'].'%' , $fontStyle, $paragraphStyleCenter );
+		}
+
 		if( $is_presencial == 1 ){
 			$table->addCell( $cell_width, $styleCell )->addText( '-' , $fontStyle, $paragraphStyleCenter );
 		}
+		
+		if( $Metodologia->isProbabilistico($id_row_met) ){
+			$table->addRow();
+			$table->addCell( $cell_width, $styleCell )->addText( 'Error' , $fontStyle, $paragraphStyleCenter );
+			
+			$errores = $Metodologia->getTableErrores($id_row_met);
+			
+			foreach( $errores as $error ){
+				$table->addCell( $cell_width, $styleCell )->addText( $error['value'].'%' , $fontStyle, $paragraphStyleCenter );
+			}
+			
+			$table->addCell( $cell_width, $styleCell )->addText( $error['total'].'%' , $fontStyle, $paragraphStyleCenter );
+			$table->addCell( $cell_width, $styleCell )->addText( '-' , $fontStyle, $paragraphStyleCenter );
+			
+			if( $is_presencial == 1 ){
+				$table->addCell( $cell_width, $styleCell )->addText( '-' , $fontStyle, $paragraphStyleCenter );
+			}
+		}
+		
+		$section->addTextBreak();
+
 	}
-	
-	$section->addTextBreak();
 }	
 
 
