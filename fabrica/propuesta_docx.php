@@ -629,7 +629,31 @@ while($campos			= mysql_fetch_array($con)){
 	if(!empty($temas)){
 		$table->addRow();
 		$table->addCell(0, $cellStyle)->addText('Temas:');
-		$table->addCell(0, $cellStyle)->addText($temas);
+		// $table->addCell(0, $cellStyle)->addText($temas);
+		
+		$this_cell = $table->addCell(0, $cellStyle);		
+		$temas = trim($temas);
+		$spaced_txt = explode("\n", $temas);
+		foreach( $spaced_txt as $txt ){
+				
+			
+			if( $txt[0] == '*' ) {
+		
+				$item = substr_replace($txt ,"",0,1);
+				$this_cell->addListItem($item,0);
+				$section->addTextBreak(1);		
+			} else if ( $txt[1] == '*' ){
+				
+				$item = substr_replace($txt ,"",0,2);
+				$this_cell->addListItem($item,0);
+				$section->addTextBreak(1);
+				
+			} else {
+				$item = $txt;
+				$this_cell->addText($item);
+			}
+		}
+		
 	}
 	$table->addRow();
 	$table->addCell(4000, $cellStyle)->addText(utf8_decode('Metodología:'));
