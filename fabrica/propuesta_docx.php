@@ -827,6 +827,8 @@ foreach( $metodologias_prop as $met_selected ){
 	$tipo_cuant 		= $SqlQuery->GetRow($query);
 	$is_probabilistico 	= $tipo_cuant['probabilistico'];
 	$id_row_met 		= $met_selected["id_row_metodologia"];
+
+	$is_presencial = FALSE; // anula la cobertura
 	
 	// fase 1 header//
 	$table->addRow();
