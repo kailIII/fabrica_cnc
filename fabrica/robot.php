@@ -8,6 +8,8 @@ $Contenidos = new Contenidos;
 require_once dirname(__FILE__).'/classes/class.Usuario.php';
 require_once dirname(__FILE__).'/krumo/class.krumo.php';
 
+require_once dirname(__FILE__).'/funciones.php';
+
 // auto logeo
 if( isset($_GET['autoAuth']) && $_GET['autoAuth'] != '' ){
 

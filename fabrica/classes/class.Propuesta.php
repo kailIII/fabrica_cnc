@@ -14,6 +14,7 @@ require_once dirname(__FILE__).'/class.Usuario.php';
 Class Propuesta extends SqlConnections{
 
 	protected $id_propuesta;
+	protected $crypt_archivo;
 
 	public function __construct( $id_propuesta ){
 		parent::__construct();
@@ -534,10 +535,89 @@ Class Propuesta extends SqlConnections{
 		}
 	}
 	
-	public function creacion_propuesta_enviar( ){
+	public function set_crypt_archivo( $crypt_archivo ){
+		$this->crypt_archivo = $crypt_archivo;
+	}
+	
+	public function creacion_propuesta_enviar( $crypt_archivo , $codigo_validacion ){
 		
-		// pr( $this );die( );
-		$query = "INSERT INTO prop_envio_email( id_propuesta ) VALUES ( 1 )";
+		$id_propuesta 	= $this->id_propuesta;
+		$query 			= "INSERT INTO prop_envio_email( id_propuesta , nombre_archivo , codigo_validacion , fecha_creado ) VALUES ( $id_propuesta , '$crypt_archivo' , '$codigo_validacion' , NOW( ) )";
+		$this->adoDbFab->Execute( $query );
+		
+	}
+	
+	public function propuesta_enviada( $crypt_archivo , $codigo_validacion , $email ){
+		
+		$id_propuesta 	= $this->id_propuesta;
+		
+		$query = " SELECT COUNT( 1 ) as cuenta FROM prop_envio_email 
+						WHERE nombre_archivo = '$crypt_archivo' AND 
+							codigo_validacion = '$codigo_validacion' AND 
+							email = '$email' AND
+							id_propuesta = $id_propuesta ";
+		
+		$respuesta = $this->adoDbFab->GetRow( $query );
+		
+		if( $respuesta[ "cuenta" ] == "1" ){
+			
+			$query = "UPDATE prop_envio_email SET estado = 'enviado' , fecha_enviado = NOW( )
+						WHERE id_propuesta = $id_propuesta AND
+							nombre_archivo = '$crypt_archivo' AND
+							codigo_validacion = '$codigo_validacion' AND
+							email = '$email' ";
+			
+		} else {
+			$query 	= "INSERT INTO prop_envio_email( id_propuesta , nombre_archivo , codigo_validacion , email , estado , fecha_enviado , fecha_creado ) 
+						VALUES ( $id_propuesta , '$crypt_archivo' , '$codigo_validacion' , '$email' , 'enviado' , NOW( ) , NOW( ) )";
+		}
+		
+		$this->adoDbFab->Execute( $query );
+		
+	}
+	
+	public function descarga_propuesta( ){
+		
+		$id_propuesta 		= $this->id_propuesta;
+		$contenidos 		= new Contenidos;
+		$email 				= trim( $contenidos->decryptData( $_GET[ "email" ] ) );
+		$crypt_archivo 		= $_GET[ "crypt_archivo" ]; 
+		$codigo_validacion 	= $_GET[ "codigo_validacion" ];
+		
+		
+		$query = " SELECT COUNT( 1 ) as cuenta FROM prop_envio_email  
+					WHERE id_propuesta = '$id_propuesta' AND
+							nombre_archivo = '$crypt_archivo' AND 
+							codigo_validacion = '$codigo_validacion' AND
+							email = '$email' ";
+		
+		$respuesta = $this->adoDbFab->getRow( $query );
+		if( $respuesta[ "cuenta" ] == "1" ){
+			
+			$id_propuesta 		= intval( $id_propuesta ); 
+			$query = " UPDATE prop_envio_email
+							SET numero_descargas = numero_descargas + 1 ,  
+								estado = 'revisado' , 
+								fecha_revisado = NOW( )
+							WHERE id_propuesta = $id_propuesta AND
+								nombre_archivo = '$crypt_archivo' AND 
+								codigo_validacion = '$codigo_validacion' AND
+								email = '$email' ";
+			$this->adoDbFab->Execute( $query );
+			
+			$archivo 	= pathPropuestas_docx . '/registros/' . $crypt_archivo;
+			$tmp 		= "PropuestaId_" . $id_propuesta . ".docx";
+			header( "Content-type: application/docx" );				
+			header( 'Content-Disposition: attachment; filename="' . $tmp . '"' );
+			readfile( $archivo );
+			return true;
+			
+		} else {
+			die( "registro no existe" );
+		}
+		
+		
+		
 	}
 
 

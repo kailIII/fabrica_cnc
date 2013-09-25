@@ -1618,8 +1618,8 @@ while($campos			= mysql_fetch_array($con)){
 		$section->addTextBreak(1);
 	}
 }
-pr( $path_propuesta_envio );
-$PropuestaDoc->creacion_propuesta_enviar( $crypt_archivo );
+
+$PropuestaDoc->creacion_propuesta_enviar( $crypt_archivo , md5( $ContenidosDoc->decryptData( $crypt_archivo ) ) );
 
 // Save File
 $objWriter = PHPWord_IOFactory::createWriter($PHPWord, 'Word2007');

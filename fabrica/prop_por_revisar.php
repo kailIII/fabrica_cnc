@@ -130,7 +130,7 @@ $Contenidos = new Contenidos;
 		<h3>Observaciones</h3>
 
 		<div id="newComment">
-			<form action="acciones_revision_propuesta.php" method="POST" >
+			<form action="acciones_revision_propuesta.php" method="post" >
 				<textarea name="leComment" required ></textarea>
 				<input type="hidden" name="id_usuario" value="<?=$usr_current['id_equipo_cnc']?>"  />
 				<input type="hidden" name="opc"  value="nuevo_comentario" />
