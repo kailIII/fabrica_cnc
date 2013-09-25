@@ -48,7 +48,7 @@ $adjuntos = array(
 		'nombre' => end( explode('/', $_POST['path_propuesta'] ))
 	)
 );
-echo sendMail( $emails , $subject , $mailBody , $from_name , $from_email );
+echo sendMail( $emails , $subject , $mailBody , $from_name , $from_email , false, true );
 
 // si hay no en idoneidad envia mails a las vps
 if( $Propuesta->noEnIdoneidad() ){

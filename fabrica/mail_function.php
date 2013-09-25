@@ -3,7 +3,7 @@
 require_once dirname(__FILE__)."/PHPMailer_v5.1/class.phpmailer.php";
 require_once dirname(__FILE__).'/classes/class.Propuesta.php';
 
-function sendMail( $emails = array() , $subject, $content, $from_name, $from_email, $adjuntos = false ){
+function sendMail( $emails = array() , $subject, $content, $from_name, $from_email, $adjuntos = false , $enviar_propuesta = false ){
 
 	$content = stripslashes($content);
 	$subject = utf8_encode( $subject );
@@ -52,7 +52,7 @@ function sendMail( $emails = array() , $subject, $content, $from_name, $from_ema
 			$intentos++;
 		}
 		
-		if( $exito === true ){
+		if( $exito === true and $enviar_propuesta === true ){
 			
 			$crypt_archivo 		= $_POST[ "crypt_archivo" ];
 			$codigo_validacion 	= $_POST[ "codigo_validacion" ];
