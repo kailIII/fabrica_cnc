@@ -261,7 +261,7 @@ foreach( $propuestas as $key_p => $prop ){
 			// RESUMEN DE LA METODOLOGIA
 			$resumen_mets[$id_metodologia]['nombre'] 	=  utf8_encode($nom_metodologia);
 			$resumen_mets[$id_metodologia]['cantidad'] 	+= $vbMuestra;
-			$resumen_mets[$id_metodologia]['total'] 	+= $vbVrUnitario;
+			$resumen_mets[$id_metodologia]['total'] 	+= $vrTotal;
 			
 			
 			} // fin each segmento rta
