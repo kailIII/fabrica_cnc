@@ -158,12 +158,20 @@ foreach( $propuestas as $key_p => $prop ){
 	
 	$objPHPExcel->setActiveSheetIndex(1)
 				->setCellValue( 'A'.$current_row, utf8_encode( $nom_prop ) );
-				
+	
+	$met_aplicadas = array();
+	
+	// evita nombres de metodologias repetidas				
 	foreach( $metodologias as $met ){
-		$nom_metodologia = $met["nom_metodologia"];
-		$objPHPExcel->setActiveSheetIndex(1)
-		->setCellValue( 'B'.$current_row, $objPHPExcel->setActiveSheetIndex(1)->getCell( 'B'.$current_row )->getValue().utf8_encode( $nom_metodologia )."\n" );
+		
+		if(! in_array($met['nom_metodologia'], $met_aplicadas ) ){
+			$met_aplicadas[] = $met['nom_metodologia'];
+		}
+		
 	}
+	
+	$objPHPExcel->setActiveSheetIndex(1)
+		->setCellValue( 'B'.$current_row, $objPHPExcel->setActiveSheetIndex(1)->getCell( 'B'.$current_row )->getValue().utf8_encode( implode("\n\n" , $met_aplicadas ) ));
 	
 	$init_row = $current_row;
 	
