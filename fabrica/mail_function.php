@@ -15,7 +15,7 @@ function sendMail( $emails = array() , $subject, $content, $from_name, $from_ema
 //		$mailAddr = "felipe.gaitan.81@gmail.com";
 		$mail = new PHPMailer();
 
-		if( true or $_SERVER['SERVER_ADDR'] == "127.0.0.1" || trim(strtolower($_SERVER['SERVER_NAME'])) == 'servidor' || trim(strtolower($_SERVER['SERVER_NAME'])) == 'localhost' ){
+		if( false and $_SERVER['SERVER_ADDR'] == "127.0.0.1" || trim(strtolower($_SERVER['SERVER_NAME'])) == 'servidor' || trim(strtolower($_SERVER['SERVER_NAME'])) == 'localhost' ){
 			$mail->IsSMTP();
 			$mail->SMTPAuth 	= true;
 			$mail->Host 		= "smtp.office365.com"; // SMTP a utilizar. Por ej. smtp.elserver.com

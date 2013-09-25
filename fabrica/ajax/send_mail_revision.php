@@ -40,7 +40,7 @@ $mailBody = str_replace( "{id_propuesta}" , $_POST['id_propuesta'] , $mailBody )
 
 $from_name = "CNC - Fábrica";
 $from_email = "comercial@cnccol.com";
-//$from_email = "noreply@cnc.com";
+$from_email = "noreply@cnc.com";
 
 $adjuntos = array(
 	array(
