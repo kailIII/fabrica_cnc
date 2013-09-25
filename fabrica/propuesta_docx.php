@@ -384,21 +384,25 @@ $texto2	= utf8_decode("El Centro se compromete con un nuevo liderazgo de servici
 //----
 $section->addTextBreak(2);
 $textStyle = array('bold'=>true, 'name'=>'Arial', 'size'=>21, 'color'=>'000000');
-$section->addText(utf8_decode('investigación + conversación = acción'), $textStyle);
-$section->addTextBreak(3);
-$textStyle = array('name'=>'Arial', 'size'=>14, 'color'=>'000000');
+$section->addText(utf8_decode('Investigación + conversación = acción'), $textStyle);
+$section->addTextBreak(2);
+$textStyle = array('name'=>'Arial', 'size'=>12, 'color'=>'000000');
 
 
-// $section->addText($texto1, $textStyle);
+$PHPWord->addParagraphStyle('pjustify', array('align' => 'both', 'spacing' => 120, 'spaceBefore' => 0, 'spaceAfter' => 0 ));
+$PHPWord->addParagraphStyle('pjustify_no_spacing', array('align' => 'both', 'spacing' => 0, 'spaceBefore' => 0, 'spaceAfter' => 0 ));
 
-$textrun = $section->createTextRun();
+
+/*$textrun = $section->createTextRun();
 $textrun->addText( 'El ', $textStyle );
-$textrun->addText( utf8_decode('Centro Nacional de Consultoría ') , array('name'=>'Arial', 'size'=>14, 'color'=>'000000', 'bold' => true ));
+$textrun->addText( utf8_decode('Centro Nacional de Consultoría ') , array('name'=>'Arial', 'size'=>12, 'color'=>'000000', 'bold' => true ) );
 $textrun->addText( utf8_decode( 'es una firma de investigación y consultoría, centrada en la creación de valor a través de la escucha generosa de sus necesidades, el estudio cuidadoso de sus problemas y el desarrollo de soluciones comercialmente viables que les garanticen el progreso.' ), $textStyle );
+ * */
 
-
-$textStyle = array('name'=>'Arial', 'size'=>14, 'color'=>'000000');
-$section->addText($texto2, $textStyle);
+$textStyle = array('name'=>'Arial', 'size'=>12, 'color'=>'000000' );
+$section->addText($texto1, $textStyle, 'pjustify' );
+$section->addTextBreak(1);
+$section->addText($texto2, $textStyle, 'pjustify' );
 
 // si el contexto esta vacio no genera la pagina
 if( !empty( $contexto ) ):
@@ -430,8 +434,9 @@ $section->addTextBreak(1);
 //----
 //$section->addTextBreak(1);
 $section->addText('CONTEXTO', 'titleStyle');
+$section->addTextBreak(2);
 //----
-$cellStyle = array('name'=>'Arial', 'size'=>14);
+$cellStyle = array('name'=>'Arial', 'size'=>12);
 //$arrayLiTexto	= nl2br($introduccion_met);
 $arrayLiTexto	= str_replace(Chr(13), "||", $contexto);  
 $arrayLiTexto	= explode('||',$arrayLiTexto);
@@ -441,10 +446,10 @@ foreach($arrayLiTexto as $ind => $vbIntMed){
 		$caracter1	= substr($vbIntMed,0,1);
 		if($caracter1=='*'){
 			$textoLI	= trim(substr($vbIntMed,1));
-			$section->addListItem($textoLI, 0, $cellStyle);
+			$section->addListItem($textoLI, 0, $cellStyle, 'pjustify' );
 		}
 		else{
-			$section->addText($vbIntMed, $cellStyle);
+			$section->addText($vbIntMed, $cellStyle, 'pjustify' );
 		}
 	}
 	else{
@@ -483,11 +488,11 @@ $section->addTextBreak(1);
 
 
 	$section->addText('OBJETIVOS', 'titleStyle');
+	$section->addTextBreak(2);
+	$cellStyle = array('name'=>'Arial', 'size'=>12);
+	$section->addText($objetivo_general, $cellStyle, 'pjustify' );
 	$section->addTextBreak(1);
-	$cellStyle = array('name'=>'Arial', 'size'=>14);
-	$section->addText($objetivo_general, $cellStyle);
-	$section->addTextBreak(1);
-	$cellStyle = array('name'=>'Arial', 'size'=>14, 'bold'=>true);
+	$cellStyle = array('name'=>'Arial', 'size'=>12, 'bold'=>true);
 
 endif; // fin emtpy obj_gen obj_esps
 
@@ -518,9 +523,9 @@ if( !empty( $objetivos_especificos ) ):
 	$section->addTextBreak(1);
 	
 	$section->addText('OBJETIVOS ESPECIFICOS', 'titleStyle' );
-	$section->addTextBreak(1);
+	$section->addTextBreak(2);
 	
-	$cellStyle = array('name'=>'Arial', 'size'=>14);
+	$cellStyle = array('name'=>'Arial', 'size'=>12);
 	if(!empty($objetivos_especificos)){
 		$objetivos_especificos	= explode('||',$objetivos_especificos);
 		$numberStyleList = array('listType' => PHPWord_Style_ListItem::TYPE_NUMBER_NESTED);
@@ -533,10 +538,11 @@ if( !empty( $objetivos_especificos ) ):
 				if( $txt[0] == '*' ){
 	
 					$txt_2 = substr_replace($txt ,"",0,1);
-					$section->addListItem($txt_2, 1, $cellStyle, $numberStyleList );
+					$section->addListItem($txt_2, 1, $cellStyle, $numberStyleList, 'pjustify' );
 	
 				} else{
-					$section->addListItem($txt, 0, $cellStyle, $numberStyleList );
+					$section->addListItem($txt, 0, $cellStyle, $numberStyleList, 'pjustify' );
+					$section->addTextBreak(1);
 				}
 			}
 			
@@ -571,8 +577,9 @@ while($campos	= mysql_fetch_array($con)){
 $section->addTextBreak(1);
 //----
 $section->addText('METODOLOGIAS', 'titleStyle');
+$section->addTextBreak(2);
 //----
-$cellStyle = array('name'=>'Arial', 'size'=>14);
+$cellStyle = array('name'=>'Arial', 'size'=>12);
 //$arrayLiTexto	= nl2br($introduccion_met);
 $arrayLiTexto	= str_replace(Chr(13), "||", $introduccion_met);  
 $arrayLiTexto	= explode('||',$arrayLiTexto);
@@ -965,7 +972,7 @@ while($campos	= mysql_fetch_array($con)){
 }
 $section->addTextBreak(1);
 $section->addText('CALENDARIO', 'titleStyle');
-
+$section->addTextBreak(2);
 //---- consulta las semanas del calendario para el proceso actual
 $sqlR = "SELECT * FROM ".tablaCalendario." WHERE id_propuesta=".$idPropuesta;
 //echo '<BR>'.$sqlR;
@@ -1055,10 +1062,10 @@ $cellStyle = array('name'=>'Arial', 'size'=>8);
 $dato	= utf8_decode("*Procesamiento y análisis incluye los procesos de elaboración de programas de captura, digitación de la información, crítica y codificación de preguntas abiertas, generación de tabulados y otros análisis estadísticos que se consideren convenientes.");
 $section->addText($dato, $cellStyle);
 
-$cellStyle = array('name'=>'Arial', 'size'=>14, 'bold'=>true);
+$cellStyle = array('name'=>'Arial', 'size'=>12, 'bold'=>true);
 $section->addText(utf8_decode('Ruta Crítica:'), $cellStyle);
 
-$cellStyle = array('name'=>'Arial', 'size'=>14);
+$cellStyle = array('name'=>'Arial', 'size'=>12);
 
 $spaced_txt = explode("\n", $info_prop['ruta_critica']);
 foreach( $spaced_txt as $txt ){
@@ -1066,11 +1073,12 @@ foreach( $spaced_txt as $txt ){
 	if( $txt[0] == '*' ) {
 
 		$item = substr_replace($txt ,"",0,1);
-		$section->addListItem($item, 0, $cellStyle);
-		$section->addTextBreak(1);		
+		$section->addListItem($item, 0, $cellStyle, 'pjustify' );
+		$section->addTextBreak(1);	
 	} else {
 		$item = $txt;
-		$section->addText($item, $cellStyle);
+		$section->addText($item, $cellStyle, 'pjustify' );
+		$section->addTextBreak(1);
 	}
 }
 
@@ -1116,6 +1124,7 @@ while($campos	= mysql_fetch_array($con)){
 $section->addTextBreak(1);
 
 $section->addText('EQUIPO DE TRABAJO', 'titleStyle');
+$section->addTextBreak(2);
 
 $sql = "SELECT *
  FROM ".tablaEquipoTrabajo." A INNER JOIN ".tablaEquipoTrabajoRTA." B USING(id_persona)
@@ -1137,13 +1146,15 @@ while($campos		= mysql_fetch_array($con)){
 	$section->addImage($srcFoto, $imageStyle);
 
 	$cellStyle = array('name'=>'Arial', 'size'=>12, 'bold'=>true);
-	$section->addText($nombre, $cellStyle);
+	$section->addText($nombre, $cellStyle, 'pjustify_no_spacing' );
 
 	$cellStyle = array('name'=>'Arial', 'size'=>12);
-	$section->addText($nom_rol, $cellStyle);
+	$section->addText($nom_rol, $cellStyle, 'pjustify_no_spacing' );
+	$section->addTextBreak(1);
 
-	$cellStyle = array('name'=>'Arial', 'size'=>14);
-	$section->addText($des_cv, $cellStyle);
+	$cellStyle = array('name'=>'Arial', 'size'=>12);
+	$section->addText($des_cv, $cellStyle, 'pjustify' );
+	$section->addTextBreak(1);
 	
 	$section->addPageBreak();
 	$section->addTextBreak(1);
@@ -1175,6 +1186,7 @@ while($campos	= mysql_fetch_array($con)){
 $section->addTextBreak(1);
 
 $section->addText(utf8_decode('INVERSIÓN'), 'titleStyle');
+$section->addTextBreak(2);
 
 // Define table style arrays
 $styleTable = array('borderSize'=>1, 'borderColor'=>'000000', 'cellMargin'=>30);
@@ -1381,9 +1393,10 @@ $table->addCell(2000, $styleCell)->addText('$ '.$vbGranTotal, $fontStyleBold, $p
 if( $vrDirEstudio_2 != "0" ){ 
 
 	$subTotal = 0;
-	$section->addTextBreak(1);
+	$section->addPageBreak();
 	
 	$section->addText(utf8_decode('INVERSIÓN 2'), 'titleStyle');
+	$section->addTextBreak(2);
 	
 	// Define table style arrays
 	$styleTable = array('borderSize'=>1, 'borderColor'=>'000000', 'cellMargin'=>30);
@@ -1510,15 +1523,15 @@ if( $vrDirEstudio_2 != "0" ){
 
 
 $section->addTextBreak(1);
-$cellStyle = array('name'=>'Arial', 'size'=>14, 'bold'=>true);
+$cellStyle = array('name'=>'Arial', 'size'=>12, 'bold'=>true);
 $section->addText('Forma pago:', $cellStyle);
-$cellStyle = array('name'=>'Arial', 'size'=>14);
-$section->addText($formaPago, $cellStyle);
+$cellStyle = array('name'=>'Arial', 'size'=>12);
+$section->addText($formaPago, $cellStyle, 'pjustify');
 
-$cellStyle = array('name'=>'Arial', 'size'=>14, 'bold'=>true);
+$cellStyle = array('name'=>'Arial', 'size'=>12, 'bold'=>true);
 $section->addText('Validez de la propuesta:', $cellStyle);
-$cellStyle = array('name'=>'Arial', 'size'=>14);
-$section->addText( $info_prop['validez_propuesta'] , $cellStyle);
+$cellStyle = array('name'=>'Arial', 'size'=>12);
+$section->addText( $info_prop['validez_propuesta'] , $cellStyle, 'pjustify');
 
 //---- Productos
 $section->addPageBreak();
@@ -1545,8 +1558,9 @@ while($campos	= mysql_fetch_array($con)){
 }
 $section->addTextBreak(1);
 $section->addText('PRODUCTOS', 'titleStyle');
+$section->addTextBreak(1);
 
-$cellStyle = array('name'=>'Arial', 'size'=>14);
+$cellStyle = array('name'=>'Arial', 'size'=>12);
 $section->addText($vb_productos, $cellStyle);
 
 $sql = "SELECT * FROM ".tablaEntregable." INNER JOIN ".tablaEntregableRTA." USING(id_entregable)
@@ -1593,6 +1607,7 @@ while($campos	= mysql_fetch_array($con)){
 }
 $section->addTextBreak(1);
 $section->addText('CONTROL DE CALIDAD', 'titleStyle');
+$section->addTextBreak(2);
 
 $cellStyle = array('name'=>'Arial', 'size'=>11);
 $section->addText(utf8_decode('El Centro Nacional de Consultoría:'), $cellStyle);
@@ -1610,7 +1625,7 @@ while($campos			= mysql_fetch_array($con)){
 
 //	$listStyle = array('listType' => PHPWord_Style_ListItem::TYPE_NUMBER);
 //	$section->addListItem($des_nota_calidad, 0, null, $listStyle);
-	$section->addListItem($des_nota_calidad, 0, $cellStyle);
+	$section->addListItem($des_nota_calidad, 0, $cellStyle );
 	
 	$section->addTextBreak(1);
 	
@@ -1619,7 +1634,9 @@ while($campos			= mysql_fetch_array($con)){
 	}
 }
 
+
 $PropuestaDoc->creacion_propuesta_enviar( $crypt_archivo , md5( $ContenidosDoc->decryptData( $crypt_archivo ) ) );
+
 
 // Save File
 $objWriter = PHPWord_IOFactory::createWriter($PHPWord, 'Word2007');
