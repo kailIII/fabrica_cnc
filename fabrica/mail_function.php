@@ -61,7 +61,7 @@ function sendMail( $emails = array() , $subject, $content, $from_name, $from_ema
 				
 		}
 		
-		echo $exito;
+		// echo $exito;
 	}
 
 }
