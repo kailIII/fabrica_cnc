@@ -258,6 +258,11 @@ foreach( $propuestas as $key_p => $prop ){
 			$objPHPExcel->getActiveSheet()->getStyle( 'F'.$current_row )->getNumberFormat()
 			->setFormatCode( '#,##' );
 			
+			// RESUMEN DE LA METODOLOGIA
+			$resumen_mets[$id_metodologia]['nombre'] 	=  utf8_encode($nom_metodologia);
+			$resumen_mets[$id_metodologia]['cantidad'] 	+= $vbMuestra;
+			$resumen_mets[$id_metodologia]['total'] 	+= $vbVrUnitario;
+			
 			
 			} // fin each segmento rta
 			
@@ -327,6 +332,49 @@ $objPHPExcel->getActiveSheet()
 $objPHPExcel->getActiveSheet()->getStyle( 'C'.$current_row )->getFont()->setBold(true);						
 $objPHPExcel->getActiveSheet()->getStyle( 'G'.$current_row )->getNumberFormat()
 ->setFormatCode( '#,##' );
+
+// HOJA DE TOTALES
+$objPHPExcel->createSheet(2);
+$objPHPExcel->setActiveSheetIndex(2)->setTitle('Resumen Totales');
+
+$objPHPExcel->getActiveSheet()->getStyle('A')->getFont()->setBold(true);
+$objPHPExcel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
+$objPHPExcel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
+
+$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+
+$objPHPExcel->getActiveSheet()
+            ->setCellValue('A1', 'Metodología')
+			->setCellValue('B1', 'Cantidad' )
+			->setCellValue('C1', 'Monto');
+
+$current_row = 2;
+foreach( $resumen_mets as $rmet ){
+	
+	$objPHPExcel->getActiveSheet()
+            ->setCellValue('A'.$current_row , $rmet['nombre'] )
+			->setCellValue('B'.$current_row , $rmet['cantidad'] )
+			->setCellValue('C'.$current_row , $rmet['total'] );
+			
+	
+	// si se formatea como numero no muestra el num 0...
+	if( $rmet['cantidad'] != 0 ){
+		$objPHPExcel->getActiveSheet()->getStyle( 'B'.$current_row )->getNumberFormat()
+					->setFormatCode( '#,##' );
+	}
+	
+	if( $rmet['total'] != 0 ){
+		$objPHPExcel->getActiveSheet()->getStyle( 'C'.$current_row )->getNumberFormat()
+					->setFormatCode( '#,##' );
+	}
+				
+	$current_row++;
+	
+}
+
+$objPHPExcel->setActiveSheetIndex(1);
 
 
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
