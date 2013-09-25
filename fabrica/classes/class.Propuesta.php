@@ -604,6 +604,9 @@ Class Propuesta extends SqlConnections{
 								codigo_validacion = '$codigo_validacion' AND
 								email = '$email' ";
 			$this->adoDbFab->Execute( $query );
+
+			$query = "UPDATE prop_propuesta SET estado_final = 2 WHERE id_propuesta = $id_propuesta ";
+			$this->adoDbFab->Execute( $query );
 			
 			$archivo 	= pathPropuestas_docx . '/registros/' . $crypt_archivo;
 			$tmp 		= "PropuestaId_" . $id_propuesta . ".docx";
