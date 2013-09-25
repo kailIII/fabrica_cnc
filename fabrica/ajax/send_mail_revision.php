@@ -28,11 +28,11 @@ $redirect = 'prop_por_revisar.php?idMenu=3&idPropuesta='.$info_prop['id_propuest
 $redirect = rtrim(strtr(base64_encode($redirect), '+/', '-_'), '=');
 
 $link_revision = 'http://herramientascnc.com/propuesta/'. $fabrica_dev .'/robot.php?autoAuth='.$Contenidos->encryptData( $info_prop['revisada_por'] ).'&redirect='.$redirect;
-$link_revision = 'http://localhost/fabrica_cnc/'. $fabrica_dev .'/robot.php?autoAuth='.$Contenidos->encryptData( $info_prop['revisada_por'] ).'&redirect='.$redirect;
+//$link_revision = 'http://localhost/fabrica_cnc/'. $fabrica_dev .'/robot.php?autoAuth='.$Contenidos->encryptData( $info_prop['revisada_por'] ).'&redirect='.$redirect;
 $mailBody = str_replace( "{link_revision}" , $link_revision , $mailBody );
 
 $link_descarga = 'http://herramientascnc.com/propuesta/'. $fabrica_dev .'/descarga_archivo.php?crypt_archivo=' . $crypt_archivo  . '&codigo_validacion=' . $codigo_validacion . '&propuesta=' . $Contenidos->encryptData( $_POST['id_propuesta'] ) . '&email=' . $Contenidos->encryptData( $_POST[ "recipent" ] );
-$link_descarga = 'http://localhost/fabrica_cnc/'. $fabrica_dev .'/descarga_archivo.php?crypt_archivo=' . $crypt_archivo  . '&codigo_validacion=' . $codigo_validacion . '&propuesta=' . $Contenidos->encryptData( $_POST['id_propuesta'] ) . '&email=' . $Contenidos->encryptData( $_POST[ "recipent" ] );
+//$link_descarga = 'http://localhost/fabrica_cnc/'. $fabrica_dev .'/descarga_archivo.php?crypt_archivo=' . $crypt_archivo  . '&codigo_validacion=' . $codigo_validacion . '&propuesta=' . $Contenidos->encryptData( $_POST['id_propuesta'] ) . '&email=' . $Contenidos->encryptData( $_POST[ "recipent" ] );
 $mailBody = str_replace( "{link_descarga}" , $link_descarga , $mailBody );
 
 $mailBody = str_replace( "{id_propuesta}" , $_POST['id_propuesta'] , $mailBody );
