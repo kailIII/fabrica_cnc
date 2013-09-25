@@ -16,7 +16,7 @@ $rowBg[$idMenu]		= " bgcolor='#282828'";
 
 	  <TD width="1%" align='center' valign='middle'><div style='color:#FFFFFF;'>|</div></TD>
 
-	  <TD width="10%" align='center' valign='middle' nowrap="nowrap" style=" <?=$rowAtrib[1]?>"<?=$rowBg[1]?>><div class="padding5"><a href="?idMenu=1"><span style='color:#FFFFFF;'>Nueva</span></a></div></TD>
+	  <TD width="10%" align='center' valign='middle' nowrap="nowrap" style=" <?=$rowAtrib[1]?>"<?=$rowBg[1]?>><div class="padding5"><a href="index.php?idMenu=1"><span style='color:#FFFFFF;'>Nueva</span></a></div></TD>
 
 	  <TD width="1%" align='center' valign='middle'><div style='color:#FFFFFF;'>|</div></TD>
 
