@@ -102,7 +102,7 @@ $table->addCell(1000, $cellStyle)->addText(utf8_decode('Lealtad y relaciones'), 
 $table->addCell(20)->addText('', $fontStyle);
 $table->addCell(1000, $cellStyle)->addText(utf8_decode('Marca y medios'), $styleUndNeg[2]);
 $table->addCell(20)->addText('', $fontStyle);
-$table->addCell(1500, $cellStyle)->addText(utf8_decode('Gobierno y asuntos públicos'), $styleUndNeg[3]);
+$table->addCell(1800, $cellStyle)->addText(utf8_decode('Gobierno y asuntos públicos'), $styleUndNeg[3]);
 $table->addCell(20)->addText('', $fontStyle);
 $table->addCell(1200, $cellStyle)->addText(utf8_decode('Investigación de mercado'), $styleUndNeg[4]);
 $table->addCell(20)->addText('', $fontStyle);
@@ -1671,9 +1671,6 @@ while($campos			= mysql_fetch_array($con)){
 		$section->addTextBreak(1);
 	}
 }
-
-
-// comentario version DEV
 
 $PropuestaDoc->creacion_propuesta_enviar( $crypt_archivo , md5( $ContenidosDoc->decryptData( $crypt_archivo ) ) );
 
