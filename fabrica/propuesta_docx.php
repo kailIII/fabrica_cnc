@@ -152,7 +152,7 @@ switch( $unidad_negocio ){
 		break;
 	
 	// consultoria empresarial
-	case 5:
+	case 6:
 		$color_unidad = "0082c5";
 		break;
 }
