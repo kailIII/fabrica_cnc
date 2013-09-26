@@ -1673,6 +1673,8 @@ while($campos			= mysql_fetch_array($con)){
 }
 
 
+// comentario version DEV
+
 $PropuestaDoc->creacion_propuesta_enviar( $crypt_archivo , md5( $ContenidosDoc->decryptData( $crypt_archivo ) ) );
 
 
