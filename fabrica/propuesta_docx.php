@@ -122,6 +122,44 @@ $styleUndNeg[5]	= $styleBarra;
 $styleUndNeg[6]	= $styleBarra; 
 $styleUndNeg[7]	= $styleBarra; 
 
+
+// elige el color de la barra adecuado para cada unidad de negocio
+switch( $unidad_negocio ){
+	
+	// lealtad y relaciones
+	case 1:
+		$color_unidad = "1ca2da";
+		break;
+	
+	// Marca y medios
+	case 2:
+		$color_unidad = "2aa84a";
+		break;
+	
+	// gobierno y asuntos publicos
+	case 3:
+		$color_unidad = "f2cc10";
+		break;
+	
+	// investigacion de mercado
+	case 4:
+		$color_unidad = "f39320";
+		break;
+	
+	// opinion publica
+	case 5:
+		$color_unidad = "f28121";
+		break;
+	
+	// consultoria empresarial
+	case 5:
+		$color_unidad = "0082c5";
+		break;
+}
+
+
+$styleBarraAct	= array('valign'=>'left', 'bgColor'=> $color_unidad );
+
 $styleUndNeg[$unidad_negocio]	= $styleBarraAct; 
 
 // Add cells
