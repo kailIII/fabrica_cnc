@@ -163,8 +163,8 @@ $footer->addPreserveText(utf8_decode('Página | ').'{PAGE}', $cellStyle, array('
 
 
 //----
-$PHPWord->addFontStyle('titleStyle', array('name'=>'Arial', 'size'=>35, 'color'=>'808080', 'bold' => true ));
-$PHPWord->addFontStyle('empStyle', array('name'=>'Arial', 'size'=>28, 'color'=>'808080'));
+$PHPWord->addFontStyle('titleStyle', array('name'=>'Arial', 'size'=>35, 'color'=>'7d949c', 'bold' => true ));
+$PHPWord->addFontStyle('empStyle', array('name'=>'Arial', 'size'=>28, 'color'=>'7d949c'));
 
 //----
 $section->addTextBreak(2);
