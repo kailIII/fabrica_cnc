@@ -326,7 +326,7 @@ for( $i = 0; $i < $num_clientes; ){
 //----
 $section->addTextBreak();
 
-$cellStyle = array('name'=>'Arial', 'size'=>10.1, 'color'=>'808080');
+$cellStyle = array('name'=>'Arial', 'size'=>9.5, 'color'=>'808080');
 $table = $section->addTable();
 $table->addRow(-330);
 $table->addCell(6000)->addText('Presentada por: ' . $nombreE , $cellStyle );
