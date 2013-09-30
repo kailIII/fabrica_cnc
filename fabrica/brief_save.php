@@ -1,9 +1,14 @@
 <?php
 
+session_start();
 
 require_once dirname(__FILE__).'/classes/class.Metodologia.php';
 require_once dirname(__FILE__).'/krumo/class.krumo.php';
 require_once dirname(__FILE__).'/classes/class.SqlQuery.php';
+require_once dirname(__FILE__).'/classes/class.Usuario.php';
+
+$Usuario 	= new Usuario( $_SESSION['userAdmin'] );
+$this_user 	= $Usuario->getUsuario();
 
 $SqlQuery = new SqlQuery;
 $idPropuesta = $_POST['idPropuesta'];
@@ -162,6 +167,13 @@ for( $k = 1 ; $k <= 2 ; $k++ ){
 
 }
 
+// registra el cambio en BD
+$sql = "INSERT INTO prop_reg_cambios SET
+			id_propuesta 		= '{$_POST['idPropuesta']}',
+			motivos_cambio 		= '{$_POST['motivo_cambio']}',
+			id_equipo_cnc 		= '{$this_user['id_equipo_cnc']}',
+			nombre_responsable 	= '{$this_user['nombre']}' ";
 
+$SqlQuery->Execute($sql);
 
 header('Location: '.$_SERVER['HTTP_REFERER']  );
