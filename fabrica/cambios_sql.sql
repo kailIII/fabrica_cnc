@@ -87,3 +87,9 @@ ADD CONSTRAINT `fk_prop_propuesta_id_propuesta`
 
 ALTER TABLE `ab1255_fabrica`.`prop_reg_cambios` 
 ADD COLUMN `fecha_cambio` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `nombre_responsable`;
+
+##commit se registra la fecha de inicio de la propuesta
+ALTER TABLE `ab1255_fabrica`.`prop_propuesta` 
+ADD COLUMN `fecha_inicio` DATE NULL AFTER `fecha_creacion`;
+
+UPDATE prop_propuesta SET fecha_inicio = fecha_creacion;

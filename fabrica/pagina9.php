@@ -70,6 +70,12 @@ for($i=$inicioSemanas; $i <= $num_semanas; $i++){
 	
 <!-- jquery library  -->
 <script src="js/jquery-1.10.2.min.js" ></script>
+
+<!-- jQuery UI -->
+<link rel="stylesheet" href="js/jquery-ui-1.10.3/themes/base/jquery-ui.css" />
+<script src="js/jquery-ui-1.10.3/ui/jquery-ui.js" ></script>
+
+
 <script src="js/page9.js?<?=time();?>" ></script>
 
 	<TABLE width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
@@ -87,6 +93,18 @@ for($i=$inicioSemanas; $i <= $num_semanas; $i++){
 
 	     <tr>
 	     	<td colspan="4" > <a href="javascript:void(0);" class="btn" id="page9AddProcess" >Añadir proceso</a></td>
+	     </tr>
+
+	     <tr>
+	     	<td colspan="4" >
+	     		<div class="rCriticaTitle">
+	     			<b>Fecha de inicio del proyecto:</b>
+	     			<?php
+	     				$info_prop['fecha_inicio'] == '' ? $fecha_inicio = date('Y-m-d') : $fecha_inicio = $info_prop['fecha_inicio'];
+	     			?>
+	     			<input type="text" name="fecha_inicio" id="fecha_inicio" value="<?php echo $fecha_inicio ?>" >
+	     		</div>
+	     	</td>
 	     </tr>
 
 	     <tr>

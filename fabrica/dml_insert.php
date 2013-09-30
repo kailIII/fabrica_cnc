@@ -766,6 +766,9 @@ if(!empty($_POST['btn_anterior']) || !empty($_POST['btn_siguiente']) || $savePag
 
 		$sql = "UPDATE prop_propuesta set ruta_critica = '{$_POST['ruta_critica']}' WHERE id_propuesta = {$idPropuesta} ";
 		$result	= eSQL( $sql );
+
+		$sql = "UPDATE prop_propuesta set fecha_inicio = '{$_POST['fecha_inicio']}' WHERE id_propuesta = {$idPropuesta} ";
+		$result	= eSQL( $sql );
 	}
 	elseif($paginaActual=='10'){
 		//---- Notas de calidad

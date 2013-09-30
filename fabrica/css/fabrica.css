@@ -266,6 +266,11 @@ a.button{
 	font-size: 14px;
 }
 
+.rCriticaTitle{
+	padding: 5px;
+	font-size: 14px;
+}
+
 #rCriticaWrapper{
 	padding:5px;
 }
