@@ -93,3 +93,8 @@ ALTER TABLE `ab1255_fabrica`.`prop_propuesta`
 ADD COLUMN `fecha_inicio` DATE NULL AFTER `fecha_creacion`;
 
 UPDATE prop_propuesta SET fecha_inicio = fecha_creacion;
+
+## commit registro fecha de inicio y fecha final por proceso de calendario
+ALTER TABLE `ab1255_fabrica`.`prop_calendario` 
+ADD COLUMN `fecha_ini` DATE NULL AFTER `id_area`,
+ADD COLUMN `fecha_fin` DATE NULL AFTER `fecha_ini`;

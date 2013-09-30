@@ -752,6 +752,9 @@ if(!empty($_POST['btn_anterior']) || !empty($_POST['btn_siguiente']) || $savePag
 			//echo '<BR>'.$sql;
 			$result	= eSQL( $sql );
 
+			$PropuestaDml = new Propuesta( $idPropuesta );
+			$PropuestaDml->setFechasCalendario();
+
 		}
 
 		foreach( $_POST['nom_proceso'] as $id_proceso => $value ){

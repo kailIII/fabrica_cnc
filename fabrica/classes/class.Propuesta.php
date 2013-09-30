@@ -623,5 +623,48 @@ Class Propuesta extends SqlConnections{
 		
 	}
 
+	public function setFechasCalendario(){
+		$info_prop 			= $this->getProp();		
+		$time_ini_prop 		= strtotime($info_prop['fecha_inicio']);
+		$query 				= "SELECT * FROM prop_calendario WHERE id_propuesta = '{$this->id_propuesta}' ";
+		
+		$calendario = $this->adoDbFab->GetAll($query);
+		foreach( $calendario as $cal ){
+			
+			$semanas = explode(",", $cal['semanas'] );
+			sort( $semanas );
+			
+			$semana_ini = reset( $semanas ) - 1; // se resta 1 semana, semana 0 = primera semana del proyecto 
+			$semana_fin = end( $semanas );
+			
+			
+			/* calculo de tiempo comienza a desfasarse 4 semanas adelante				
+			$time_ini 	= $semana_ini * 7 * 24 * 60 * 60;			
+			$fecha_ini 	= date('Y-m-d', ($time_ini + $time_ini_prop));	
+					
+			$time_fin 	= $semana_fin * 7 * 24 * 60 * 60;
+			$fecha_fin 	= date('Y-m-d', ($time_fin + $time_ini_prop));	*/
+			
+			$query = "SELECT DATE_ADD( '{$info_prop['fecha_inicio']}' , INTERVAL {$semana_ini} WEEK ) as fecha";
+			$fecha_ini = $this->adoDbFab->GetRow( $query );
+			$fecha_ini = $fecha_ini['fecha'];
+			
+			$query = "SELECT DATE_ADD( '{$info_prop['fecha_inicio']}' , INTERVAL {$semana_fin} WEEK ) as fecha";
+			$fecha_fin = $this->adoDbFab->GetRow( $query );
+			$fecha_fin = $fecha_fin['fecha'];
+			
+			$query = "UPDATE prop_calendario SET
+						fecha_ini = '{$fecha_ini}',
+						fecha_fin = '{$fecha_fin}'
+					WHERE id_propuesta = '{$this->id_propuesta}'
+					AND id_proceso = '{$cal['id_proceso']}'";
+					
+			$this->adoDbFab->Execute( $query );
+		}
+		
+		
+		
+	}
+
 
 }

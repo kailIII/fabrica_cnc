@@ -17,26 +17,7 @@ $Contenidos = new Contenidos();
 $procesos = $Contenidos->getDefaultsProceso();
 
 foreach( $propuestas as $prop ){
-	//if( $prop['id_propuesta'] == 59 ){
-
-	$query = "SELECT * FROM prop_proceso WHERE id_propuesta = {$prop['id_propuesta']}";
-	$procesos_asignados = $adoDbFix->GetAll($query);
-
-
-	krumo($procesos_asignados);
-
-	$query = "SELECT * FROM prop_calendario WHERE id_propuesta = {$prop['id_propuesta']}";
-	$procesos_calendario = $adoDbFix->GetAll($query);
-
-	krumo($procesos_calendario);
-
-	foreach( $procesos_asignados as $key => $val ){
-
-		$id_proceso_mod = $key+1;
-		$query = "UPDATE prop_calendario SET id_proceso = {$val['id_proceso']} WHERE id_propuesta = {$prop['id_propuesta']} AND id_proceso = {$id_proceso_mod}"	;
-
-		// $adoDbFix->Execute($query);
-	}
-
-	//}
+	
+	$Propuesta = new Propuesta( $prop['id_propuesta'] );
+	$Propuesta->setFechasCalendario();
 }
