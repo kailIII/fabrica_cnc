@@ -2,6 +2,7 @@
 
 session_start();
 
+require_once dirname(__FILE__).'/classes/class.Propuesta.php';
 require_once dirname(__FILE__).'/classes/class.Metodologia.php';
 require_once dirname(__FILE__).'/krumo/class.krumo.php';
 require_once dirname(__FILE__).'/classes/class.SqlQuery.php';
@@ -12,6 +13,8 @@ $this_user 	= $Usuario->getUsuario();
 
 $SqlQuery = new SqlQuery;
 $idPropuesta = $_POST['idPropuesta'];
+
+$Propuesta = new Propuesta( $idPropuesta );
 
 // CALENDARIO
 
@@ -175,5 +178,6 @@ $sql = "INSERT INTO prop_reg_cambios SET
 			nombre_responsable 	= '{$this_user['nombre']}' ";
 
 $SqlQuery->Execute($sql);
+$Propuesta->setFechasCalendario();
 
 header('Location: '.$_SERVER['HTTP_REFERER']  );

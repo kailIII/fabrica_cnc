@@ -28,6 +28,7 @@ for($i=$inicioSemanas; $i <= $num_semanas; $i++){
 		$conR					= mysql_query($sqlR);
 		while($camposR			= mysql_fetch_array($conR)){
 			$arraySemanas		= explode(',',$camposR["semanas"]);
+			$id_area 			= $camposR["id_area"];
 		}
 
 		$colsSemanas	= NULL;
@@ -61,7 +62,9 @@ for($i=$inicioSemanas; $i <= $num_semanas; $i++){
 		  <TD align='right' class='bb'><IMG src='/imagenes/yes.png' height='16' border='0'></TD>
 		  <TD align='left' class='bb'><div class='padding2 textLabel'> <input class='cal-nom-proceso' type='text' value = '$nom_proceso' name='nom_proceso[$id_proceso]' placeholder='Especifique el proceso' /> </div></TD>
 		  <TD align='center' class='bb'><div class='padding2 textLabel'><input class='cal-nom-proceso' type='text' value = '$responsable' name='res_proceso[$id_proceso]' placeholder='Especifique' /></div></TD>
-		  <TD align='center' class='borderBR'><div id='$idContSem' class='padding2'>$tiempoProceso</div></TD>	
+		  <TD align='center' class='borderBR'><div id='$idContSem' class='padding2'>$tiempoProceso</div>
+		  	<input type='hidden' name='calendario_area_responsable[" . $id_proceso . "]' value='" . $id_area . "' />
+		  </TD>	
 		  $colsSemanas
 		 </TR>";
 	}

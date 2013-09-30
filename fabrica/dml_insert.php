@@ -755,6 +755,13 @@ if(!empty($_POST['btn_anterior']) || !empty($_POST['btn_siguiente']) || $savePag
 			$PropuestaDml = new Propuesta( $idPropuesta );
 			$PropuestaDml->setFechasCalendario();
 
+			foreach( $_POST['calendario_area_responsable'] as $id_proceso => $id_area ){
+	
+				$sql = "UPDATE prop_calendario SET id_area = '{$id_area}' WHERE id_propuesta = '{$idPropuesta}' AND id_proceso = '{$id_proceso}'";
+				$result	= eSQL( $sql );
+				
+			}
+
 		}
 
 		foreach( $_POST['nom_proceso'] as $id_proceso => $value ){
