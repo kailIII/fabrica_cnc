@@ -66,6 +66,19 @@ class Metodologia extends Propuesta{
 	
 		return $this->adoDbFab->GetAll($query);
 	}
+	
+	// obtiene UNA metodologia aplicada a una propuesta
+	public function getPropMetodologia( $id_row_metodologia ){
+		$query = "SELECT * FROM prop_metodologia_selected pms 
+		INNER JOIN prop_metodologia pme ON pme.id_metodologia = pms.id_metodologia 
+		INNER JOIN prop_tipo_metodologia ptm ON ptm.id_tipo_metodologia = pme.id_tipo_metodologia
+		WHERE pms.id_propuesta = {$this->id_propuesta}
+		AND pms.id_row_metodologia = {$id_row_metodologia}
+		ORDER BY pms.id_row_metodologia";
+	
+		return $this->adoDbFab->GetRow($query);
+	}
+	
 
 	// obtiene metodologia propuesta
 	public function getPropMet($id_row_metodologia){

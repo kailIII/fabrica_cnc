@@ -229,5 +229,10 @@ Class Contenidos extends SqlConnections {
 		return $this->adoDbFab->GetRow($query);
 	}
 	
+	public function getAreas(){
+		$query = "SELECT * FROM prop_areas";
+		return $this->adoDbFab->GetAll( $query );
+	}
+	
 
 }

@@ -437,3 +437,40 @@ a.button{
 .ui-datepicker{
 	font-size:1em;
 }
+
+.requi-area-responsable{
+	padding: 0 10px;
+}
+
+.requi-area-responsable select{
+	width: 100%;
+	border: 1px solid #CCC;
+	padding: 3px;
+}
+
+.requi-mcambio-wrapper{
+	padding:5px;
+}
+
+.requi-mcambio-wrapper textarea{
+	width: 530px;
+	height: 100px;
+}
+
+.requi-item{
+	margin-bottom: 30px;
+	overflow: hidden;
+}
+
+.requi-item #tabla_inversion tr td a{
+	color:#336699;
+	text-decoration: underline;
+}
+
+#iframeMets{
+	width:900px;
+}
+
+#iframeMets textarea.met-field-temas{
+	width:626px;
+}
