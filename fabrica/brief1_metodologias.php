@@ -478,7 +478,7 @@ $vbGranTotal_2 	= number_format( $granTotal_2 );
 	<table width="60%" border="0" cellspacing="0" cellpadding="0" align="center">
 	 <tr>
 	  <td align='left'>
-        <div style="padding:5px; display: inline;"><a href="javascript:add_item_factura('<?php echo porcentajeIVA?>','<?php echo $nomObjVrTotalItem?>','<?php echo $idDivSubTotal?>','<?php echo $idDivIVA?>','<?php echo $idDivGranTotal?>','');"><img src='/imagenes/ico-feedback.png' height='32' border='0' alt='Adicionar Item' title='Adicionar Item' /></a></div>
+        <div style="padding:5px; display: none;"><a href="javascript:add_item_factura('<?php echo porcentajeIVA?>','<?php echo $nomObjVrTotalItem?>','<?php echo $idDivSubTotal?>','<?php echo $idDivIVA?>','<?php echo $idDivGranTotal?>','');"><img src='/imagenes/ico-feedback.png' height='32' border='0' alt='Adicionar Item' title='Adicionar Item' /></a></div>
        <!--  <?php if( $mostrar_tabla_2 === false ): ?>
        	<div style="padding:5px; display: inline;"><a href="javascript:add_table_factura( 'div_tabla_inversion2' );"><img src='/imagenes/new_table.png' height='32' border='0' alt='Adicionar Tabla Inversion' title='Adicionar Tabla Inversion' /></a></div>
        <?php endif ?> -->
