@@ -23,9 +23,11 @@ $inicioSemanas	= 1;
 include("funciones.php");
 include("dml_insert.php");
 
+
 if(empty($paginaActual)){
 	$paginaActual	= 1;
 }
+
 //echo 'idPropuesta: '.$idPropuesta;
 if(empty($idPropuesta) && $paginaActual > 1){
 //	@header("Location: lista_propuestas.php?idMenu=2");
@@ -58,13 +60,14 @@ $vbFecha		= date("d/m/Y (H:i)");
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-<TITLE>..:: <?=tituloPag?> ::..</TITLE>
+<TITLE>..:: <?php echo tituloPag?> ::..</TITLE>
 <!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 -->
 <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
 <script language="JavaScript" type="text/javascript" src="/scripts/js.js"></script>
-<script language="JavaScript" type="text/javascript" src="ajax/ajax2.js?v=<?=$aleatorio?>"></script>
+<script src="js/jquery-1.10.2.min.js" ></script>
+<script language="JavaScript" type="text/javascript" src="ajax/ajax2.js?v=<?php echo $aleatorio?>"></script>
 <script language="JavaScript">
 var formatNumber = {
 	separador: ",", // separador para los miles
@@ -302,9 +305,9 @@ function fxAvance(direccion,numPaginas){
 	//alert('pag: '+document.getElementById('cPagina').value);
 }
 
-function fxUbicarPag(pagina){
+function fxUbdicarPag( pagina ){
 //	alert('pagina: '+pagina);
-	document.getElementById('cPagina').value=pagina;
+	document.getElementById('cPagina').value = pagina;
 	document.formulario.submit();
 }
 
@@ -380,7 +383,7 @@ function fxCalendario(id_metodologia,id_proceso,idCelda,nameObjC,idObjC,idContSe
 }
 //----
 function verLugares(clic){
-	if(document.getElementById('<?=idObjLugar?>').value.length == 0 || clic	== 1){
+	if(document.getElementById('<?php echo idObjLugar?>').value.length == 0 || clic	== 1){
 		var divResultado 	= document.getElementById('listLugares');
 		if(divResultado.style.display == 'none'){
 			showdiv('listLugares');
@@ -393,13 +396,13 @@ function verLugares(clic){
 function selLugar(idDiv){
 	//alert('idDiv: '+idDiv);
 	var nomLugar 	= document.getElementById(idDiv).innerHTML;
-	document.getElementById('<?=idObjLugar?>').value	= nomLugar;
+	document.getElementById('<?php echo idObjLugar?>').value	= nomLugar;
 	hidediv('listLugares');
 }
 
 </script>
 <LINK rel="stylesheet" href="/css/style.css" type="text/css">
-<LINK rel="stylesheet" href="./css/fabrica.css?<?=time(); ?>" type="text/css">
+<LINK rel="stylesheet" href="./css/fabrica.css?<?php echo time(); ?>" type="text/css">
 <style>
 .textLabel	{
 	color:#5F5F5F;
@@ -445,134 +448,216 @@ a:hover {
 }*/
 </style>
 <!-- Contact Form CSS files -->
-<link type='text/css' href='css/contact.css?v=<?=$aleatorio?>' rel='stylesheet' media='screen' />
+<link type='text/css' href='css/contact.css?v=<?php echo $aleatorio?>' rel='stylesheet' media='screen' />
 
-<link rel="stylesheet" href="bootstrap/css/bootstrap.css?<?=time();?>" />
+<link rel="stylesheet" href="bootstrap/css/bootstrap.css?<?php echo time();?>" />
 
 </HEAD>
 <BODY style="margin-top:0px !important; padding-top:0px; background-color:#FFFFFF;">
 <div id='container' style="margin:0px; padding:0px;">
-<FORM name='formulario' action='' method='post' id="mainForm" >
-<input type='hidden' name='idPropuesta' id='idPropuesta' value='<?=$idPropuesta?>'>
-<input type='hidden' name='cPagina' id='cPagina' value='<?=$paginaActual?>'>
 
-	<?php if( $fabrica_dev == 'fabrica_dev' ){
-		include("../menu_admin_dev.php"); 
-	} else {
-		include("../menu_admin.php"); 
-	} ?>
-<TABLE width="98%" border="0" cellspacing="0" cellpadding="0" align="center" style="background-color:#FFFFFF">
- <TR>
-  <TD>
-   <TABLE width="100%" cellspacing="0" cellpadding="2" align='center' border="0">
-    <TR>
-	 <TD width="10%" align="left"><img src="/imagenes/logo_cnc.gif" title="Centro Nacional de consultoría" height="81" border='0'></TD>
-     <TD align="left" width="40%" nowrap="nowrap" valign="bottom"><div class="padding5 subtitulos_azules"><?=$vbNroPagina?></div></TD>
-	 <TD align='left' valign='middle'><!--<div style='font-family: Arial, Helvetica, sans-serif; font-size: 20px; color:#336666; font-weight: bold; padding-left:40px;'>F&aacute;brica de Propuestas</div>--></TD>
-	</TR>
-   </TABLE>
-  </TD>
- </TR>
- <TR>
-  <TD>
-	<TABLE cellSpacing='0' cellPadding='0' width='100%' align='center' border='0'>
-	  <TR>
-	   <TD width="10" nowrap="nowrap"><IMG src='/imagenes/spacer.gif' width='10' height='8' border="0"></TD>
-	   <TD nowrap="nowrap"><div class="padding5"><IMG src='/imagenes/barra_colores.jpg' width='100%' height='8'></div></TD>
-	   <TD width="10" nowrap="nowrap"><IMG src='/imagenes/spacer.gif' width='10' height='8' border="0"></TD>
-	  </TR>
-	</TABLE>
-  </TD>
- </TR>
- <TR>
-  <TD style="background-color:#F5F5F5" height="20">
-	<TABLE cellSpacing='0' cellPadding='0' width='100%' align='center' border='0'>
-	  <TR>
-	   <TD width="9%" nowrap="nowrap" class="<?=$bgT[1]?>"><div class="padding5 menuF"><a href="javascript:fxUbicarPag(1)"><B>Página 1</B></a></div></TD>
-	   <TD width="9%" nowrap="nowrap" class="<?=$bgT[2]?>"><div class="padding5 menuF"><a href="javascript:fxUbicarPag(2)"><B>Página 2</B></a></div></TD>
-	   <TD width="9%" nowrap="nowrap" class="<?=$bgT[3]?>"><div class="padding5 menuF"><a href="javascript:fxUbicarPag(3)"><B>Contexto</B></a></div></TD>
-	   <TD width="9%" nowrap="nowrap" class="<?=$bgT[4]?>"><div class="padding5 menuF"><a href="javascript:fxUbicarPag(4)"><B>Objetivos</B></a></div></TD>
-	   <TD width="9%" nowrap="nowrap" class="<?=$bgT[5]?>"><div class="padding5 menuF"><a href="javascript:fxUbicarPag(5)"><B>Metodologías</B></a></div></TD>
-	   <TD width="9%" nowrap="nowrap" class="<?=$bgT[6]?>"><div class="padding5 menuF"><a href="javascript:fxUbicarPag(6)"><B>Inversión</B></a></div></TD>
-	   <TD width="9%" nowrap="nowrap" class="<?=$bgT[7]?>"><div class="padding5 menuF"><a href="javascript:fxUbicarPag(7)"><B>Productos</B></a></div></TD>
-	   <TD width="9%" nowrap="nowrap" class="<?=$bgT[8]?>"><div class="padding5 menuF"><a href="javascript:fxUbicarPag(8)"><B>Equipo</B></a></div></TD>
-	   <TD width="9%" nowrap="nowrap" class="<?=$bgT[9]?>"><div class="padding5 menuF"><a href="javascript:fxUbicarPag(9)"><B>Calendario</B></a></div></TD>
-	   <TD width="9%" nowrap="nowrap" class="<?=$bgT[10]?>"><div class="padding5 menuF"><a href="javascript:fxUbicarPag(10)"><B>Notas de calidad</B></a></div></TD>
-	   <TD width="9%" nowrap="nowrap" class="<?=$bgT[11]?>"><div class="padding5 menuF"><a href="javascript:fxUbicarPag(11)"><B><u>Descargar</u></B></a></div></TD>
-	   
-	  </TR>
-	</TABLE>
-  </TD>
- </TR>
+	<form action='' id="mainForm" method='post' name='formulario'>
+		
+		<input id='idPropuesta' name='idPropuesta' type='hidden' value='<?php echo $idPropuesta?>'> 
+		<input id='cPagina' name='cPagina' type='hidden' value='<?php echo $paginaActual?>'>
+		
+			<?php 
+				if( $fabrica_dev == 'fabrica_dev' ){ 
+					include("../menu_admin_dev.php"); 
+				} else { 
+					include("../menu_admin.php"); 
+				}  
+			?>
 
+		<table align="center" border="0" cellpadding="0" cellspacing="0" style="background-color:#FFFFFF" width="98%">
+			<tr>
+				<td>
+					<table align='center' border="0" cellpadding="2" cellspacing="0" width="100%">
+						<tr>
+							<td align="left" width="10%">
+								<img border='0' height="81" src="/imagenes/logo_cnc.gif" title="Centro Nacional de consultoría">
+							</td>
 
- <TR>
-  <TD>
-	<TABLE width="100%" border="0" cellspacing="0" cellpadding="0" align="left" style='border:1px solid #CED7EC;'>
-	 <TR>
-	  <TD align="center" colspan="2" valign="top">
-	  <?
-	  if($paginaActual=='1'){
-	 	 include("pagina1.php");
-	  }
-	  elseif($paginaActual=='2'){
-	 	 include("pagina2.php");
-	  }
-	  elseif($paginaActual=='3'){
-	 	 include("pagina3.php");
-	  }
-	  elseif($paginaActual=='4'){
-	 	 include("pagina4.php");
-	  }
-	  elseif($paginaActual=='5'){
-	 	 include("pagina5.php");
-	  }
-	  elseif($paginaActual=='6'){
-	 	 include("pagina6.php");
-	  }
-	  elseif($paginaActual=='7'){
-	 	 include("pagina7.php");
-	  }
-	  elseif($paginaActual=='8'){
-	 	 include("pagina8.php");
-	  }
-	  elseif($paginaActual=='9'){
-	 	 include("pagina9.php");
-	  }
-	  elseif($paginaActual=='10'){
-	 	 include("pagina10.php");
-	  }
-	  ?>
-	  </TD>
-	 </TR>
-	 <TR>
-	  <TD align="center" colspan="2">
-		<TABLE width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
-<!--		 <TR>
-		  <TD width="50%" align='right'><div class='padding5'><input type='submit' name='btn_anterior' id='btn_anterior' class='Button' style="padding:5px 8px;" value='Anterior' onclick="fxAvance('-',<?=numPaginas?>);" /></div></TD>
-		  <TD width="50%" align='left'><div class='padding5'><input type='submit' name='btn_siguiente' id='btn_siguiente' class='Button' style="padding:5px 8px;" value='Siguiente' onclick="fxAvance('+',<?=numPaginas?>);" /></div></TD>
-		 </TR>
--->
-		 <TR>
-		  <TD width="50%" align='right'><div class='padding5'><input type='submit' name='btn_anterior' id='btn_anterior' class='Button' style="padding:5px 8px;" value='Anterior' /></div></TD>
-		  <TD width="50%" align='left'><div class='padding5'><input type='submit' name='btn_siguiente' id='btn_siguiente' class='Button' style="padding:5px 8px;" value='Siguiente' /></div></TD>
-		 </TR>
-		</TABLE>
-	  </TD>
-	 </TR>
+							<td align="left" nowrap="nowrap" valign="bottom" width="40%">
+								<div class="padding5 subtitulos_azules">
+									<?php echo $vbNroPagina?>
+								</div>
+							</td>
 
-	 <TR>
-	  <TD align="right" colspan="2"><IMG src='/imagenes/spacer.gif' width='1' height='10' border="0"></TD>
-	 </TR>
-	</TABLE>
-  </TD>
- </TR>
+							<td align='left' valign='middle'>
+								<!--<div style='font-family: Arial, Helvetica, sans-serif; font-size: 20px; color:#336666; font-weight: bold; padding-left:40px;'>F&aacute;brica de Propuestas</div>-->
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
 
-<!-- <TR>
-  <TD align="right"><IMG src='/imagenes/spacer.gif' width='1' height='10' border="0"></TD>
- </TR>
--->
-</TABLE>
-</FORM>
+			<tr>
+				<td>
+					<table align='center' border='0' cellpadding='0' cellspacing='0' width='100%'>
+						<tr>
+							<td nowrap="nowrap" width="10">
+								<img border="0" height='8' src='/imagenes/spacer.gif' width= '10'>
+							</td>
+
+							<td nowrap="nowrap">
+								<div class="padding5"><img height='8' src='/imagenes/barra_colores.jpg' width='100%'></div>
+							</td>
+
+							<td nowrap="nowrap" width="10">
+								<img border="0"height='8' src='/imagenes/spacer.gif' width='10'></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+
+			<tr>
+				<td height="20" style="background-color:#F5F5F5">
+					<table align='center' border='0' cellpadding='0' cellspacing='0' width='100%'>
+						<tr>
+							<td class="<?php echo $bgT[1]?>" nowrap="nowrap" width="9%">
+								<div class="padding5 menuF">
+									<a class="link_pagina" href="#" style= "font-weight: bold">Página 1</a>
+								</div>
+							</td>
+
+							<td class="<?php echo $bgT[2]?>" nowrap="nowrap" width="9%">
+								<div class="padding5 menuF">
+									<a class="link_pagina" href="#" style="font-weight: bold">Página 2</a>
+								</div>
+							</td>
+
+							<td class="<?php echo $bgT[3]?>" nowrap="nowrap" width="9%">
+								<div class="padding5 menuF">
+									<a class="link_pagina" href="#" style="font-weight: bold">Contexto</a>
+								</div>
+							</td>
+
+							<td class="<?php echo $bgT[4]?>" nowrap="nowrap" width="9%">
+								<div class="padding5 menuF">
+									<a class="link_pagina" href="#" style="font-weight: bold">Objetivos</a>
+								</div>
+							</td>
+
+							<td class="<?php echo $bgT[5]?>" nowrap="nowrap" width="9%">
+								<div class="padding5 menuF">
+									<a class="link_pagina" href="#" style="font-weight: bold">Metodologías</a>
+								</div>
+							</td>
+
+							<td class="<?php echo $bgT[6]?>" nowrap="nowrap" width="9%">
+								<div class="padding5 menuF">
+									<a class="link_pagina" href="#" style="font-weight: bold">Inversión</a>
+								</div>
+							</td>
+
+							<td class="<?php echo $bgT[7]?>" nowrap="nowrap" width="9%">
+								<div class="padding5 menuF">
+									<a class="link_pagina" href="#" style="font-weight: bold">Productos</a>
+								</div>
+							</td>
+
+							<td class="<?php echo $bgT[8]?>" nowrap="nowrap" width="9%">
+								<div class="padding5 menuF">
+									<a class="link_pagina" href="#" style="font-weight: bold">Equipo</a>
+								</div>
+							</td>
+
+							<td class="<?php echo $bgT[9]?>" nowrap="nowrap" width="9%">
+								<div class="padding5 menuF">
+									<a class="link_pagina" href="#" style="font-weight: bold">Calendario</a>
+								</div>
+							</td>
+
+							<td class="<?php echo $bgT[10]?>" nowrap="nowrap" width="9%">
+								<div class="padding5 menuF">
+									<a class="link_pagina" href="#" style="font-weight: bold">Notas de calidad</a>
+								</div>
+							</td>
+
+							<td class="<?php echo $bgT[11]?>" nowrap="nowrap" width="9%">
+								<div class="padding5 menuF">
+									<a class="link_pagina" href="#" style="font-weight: bold; text-decoration: underline">Descargar</a>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<table align="left" border="0" cellpadding="0" cellspacing="0" style='border:1px solid #CED7EC;' width="100%">
+						<tr>
+							<td align="center" colspan="2" valign="top">
+								<?php
+								
+									switch ( $paginaActual ){
+										case "1":
+										case "2":
+										case "3":
+										case "4":
+										case "5":
+										case "6":
+										case "7":
+										case "8":
+										case "9":
+										case "10":
+											include("pagina" . $paginaActual . ".php");
+											break;		
+									} 
+								?>
+							</td>
+						</tr>
+
+						<tr>
+							<td align="center" colspan="2">
+								<table align="center" border="0" cellpadding="0" cellspacing="0" width="98%">
+
+									<tr>
+										<td align='right' width="50%">
+											<div class='padding5'>
+												<input class='Button' id='btn_anterior' name='btn_anterior' style="padding:5px 8px;" type='submit' value='Anterior'>
+											</div>
+										</td>
+
+										<td align='left' width="50%">
+											<div class='padding5'>
+												<input class='Button' id='btn_siguiente' name='btn_siguiente' style="padding:5px 8px;" type='submit' value='Siguiente'>
+											</div>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+
+						<tr>
+							<td align="right" colspan="2">
+								<img border="0" height='10' src='/imagenes/spacer.gif' width= '1'>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr> 
+		</table>
+	</form>
+	
+	<script>
+	
+
+		$.each( $("a.link_pagina" ) , function( key , value ) { 
+
+			$( this ).click( function( ){
+				
+				var pagina = key + 1;
+				$( "#cPagina" ).val( pagina );
+				$( "#mainForm" ).submit( ); 
+				
+			} );
+			
+		});
+
+	</script>
+
 </BODY>
 </HTML>
