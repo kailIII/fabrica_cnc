@@ -457,6 +457,11 @@ a:hover {
 <link rel="stylesheet" href="js/colorbox-master/example4/colorbox.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
 <script src="js/colorbox-master/jquery.colorbox-min.js" type="text/javascript" charset="utf-8"></script>
 
+
+<link rel="stylesheet" href="js/tooltipster-master/css/tooltipster.css" />
+<link rel="stylesheet" href="js/tooltipster-master/css/themes/tooltipster-light.css" />
+<script src="js/tooltipster-master/js/jquery.tooltipster.min.js" ></script>
+
 <script src="js/brief.js" ></script>
 
 </HEAD>
