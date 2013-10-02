@@ -4,7 +4,11 @@ $(document).ready(function(){
 
 
 	if( typeof  goTopage != 'undefined' ){
-		fxUbicarPag(2);
+
+		var pagina = 2;
+
+		$( "#cPagina" ).val( pagina );
+		$( "#mainForm" ).submit( ); 
 	}
 
 });
