@@ -11,7 +11,7 @@ if(empty($formaPago)){
 }
 
 $info_prop = $Propuesta->getProp();
-
+$script = "";
 
 $idDivSubTotal	= 'divSubTotal';
 $idDivIVA		= 'divIVA';
@@ -26,13 +26,21 @@ $idObjVrTotalItem	= 'objVrTotalItem'.$contItems;
 $idObjCantidad		= nameObjVrDirEstudio.'cant';
 $objCantidad	= "<input type='text' name='" . $idObjCantidad . "' id='" . $idObjCantidad . "' value='1' class='txt' style='width:60px; text-align:center; border:none;' readonly='readonly' />";
 			
-$fxVrUnit			= "fxInversion('$idObjCantidad','" . porcentajeIVA . "','$idObjVrUnit','$nomObjVrTotalItem','$idObjVrTotalItem','$idDivSubTotal','$idDivIVA','$idDivGranTotal')";
+$fxVrUnit			= "  fxInversion(  '$idObjCantidad','" . porcentajeIVA . "','$idObjVrUnit','$nomObjVrTotalItem','$idObjVrTotalItem','$idDivSubTotal','$idDivIVA','$idDivGranTotal'); ";
 
-$objPrecioUnit	= "<input type='text' name='" . $idObjVrUnit . "' id='" . $idObjVrUnit . "' maxlength='10' value='$vbVrDirEstudio' class='txt' style='width:80px; text-align:right;' onkeypress='return esNumero(event);' onkeyup=\"$fxVrUnit;\" />";			
+$objPrecioUnit	= "<input type='text' name='" . $idObjVrUnit . "' id='" . $idObjVrUnit . "' maxlength='10' value='$vbVrDirEstudio' class='txt' style='width:80px; text-align:right;' onkeypress='return esNumero(event);' />";			
 //----
 $objVrTotalItem	= "<input type='text' name='" . $nomObjVrTotalItem . "' id='" . $idObjVrTotalItem . "' value='$vbVrDirEstudio' style='width:90px; text-align:right; border:none;' readonly='readonly' />";
 
 
+$script .= "
+	$( '#" . $idObjVrUnit . "' ).keyup( function( ){
+		$fxVrUnit
+	});
+	$( '#" . $idObjVrUnit . "' ).change( function( ){
+		$fxVrUnit
+	});
+";
 $filasInversion	= "
      <tr>
       <td align='right' class='borderBR'><div class='padding5'>$contItems</td>
@@ -74,7 +82,7 @@ $fxVrUnit			= "fxInversion( '$idObjCantidad_2' , " .
 									" '$idObjVrTotalItem_2' , " . 
 									" '$idDivSubTotal_2' , " . 
 									" '$idDivIVA_2' , " . 
-									" '$idDivGranTotal_2' )";
+									" '$idDivGranTotal_2' ); ";
 
 $objPrecioUnit_2	= "<input type='text' name='" . $idObjVrUnit_2 . "' id='" . $idObjVrUnit_2 . "' maxlength='10' value='$vbVrDirEstudio' class='txt' style='width:80px; text-align:right;' onkeypress='return esNumero(event);' onkeyup=\"$fxVrUnit;\" />";			
 $objVrTotalItem_2	= "<input type='text' name='" . $nomObjVrTotalItem_2 . "' id='" . $idObjVrTotalItem_2 . "' value='$vbVrDirEstudio' style='width:90px; text-align:right; border:none;' readonly='readonly' />";			
@@ -89,7 +97,7 @@ $filasInversion_2	= " <tr>
      </tr> ";
 
 
-//---- consulta las metodologÌas de la propuesta
+//---- consulta las metodolog√≠as de la propuesta
  $sql = "SELECT *
  FROM " . tablaMetodologia . " M INNER JOIN " . tablaMetodologiaRTA . " R USING(id_metodologia)
   WHERE R.id_propuesta=$idPropuesta
@@ -118,7 +126,7 @@ while($campos			= mysql_fetch_array($con)){
 
 		// krumo($Propuesta->calcInversion( $idRowMetodologia ));
 
-		//---- consulta los segmentos de la metodologÌa
+		//---- consulta los segmentos de la metodolog√≠a
 		$sqlR = "SELECT *
 		 FROM " . tablaSegmentoMetodologiaRTA . " R
 		  WHERE R.id_row_metodologia=$idRowMetodologia
@@ -217,9 +225,9 @@ while($campos			= mysql_fetch_array($con)){
 			$idObjCantidad		= nameObjVrUnitario.'cant'.$id_row_segmento;;
 			$objCantidad	= "<input type='text' name='" . $idObjCantidad . "' id='" . $idObjCantidad . "' value='$vbMuestra' class='txt' style='width:60px; text-align:center; border:none;' readonly='readonly' />";
 			
-			$fxVrUnit			= "fxInversion('$idObjCantidad','" . porcentajeIVA . "','$idObjVrUnit','$nomObjVrTotalItem','$idObjVrTotalItem','$idDivSubTotal','$idDivIVA','$idDivGranTotal')";
+			$fxVrUnit			= "fxInversion('$idObjCantidad','" . porcentajeIVA . "','$idObjVrUnit','$nomObjVrTotalItem','$idObjVrTotalItem','$idDivSubTotal','$idDivIVA','$idDivGranTotal'); ";
 
-			$objPrecioUnit	= "<input type='text' name='" . $idObjVrUnit . "' id='" . $idObjVrUnit . "' maxlength='10' value='$vbVrUnitario' class='txt' style='width:80px; text-align:right;' onkeypress='return esNumero(event);' onkeyup=\"$fxVrUnit;\" onchange=\"$fxVrUnit;\" />";			
+			$objPrecioUnit	= "<input type='text' name='" . $idObjVrUnit . "' id='" . $idObjVrUnit . "' maxlength='10' value='$vbVrUnitario' class='txt' style='width:80px; text-align:right;' onkeypress='return esNumero(event);' />";			
 			//----
 			$objVrTotalItem	= "<input type='text' name='" . $nomObjVrTotalItem . "' id='" . $idObjVrTotalItem . "' value='$vbVrTotal' style='width:90px; text-align:right; border:none;' readonly='readonly' />";			
 			$filasInversion		.= "
@@ -229,8 +237,9 @@ while($campos			= mysql_fetch_array($con)){
 			  <td align='center' class='borderBR'><div class='padding5'>$objCantidad</div></td>
 			  <td align='right' class='borderBR'><div class='padding5'>$objPrecioUnit <br /></div></td>
 			  <td align='right' class='borderBR'><div class='padding5'>$objVrTotalItem</div></td>
-			 </tr>";
-		}//---- consulta de segmentos de la metodologÌa
+			 </tr>
+			 ";
+		}//---- consulta de segmentos de la metodolog√≠a
 	}
 }
 
@@ -276,7 +285,7 @@ while($campos = mysql_fetch_array( $con ) ){
 
 		$nameObjCant	= 'cantidad_2[]';
 		$idObjCant		= 'item_2'.$contItems;
-		$fxVrUnit		= "fxInversion('" . $idObjCant . "','" . porcentajeIVA . "','" . $idObjVrUnit . "','" . $nomObjVrTotalItem_2 . "','" . $idObjVrTotalItem . "','" . $idDivSubTotal . "_2','" . $idDivIVA . "_2','" . $idDivGranTotal . "_2')";
+		$fxVrUnit		= "fxInversion('" . $idObjCant . "','" . porcentajeIVA . "','" . $idObjVrUnit . "','" . $nomObjVrTotalItem_2 . "','" . $idObjVrTotalItem . "','" . $idDivSubTotal . "_2','" . $idDivIVA . "_2','" . $idDivGranTotal . "_2'); ";
 	
 		$objCantidad	= "<input type='text' name='" . $nameObjCant . "' id='" . $idObjCant . "' maxlength='10' value='$cantidad' class='txt' style='width:60px; text-align:center;' onkeypress='return esNumero(event);' onkeyup=\"$fxVrUnit\" onchange=\"$fxVrUnit\" />";
 		
@@ -310,7 +319,7 @@ while($campos = mysql_fetch_array( $con ) ){
 
 		$nameObjCant	= 'cantidad[]';
 		$idObjCant		= 'item'.$contItems;
-		$fxVrUnit		= "fxInversion('" . $idObjCant . "','" . porcentajeIVA . "','" . $idObjVrUnit . "','" . $nomObjVrTotalItem . "','" . $idObjVrTotalItem . "','" . $idDivSubTotal . "','" . $idDivIVA . "','" . $idDivGranTotal . "')";
+		$fxVrUnit		= "fxInversion('" . $idObjCant . "','" . porcentajeIVA . "','" . $idObjVrUnit . "','" . $nomObjVrTotalItem . "','" . $idObjVrTotalItem . "','" . $idDivSubTotal . "','" . $idDivIVA . "','" . $idDivGranTotal . "'); ";
 	
 		$objCantidad	= "<input type='text' name='" . $nameObjCant . "' id='" . $idObjCant . "' maxlength='10' value='$cantidad' class='txt' style='width:60px; text-align:center;' onkeypress='return esNumero(event);' onkeyup=\"$fxVrUnit\" onchange=\"$fxVrUnit\" />";
 		
@@ -379,13 +388,13 @@ $vbGranTotal_2 	= number_format( $granTotal_2 );
 	  <?php
 	  echo "<OL>";
 	  echo "<LI>";
-	  echo utf8_decode("Considerar algunos sobre-costos de acuerdo a la ruralidad que se maneje, por ejemplo la ruralidad de Choco es mucho m·s costosa que la ruralidad del Cundinamarca en cuanto a desplazamientos." );
+	  echo utf8_decode("Considerar algunos sobre-costos de acuerdo a la ruralidad que se maneje, por ejemplo la ruralidad de Choco es mucho m√°s costosa que la ruralidad del Cundinamarca en cuanto a desplazamientos." );
 	  echo "</LI>";
 	  echo "<LI>";
-	  echo utf8_decode("Si hay solicitudes especÌficas del cliente en tÈrminos de formatos de entrega de base de datos, tipos de procesamiento adicionales, forma de captura de la informaciÛn, entre otros, por favor tenerlo en cuenta en los costos." );
+	  echo utf8_decode("Si hay solicitudes espec√≠ficas del cliente en t√©rminos de formatos de entrega de base de datos, tipos de procesamiento adicionales, forma de captura de la informaci√≥n, entre otros, por favor tenerlo en cuenta en los costos." );
 	  echo "</LI>";
 	  echo "<LI>";
-	  echo utf8_decode("Desapeguese del resultado... hay algo que se deba comunicar aquÌ que influencie tiempos, costos y otros que el cliente deba saber que afecte a CNC, al Clientes o que interfiera con el desarrollo del estudio y que no se haya mencionado." );
+	  echo utf8_decode("Desapeguese del resultado... hay algo que se deba comunicar aqu√≠ que influencie tiempos, costos y otros que el cliente deba saber que afecte a CNC, al Clientes o que interfiera con el desarrollo del estudio y que no se haya mencionado." );
 	  echo "</LI>";
 	  ?>
 	  </td>
@@ -425,7 +434,7 @@ $vbGranTotal_2 	= number_format( $granTotal_2 );
 	<table width="60%" border="0" cellspacing="0" cellpadding="0" align="center">
 	 <tr>
 	  <td align='left'>
-        <div style="padding:5px; display: inline;"><a href="javascript:add_item_factura('<?php echo porcentajeIVA?>','<?php echo $nomObjVrTotalItem?>','<?php echo $idDivSubTotal?>','<?php echo $idDivIVA?>','<?php echo $idDivGranTotal?>','');"><img src='/imagenes/ico-feedback.png' height='32' border='0' alt='Adicionar Içtem' title='Adicionar Içtem' /></a></div>
+        <div style="padding:5px; display: inline;"><a href="javascript:add_item_factura('<?php echo porcentajeIVA?>','<?php echo $nomObjVrTotalItem?>','<?php echo $idDivSubTotal?>','<?php echo $idDivIVA?>','<?php echo $idDivGranTotal?>','');"><img src='/imagenes/ico-feedback.png' height='32' border='0' alt='Adicionar IÔøΩtem' title='Adicionar IÔøΩtem' /></a></div>
         <?php if( $mostrar_tabla_2 === false ): ?>
         	<div style="padding:5px; display: inline;"><a href="javascript:add_table_factura( 'div_tabla_inversion2' );"><img src='/imagenes/new_table.png' height='32' border='0' alt='Adicionar Tabla Inversion' title='Adicionar Tabla Inversion' /></a></div>
         <?php endif ?>
@@ -468,7 +477,7 @@ $vbGranTotal_2 	= number_format( $granTotal_2 );
 		<table width="60%" border="0" cellspacing="0" cellpadding="0" align="center"> 
 			<tr> 
 				<td align='left'> 
-					<div style="padding:5px; display: inline;"><a href="javascript:add_item_factura('<?php echo porcentajeIVA?>','<?php echo $nomObjVrTotalItem_2?>','<?php echo $idDivSubTotal_2?>','<?php echo $idDivIVA_2?>','<?php echo $idDivGranTotal_2?>',2);"><img src='/imagenes/ico-feedback.png' height='32' border='0' alt='Adicionar Içtem' title='Adicionar Içtem' /></a></div> 
+					<div style="padding:5px; display: inline;"><a href="javascript:add_item_factura('<?php echo porcentajeIVA?>','<?php echo $nomObjVrTotalItem_2?>','<?php echo $idDivSubTotal_2?>','<?php echo $idDivIVA_2?>','<?php echo $idDivGranTotal_2?>',2);"><img src='/imagenes/ico-feedback.png' height='32' border='0' alt='Adicionar IÔøΩtem' title='Adicionar IÔøΩtem' /></a></div> 
 				</td> 
 			</tr> 
 			</table>
@@ -497,3 +506,7 @@ $vbGranTotal_2 	= number_format( $granTotal_2 );
 	 	</td>
 	 </tr>
 	</table>
+
+	<script>
+		<?php echo $script; ?>
+	</script>
