@@ -590,7 +590,7 @@ a.button{
 	color:#428bca !important;
 }
 
-.brief2Table .btn{
+.brief2Table a.btn{
 	color:#333 !important;
 }
 
@@ -617,4 +617,8 @@ a.button{
 #brief2AjaxLoader #brief2AjaxLoaderWraper span{
 	margin-bottom: 3px;
 	display: block;
+}
+
+.brief2Table .text-center{
+	text-align:center;
 }
