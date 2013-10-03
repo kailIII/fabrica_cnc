@@ -124,6 +124,9 @@ class Metodologia extends Propuesta{
 		// limia bd antigua -- condicion: new_id_row_metodologia IS NOT NULL asegura que solo se borren registros asociados al nuevo metodo de ingreso de metodologia
 		$query = "DELETE FROM prop_metodologia_rta WHERE id_propuesta = {$this->id_propuesta} AND old_register = 0";
 		$this->adoDbFab->Execute($query);
+		
+		$query = "DELETE FROM prop_seg_metodologia_rta WHERE id_propuesta = {$this->id_propuesta}";
+		$this->adoDbFab->Execute($query);
 	}
 
 	// insert de data base

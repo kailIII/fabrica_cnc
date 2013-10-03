@@ -11,7 +11,7 @@ if(empty($formaPago)){
 }
 
 $info_prop = $Propuesta->getProp();
-
+$script = "";
 
 $idDivSubTotal	= 'divSubTotal';
 $idDivIVA		= 'divIVA';
@@ -31,6 +31,15 @@ $fxVrUnit			= "fxInversion('$idObjCantidad','" . porcentajeIVA . "','$idObjVrUni
 $objPrecioUnit	= "<input type='text' name='" . $idObjVrUnit . "' id='" . $idObjVrUnit . "' maxlength='10' value='$vbVrDirEstudio' class='txt' style='width:80px; text-align:right;' onkeypress='return esNumero(event);' onkeyup=\"$fxVrUnit;\" />";			
 //----
 $objVrTotalItem	= "<input type='text' name='" . $nomObjVrTotalItem . "' id='" . $idObjVrTotalItem . "' value='$vbVrDirEstudio' style='width:90px; text-align:right; border:none;' readonly='readonly' />";
+
+$script .= "
+	$( '#" . $idObjVrUnit . "' ).keyup( function( ){
+		$fxVrUnit
+	});
+	$( '#" . $idObjVrUnit . "' ).change( function( ){
+		$fxVrUnit
+	});
+";
 
 $filasInversion	= "
      <tr>
@@ -525,6 +534,8 @@ $vbGranTotal_2 	= number_format( $granTotal_2 );
 				</td> 
 			</tr> 
 			</table>
-	
+	<script>
+		<?php echo $script; ?>
+	</script>
 	
 	</div>

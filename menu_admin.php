@@ -29,7 +29,7 @@ $rowBg[$idMenu]		= " bgcolor='#282828'";
 
 
 	
-    <? echo " <TD width='10%' align='center' valign='middle' nowrap='nowrap' style=".$rowAtrib[2]=$rowBg[2]."><div class='padding5'><a href='../requisicion/index.php?session=".$nomUsuario."'> <span style='color:#FFFFFF;'>BRIEF</span></a></div></TD>  
+    <? echo " <TD width='10%' align='center' valign='middle' nowrap='nowrap' style=".$rowAtrib[2]=$rowBg[2]."><div class='padding5'><a href='brief_2.php'> <span style='color:#FFFFFF;'>BRIEF</span></a></div></TD>  
   ";
   ?>
 

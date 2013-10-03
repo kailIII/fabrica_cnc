@@ -23,9 +23,11 @@ $inicioSemanas	= 1;
 include("funciones.php");
 include("dml_insert.php");
 
+
 if(empty($paginaActual)){
 	$paginaActual	= 1;
 }
+
 //echo 'idPropuesta: '.$idPropuesta;
 if(empty($idPropuesta) && $paginaActual > 1){
 //	@header("Location: lista_propuestas.php?idMenu=2");
@@ -55,353 +57,19 @@ $numeroSemana = date("W");
 //echo '<BR>paginaActual: '.$paginaActual;
 $vbFecha		= date("d/m/Y (H:i)");	
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<HTML xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE HTML>
+<html>
 <HEAD>
-<TITLE>..:: <?=tituloPag?> ::..</TITLE>
+<TITLE>..:: <?php echo tituloPag?> ::..</TITLE>
 <!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 -->
 <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-
-<script language="JavaScript" type="text/javascript" src="/scripts/js.js"></script>
-<script language="JavaScript" type="text/javascript" src="ajax/ajax2.js?v=<?=$aleatorio?>"></script>
-<script language="JavaScript">
-var formatNumber = {
-	separador: ",", // separador para los miles
-	sepDecimal: '.', // separador para los decimales
-	formatear:function (num){
-		num +='';
-		var splitStr = num.split('.');
-		var splitLeft = splitStr[0];
-		var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
-		var regx = /(\d+)(\d{3})/;
-		while (regx.test(splitLeft)) {
-			splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
-		}
-		return this.simbol + splitLeft  +splitRight;
-	},
-	new:function(num, simbol){
-		this.simbol = simbol ||'';
-		return this.formatear(num);
-	}
-}
-//---- Función para mostrar y ocultar DIVISIONES
-function switchdivM(divid){
-	var div = document.getElementById(divid);
-	if(div != null){
-		if(div.style.visibility == 'visible' || div.style.display == 'block'){
-			div.style.visibility	= 'hidden';
-			div.style.display		= 'none';
-		}
-		else{
-			div.style.visibility	= 'visible';
-			div.style.display		= 'block';
-		}
-	}
-}
-
-/*
-function textAreaAdjust(o) {
-    o.style.height = "1px";
-    o.style.height = (25+o.scrollHeight)+"px";
-}
-window.onload = function() {
-    var t = document.getElementsByTagName('textarea')[0];
-    var offset= !window.opera ? (t.offsetHeight - t.clientHeight) : (t.offsetHeight + parseInt(window.getComputedStyle(t, null).getPropertyValue('border-top-width'))) ;
- 
-    var resize  = function(t) {
-        t.style.height = 'auto';
-        t.style.height = (t.scrollHeight  + offset ) + 'px';   
-    }
- 
-    t.addEventListener && t.addEventListener('input', function(event) {
-        resize(t);
-    });
- 
-    t['attachEvent']  && t.attachEvent('onkeyup', function() {
-        resize(t);
-    });
-}
-*/
-
-function add_table_factura( div ){
-	showdiv( div );
-}
-
-function add_item_factura(porcentajeIVA,nomObjVrTotalItem,idDivSubTotal,idDivIVA,idDivGranTotal, tabla){
-	var tableID = 'tabla_inversion' + tabla;
-
-	tabla = ( tabla != 2 ) ? 1 : 2;
-	
-	var contItems = parseInt(document.getElementById('contItems').value);
-	++contItems;
-	document.getElementById('contItems').value=contItems;
-	//----	
-	var table = document.getElementById(tableID);
-	
-	var rowCount = table.rows.length;
-//	var row = table.insertRow(rowCount);
-	var indFila	= rowCount-3;
-	var row = table.insertRow(indFila);
-	
-	var cell1 = row.insertCell(0);
-	cell1.className	= 'borderBR padding5';
-	cell1.align		= 'center';
-	var nroItem		= rowCount-4;
-	cell1.innerHTML = nroItem;
-	//----
-	//----
-	var nameObj		= 'productos[]';
-	var idObj		= 'producto'+contItems;
-	var obj			= "<input type='text' name='"+nameObj+"' id='"+idObj+"' value='' class='txt' style='width:96%;' />";			
-
-	var cell1 = row.insertCell(1);
-	cell1.className	= 'borderBR padding5';
-	cell1.align		= 'left';
-	cell1.innerHTML = obj;
-
-	//----
-	var nameObjVrUnit	= 'vrUnit[]';
-	var idObjVrUnit		= 'vrUnit'+contItems;
-	//----
-	var idObjVrTotalItem	= 'vrTotalItem'+contItems;
-	//----
-	var nameObjCant	= 'cantidad[]';
-	var idObjCant	= 'item'+contItems;
-	var fxVrUnit	= "fxInversion('"+idObjCant+"','"+porcentajeIVA+"','"+idObjVrUnit+"','"+nomObjVrTotalItem+"','"+idObjVrTotalItem+"','"+idDivSubTotal+"','"+idDivIVA+"','"+idDivGranTotal+"')";
-
-	var objCantidad	= "<input type='text' name='"+nameObjCant+"' id='"+idObjCant+"' maxlength='10' value='' class='txt' style='width:60px; text-align:center;' onkeypress='return esNumero(event);' onkeyup=\""+fxVrUnit+"\" onchange=\""+fxVrUnit+"\" />";			
-	//----
-	var cell1 = row.insertCell(2);
-	cell1.className	= 'borderBR padding5';
-	cell1.align		= 'center';
-	cell1.innerHTML = objCantidad;
-
-	var objPrecioUnit	= "<input type='text' name='"+nameObjVrUnit+"' id='"+idObjVrUnit+"' maxlength='10' value='' class='txt' style='width:80px; text-align:right;' onkeypress='return esNumero(event);' onkeyup=\""+fxVrUnit+"\" onchange=\""+fxVrUnit+"\" />";			
-
-	var cell1 = row.insertCell(3);
-	cell1.className	= 'borderBR padding5';
-	cell1.align		= 'center';
-	cell1.innerHTML = objPrecioUnit;
-
-	var objVrTotalItem	= "<input type='text' name='"+nomObjVrTotalItem+"' id='"+idObjVrTotalItem+"' value='' style='width:90px; text-align:right; border:none;' readonly='readonly' />" + 
-						"<input type='hidden' name='tabla[]' value='" + tabla + "' />"; 
-	var cell1 = row.insertCell(4);
-	cell1.className	= 'borderBR padding5';
-	cell1.align		= 'center';
-	cell1.innerHTML = objVrTotalItem;
-	
-	
-//	var rows		= table.rows;
-//	var cols		= rows[2].cells;
-
-//	table.rows[5].cols[1].innerHTML = 'www';
-//	table.cols[1].innerHTML = 'www';
-}
-function fxInversion( objMuestra , porcentajeIVA , idObjVrUnit , nomObjVrTotalItem , idObjVrTotalItem , idDivSubTotal , idDivIVA , idDivGranTotal ){
-	
-	var frm		= document.formulario;
-	var muestra	= document.getElementById( objMuestra 	).value;
-	var vrUnit	= document.getElementById( idObjVrUnit 	).value;
-    //---- quitamos caracteres
-    muestra	= muestra.toString( ).replace(/\./g, '');
-    muestra	= muestra.toString( ).replace(/\,/g, '');
-    vrUnit	= vrUnit.toString( ).replace(/\./g, '');
-    vrUnit	= vrUnit.toString( ).replace(/\,/g, '');
-	var vrTotalItem	= 0;
-	if(parseFloat(muestra)>0){
-		vrTotalItem	= parseFloat(muestra)*parseFloat(vrUnit);
-	}
-
-	vrUnit 		= formatNumber.new( vrUnit );
-	vrTotalItem = formatNumber.new(	vrTotalItem );
-
-	document.getElementById( idObjVrUnit ).value 		= vrUnit;
-	document.getElementById( idObjVrTotalItem ).value 	= vrTotalItem;
-
-	var vrSubTotal	= 0;
-
-	if( typeof frm[ nomObjVrTotalItem ] != 'undefined' ){
-
-		var total = frm[ nomObjVrTotalItem ].length;
-		total = ( typeof total != 'undefined' ) ? total : 1;
-
-		for (var w = 0; w < total; w++){
-
-			var valorObj	= ( typeof frm[ nomObjVrTotalItem ][ w ] != 'undefined' ) ? frm[ nomObjVrTotalItem ][ w ].value : frm[ nomObjVrTotalItem ].value;
-			//---- quitamos caracteres
-			valorObj	= valorObj.toString().replace(/\./g, '');
-			valorObj	= valorObj.toString().replace(/\,/g, ''); 
-			
-//			var idObj_act	= frm[nomObjVrTotalItem][w].id;
-			if(trimAll(valorObj).length > 0){
-				if(parseFloat(valorObj)){
-					vrSubTotal	+= parseFloat(valorObj);
-				}
-			}
-		}
-	} 
-
-	
-	var vrIVA	= 0;
-	if(parseFloat(vrSubTotal)){
-		vrIVA	= Math.round(parseFloat(porcentajeIVA) * parseFloat(vrSubTotal),0);
-	}
-	var vrGranTotal	= Math.round((parseFloat(vrSubTotal)+parseFloat(vrIVA)),0);
-	vrSubTotal = formatNumber.new(vrSubTotal);
-	document.getElementById(idDivSubTotal).innerHTML = vrSubTotal;
-	vrIVA = formatNumber.new(vrIVA);
-	document.getElementById(idDivIVA).innerHTML = vrIVA;
-	vrGranTotal = formatNumber.new(vrGranTotal, "$ ");
-	document.getElementById(idDivGranTotal).innerHTML = '<B>'+vrGranTotal+'</B>'; 
-	
-}
-
-function fxDeleteMetodologia(id_row_metodologia){
-	if (!confirm("Atención!!!\n\n¿Confirma que desea eliminar la metodología?\nRecuerde que no puedes deshacer esta acción")) {
-		//return false;
-	}
-	else{
-		document.getElementById('idRowMetodologiaDelete').value=id_row_metodologia;
-		document.formulario.submit();
-		//return true;
-	}
-}
-
-function new_segmento(id_row_metodologia){
-	if (!confirm("Atención!!!\n\n¿Confirma que desea crear un nuevo segmento")) {
-		//return false;
-	}
-	else{
-		document.getElementById('id_row_metodologia_new_seg').value=id_row_metodologia;
-		document.formulario.submit();
-		//return true;
-	}
-}
-
-function new_metodologia(){
-	document.getElementById('id_new_metodologia').value=1;
-	document.formulario.submit();
-}
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
 
 
-function fxAvance(direccion,numPaginas){
-//	alert('direccion: '+direccion);
-	var pagActual	= parseInt(document.getElementById('cPagina').value);
-	if(direccion == '+'){
-		if(pagActual < numPaginas){
-			pagActual++;
-		}
-	}
-	else if(direccion == '-'){
-		if(pagActual > 1){
-			pagActual--;
-		}
-	}
-	document.getElementById('cPagina').value=pagActual;
-	//alert('pag: '+document.getElementById('cPagina').value);
-}
-
-function fxUbicarPag(pagina){
-//	alert('pagina: '+pagina);
-	document.getElementById('cPagina').value=pagina;
-	document.formulario.submit();
-}
-
-function fxAprobar(idPropuesta){
-//	alert('pagina: '+pagina);
-	if (confirm("¿Está seguro que desea aprobar la propuesta?")) {
-		document.location.href="aprobar_propuesta.php?idPropuesta="+idPropuesta;
-	}
-}
-
-
-
-
-function fxSelEquipo(idObj,nameObjE,idObjE,idIMG,idObjRol,idPersona,nomPersona,colorBordeON,colorBordeOFF){
-//	alert('direccion: '+direccion);
-	var frm			= document.formulario;
-	if(document.getElementById(idObj).checked==false){
-		document.getElementById(idObj).checked	= true;
-		document.getElementById(idObjE).value	= nomPersona;
-		document.getElementById(idIMG).style.borderColor = colorBordeON;
-		document.getElementById(idObjRol).value	= 0;
-		document.getElementById(idObjRol).disabled	= false;
-		document.getElementById(idObjRol).focus();		;
-	}
-	else{
-		document.getElementById(idObj).checked	= false;
-		document.getElementById(idObjE).value	= '';
-		document.getElementById(idIMG).style.borderColor = colorBordeOFF;
-		document.getElementById(idObjRol).value	= 0;
-		document.getElementById(idObjRol).disabled	= true;
-	}
-	var	arrayEquipo		= new Array(); 
-	if(typeof frm[nameObjE] != 'undefined'){
-		//alert('Entro');
-		var i = 0;
-		for (var w = 0, total = frm[nameObjE].length; w < total; w++){
-//			var valores_act	= frm[nameObjE][w].value;
-//			var idObj_act	= frm[nameObjE][w].id;
-			if(trimAll(frm[nameObjE][w].value).length > 0){
-				arrayEquipo[i]=frm[nameObjE][w].value;
-				i++;
-			}
-		}
-	}
-	var nom_equipo = arrayEquipo.length > 0 ? arrayEquipo.join(", ") : "";
-	document.getElementById('divListaEquipoTrabajo').innerHTML	= "<B><u>Equipo de trabajo:</u> "+nom_equipo+"</B>";
-}
-
-function fxCalendario(id_metodologia,id_proceso,idCelda,nameObjC,idObjC,idContSem,nroSemana,vbSemana,colorBgON,colorBgOFF){
-//	alert('idObjC: '+idObjC);
-	
-	colorBgON = "#74B64A";
-	var frm			= document.formulario;
-	if(document.getElementById(idObjC).checked==false){
-		document.getElementById(idObjC).checked	= true;
-		document.getElementById(idCelda).style.backgroundColor = colorBgON;
-	}
-	else{
-		document.getElementById(idObjC).checked	= false;
-		document.getElementById(idCelda).style.backgroundColor = colorBgOFF;
-	}
-	if(typeof frm[nameObjC] != 'undefined'){
-		//alert('Entro');
-		var contSem = 0;
-		for (var w = 0, total = frm[nameObjC].length; w < total; w++){
-//			var valores_act	= frm[nameObjC][w].value;
-			var idObj_act	= frm[nameObjC][w].id;
-			//alert('valor: '+document.getElementById(idObj_act).value);
-			if(document.getElementById(idObj_act).checked == true){
-				contSem++;
-			}
-		}
-		document.getElementById(idContSem).innerHTML	= contSem;
-	}
-}
-//----
-function verLugares(clic){
-	if(document.getElementById('<?=idObjLugar?>').value.length == 0 || clic	== 1){
-		var divResultado 	= document.getElementById('listLugares');
-		if(divResultado.style.display == 'none'){
-			showdiv('listLugares');
-		}else{
-			hidediv('listLugares');
-		}
-	}
-}
-//----
-function selLugar(idDiv){
-	//alert('idDiv: '+idDiv);
-	var nomLugar 	= document.getElementById(idDiv).innerHTML;
-	document.getElementById('<?=idObjLugar?>').value	= nomLugar;
-	hidediv('listLugares');
-}
-
-</script>
+<script language="JavaScript" type="text/javascript" src="ajax/ajax2.js?v=<?php echo $aleatorio?>"></script>
 <LINK rel="stylesheet" href="/css/style.css" type="text/css">
-<LINK rel="stylesheet" href="./css/fabrica.css?<?=time(); ?>" type="text/css">
+<LINK rel="stylesheet" href="./css/fabrica.css?<?php echo time(); ?>" type="text/css">
 <style>
 .textLabel	{
 	color:#5F5F5F;
@@ -439,12 +107,6 @@ function selLugar(idDiv){
 	background-image:url(bg_blue.png);
 }
 
-/*a {
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
-}*/
 </style>
 <!-- Contact Form CSS files -->
 <link type='text/css' href='css/contact.css?v=<?=$aleatorio?>' rel='stylesheet' media='screen' />
@@ -456,6 +118,10 @@ a:hover {
 
 <link rel="stylesheet" href="js/colorbox-master/example4/colorbox.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
 <script src="js/colorbox-master/jquery.colorbox-min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- jQuery UI -->
+<link rel="stylesheet" href="js/jquery-ui-1.10.3/themes/base/jquery-ui.css" />
+<script src="js/jquery-ui-1.10.3/ui/jquery-ui.js" ></script>
 
 
 <link rel="stylesheet" href="js/tooltipster-master/css/tooltipster.css" />
@@ -563,5 +229,9 @@ a:hover {
 -->
 </TABLE>
 </FORM>
+
+	<script language="JavaScript" type="text/javascript" src="/scripts/js.js"></script>
+	<script src="js/funciones.js" ></script>
+
 </BODY>
 </HTML>

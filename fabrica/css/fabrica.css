@@ -479,3 +479,142 @@ a.button{
 #iframeMets textarea.met-field-temas{
 	width:626px;
 }
+
+.brief2Table{
+	border-left:1px solid #CCC;
+	border-top:1px solid #CCC;
+}
+
+.brief2Table th{
+	background-color: #F0F0F0;
+	color: #333366;
+	padding: 10px;
+}
+
+.brief2Table td{
+	padding: 10px;
+	color:#333;
+
+}
+
+.brief2Table .no-padding{
+	padding:0;
+}
+
+.brief2Table th,.brief2Table td{
+	border-right: 1px solid #CCC;
+	border-bottom: 1px solid #CCC;
+}
+
+
+
+#toolTipProceso{
+	z-index: 100;
+}
+
+.ui-datepicker{
+	z-index:200;
+}
+
+#toolTipProceso, #toolTipProceso.hide {
+	display:none;
+	position: absolute;
+}
+
+#toolTipProceso.show{
+	display:block;
+}
+
+#toolTipProceso input[type=text]{
+	width:125px;
+	text-align: center;
+	border:1px solid #CCC;
+	padding:1px 0;
+}
+
+.brief-procesos-container{
+	
+	width:100%;
+	overflow: hidden;
+}
+
+.brief-procesos-container h3{
+	background: #CCC;
+	font-size: 12px;
+	text-align: center;
+	padding:4px 0;
+	margin:0;
+}
+
+.brief-procesos-container ul{
+	margin: 0;
+	padding-left: 15px;
+}
+
+.brief-procesos-container ul li{
+}
+
+.brief-procesos-container ul li span{
+	color:#428bca;
+}
+
+.brief-procesos-container ul li a.active{
+	color:#468847;
+}
+
+#brief2Container #tabs .ui-tabs-nav li a  {
+	outline:none;
+}
+
+#brief2Container #tabs .ui-tabs-nav.fixed-top{
+	width:97%;
+	position: fixed;
+	top:0px;
+	z-index: 50;
+}
+
+.brief2Table.innerTable{
+	border:none;
+}
+
+.brief2Table.innerTable th:last-child,
+.brief2Table.innerTable td:last-child{
+	border-right:none;
+}
+
+.brief2Table .completado{
+	width:50px;
+}
+
+.brief2Table a, .brief2Table a:visited{
+	color:#428bca !important;
+}
+
+.brief2Table .btn{
+	color:#333 !important;
+}
+
+#brief2AjaxLoader{
+	position: fixed;
+	top: 60px;
+	text-align: center;
+	width: 100%;
+	display: none;
+}
+
+#brief2AjaxLoader #brief2AjaxLoaderWraper{
+	width: 100px;
+	margin: auto;
+	background: #FFFFFF;
+	padding: 8px;
+	border-radius: 7px;
+	color: #404040;
+	box-shadow: 0 2px 10px rgba(0,0,0,.2);
+	border: 1px solid #ccc;
+	border-color: rgba(0,0,0,.2);
+}
+
+#brief2AjaxLoader #brief2AjaxLoaderWraper span{
+	margin-bottom: 3px;
+	display: block;
+}

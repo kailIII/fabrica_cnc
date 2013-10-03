@@ -234,5 +234,20 @@ Class Contenidos extends SqlConnections {
 		return $this->adoDbFab->GetAll( $query );
 	}
 	
+	public function getIncumplimientoArea( $id_area ){
+		$query = "SELECT * FROM prop_incumplimiento WHERE id_area = '{$id_area}' ";
+		return $this->adoDbFab->GetAll( $query );
+	}
+	
+	public function getIncumplimiento(){
+		$query = "SELECT * FROM prop_incumplimiento GROUP BY des_incu ";
+		return $this->adoDbFab->GetAll( $query );
+	}
+	
+	public function getPobsOjetivo(){
+		$query  = "SELECT * FROM prop_pob_objetivo";
+		return $this->adoDbFab->GetAll($query);
+	}
+	
 
 }

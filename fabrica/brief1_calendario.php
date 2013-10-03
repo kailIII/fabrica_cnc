@@ -49,7 +49,7 @@ for($i=$inicioSemanas; $i <= $num_semanas; $i++){
 			$idObjC		= 'sw_m'.$id_metodologia.'p'.$id_proceso.'s'.$i;
 			$objNs		= "<INPUT type='checkbox' name='$nameObjC' id='$idObjC' value='$i' $chObj style='display:none' />";
 
-			$funcion	= "fxCalendario('$id_metodologia','$id_proceso','$idCelda','$nameObjC','$idObjC','$idContSem','$i','$vbSemana','".colorBgON."','".colorBgOFF."');";
+			$funcion	= "fxCalendario('$id_metodologia','$id_proceso','$idCelda','$nameObjC','$idObjC','$idContSem','$i','$vbSemana','#73B649','".colorBgOFF."');";
 //			$celda		= "<a href=\"JavaScript:$funcion\"><div style='width:50px;'>&nbsp;</div></a>";
 			$celda		= "<a href=\"JavaScript:$funcion\"><img id='$idIMG' src='../spacer.png' width='25' height='30' border='0' /></a>";
 		
