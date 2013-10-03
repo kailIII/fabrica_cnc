@@ -1,3 +1,6 @@
+
+## LISTO :D
+
 UPDATE `ab1255_fabrica`.`prop_areas` SET `nom_area`='Informe' WHERE `id_area`='4';
 
 CREATE TABLE `prop_incumplimiento` (

@@ -1,7 +1,7 @@
 <?
 $dbhost = 'localhost';
-$dbuser = 'ab1255_cnc';
-$dbpass = 'df7)!cnc)43()';
+$dbuser = 'root';
+$dbpass = 'F3l1p3b1';
 $dbname = 'ab1255_fabrica';
 dbConnect('ab1255_fabrica');
 function dbConnect($db='')
