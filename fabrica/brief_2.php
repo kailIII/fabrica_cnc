@@ -469,6 +469,14 @@ a:hover {
 
 </HEAD>
 <BODY style="margin-top:0px !important; padding-top:0px; background-color:#FFFFFF;">
+
+<div id="brief2pageLoader" class="brief2AjaxLoader" >
+	<div class="brief2AjaxLoaderWraper" >
+		<span>Cargando...</span>
+		<div><img src="../imagenes/loader-transparent.gif"  /></div>
+	</div>
+</div>
+	
 <div id='container' style="margin:0px; padding:0px;">
 <FORM name='formulario' action='brief_save.php' method='post' id="mainForm" >
 <input type='hidden' name='idPropuesta' id='idPropuesta' value='<?=$idPropuesta?>'>
@@ -561,12 +569,7 @@ a:hover {
 	</div>
 </div>
 
-<div id="brief2pageLoader" class="brief2AjaxLoader" >
-	<div class="brief2AjaxLoaderWraper" >
-		<span>Cargando...</span>
-		<div><img src="../imagenes/loader-transparent.gif"  /></div>
-	</div>
-</div>
+
 
 </BODY>
 </HTML>
