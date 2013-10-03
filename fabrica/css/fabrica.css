@@ -594,7 +594,7 @@ a.button{
 	color:#333 !important;
 }
 
-#brief2AjaxLoader{
+.brief2AjaxLoader{
 	position: fixed;
 	top: 60px;
 	text-align: center;
@@ -602,7 +602,7 @@ a.button{
 	display: none;
 }
 
-#brief2AjaxLoader #brief2AjaxLoaderWraper{
+.brief2AjaxLoader .brief2AjaxLoaderWraper{
 	width: 100px;
 	margin: auto;
 	background: #FFFFFF;
@@ -614,11 +614,20 @@ a.button{
 	border-color: rgba(0,0,0,.2);
 }
 
-#brief2AjaxLoader #brief2AjaxLoaderWraper span{
+.brief2AjaxLoader .brief2AjaxLoaderWraper span{
 	margin-bottom: 3px;
 	display: block;
 }
 
 .brief2Table .text-center{
 	text-align:center;
+}
+
+#brief2Container{
+	display: none;
+}
+
+#brief2pageLoader{
+	display: block;
+	top: 250px;
 }

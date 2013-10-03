@@ -1,3 +1,13 @@
+$(window).load(function(){
+
+	// carga de brief -- para mostrar la pag cuando los tabs esten listos
+
+	$("#brief2pageLoader").hide();
+	$("#brief2Container").show();
+
+});
+
+
 $(document).ready(function(){
 
 	// global listener de interacciones ajax

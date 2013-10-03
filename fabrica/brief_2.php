@@ -554,9 +554,16 @@ a:hover {
 		<!-- <a href="javascript:void(0);" class="btn btn-mini">Guardar</a> --> 
 	</div><div class="tooltipster-arrow-top tooltipster-arrow" style=""><span class="tooltipster-arrow-border" style="margin-bottom: -1px; border-color: rgb(204, 204, 204);;"></span><span style="border-color:rgb(237, 237, 237);"></span></div></div>
 
-<div id="brief2AjaxLoader">
-	<div id="brief2AjaxLoaderWraper" >
+<div id="brief2AjaxLoader" class="brief2AjaxLoader" >
+	<div class="brief2AjaxLoaderWraper" >
 		<span>Guardando...</span>
+		<div><img src="../imagenes/loader-transparent.gif"  /></div>
+	</div>
+</div>
+
+<div id="brief2pageLoader" class="brief2AjaxLoader" >
+	<div class="brief2AjaxLoaderWraper" >
+		<span>Cargando...</span>
 		<div><img src="../imagenes/loader-transparent.gif"  /></div>
 	</div>
 </div>
