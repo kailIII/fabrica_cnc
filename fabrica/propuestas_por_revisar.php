@@ -129,6 +129,10 @@ while($campos			= mysql_fetch_array($con)){
 <script src="js/jquery-1.10.2.min.js" ></script>
 <script src="js/lista_prop.js?<?=time();?>" ></script>
 
+<!-- jQuery UI -->
+<link rel="stylesheet" href="js/jquery-ui-1.10.3/themes/base/jquery-ui.css" />
+<script src="js/jquery-ui-1.10.3/ui/jquery-ui.js" ></script>
+
 <link rel="stylesheet" href="js/chosen_v1.0.0/chosen.css" />
 <script src="js/chosen_v1.0.0/chosen.jquery.min.js" ></script>
 
