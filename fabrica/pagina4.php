@@ -53,7 +53,7 @@ else{
         <div id="divObjetivosEsp">
         <?=$objetosObjEsp?>
         </div>
-        <div style="padding:5px;"><a href="javascript:add_objetivo_esp();"><img src='/imagenes/ico-feedback.png' height='32' border='0' alt='Adicionar objetivo' title='Adicionar objetivo' /></a></div>
+        
       </TD>
 	 </TR>
 	</TABLE>
