@@ -1,3 +1,4 @@
+UPDATE prop_metodologia SET titulo_marco_muestral = 'Método de selección del informante' WHERE titulo_marco_muestral = 'Método de selección del cliente'
 
 ## LISTO :D
 
