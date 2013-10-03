@@ -28,7 +28,7 @@ $objCantidad	= "<input type='text' name='" . $idObjCantidad . "' id='" . $idObjC
 			
 $fxVrUnit			= "fxInversion('$idObjCantidad','" . porcentajeIVA . "','$idObjVrUnit','$nomObjVrTotalItem','$idObjVrTotalItem','$idDivSubTotal','$idDivIVA','$idDivGranTotal')";
 
-$objPrecioUnit	= "<input type='text' name='" . $idObjVrUnit . "' id='" . $idObjVrUnit . "' maxlength='10' value='$vbVrDirEstudio' class='txt' style='width:80px; text-align:right;' onkeypress='return esNumero(event);' onkeyup=\"$fxVrUnit;\" />";			
+$objPrecioUnit	= "<input type='text' name='" . $idObjVrUnit . "' id='" . $idObjVrUnit . "' maxlength='10' value='$vbVrDirEstudio' class='txt' style='width:80px; text-align:right;' onkeypress='return esNumero(event);' />";			
 //----
 $objVrTotalItem	= "<input type='text' name='" . $nomObjVrTotalItem . "' id='" . $idObjVrTotalItem . "' value='$vbVrDirEstudio' style='width:90px; text-align:right; border:none;' readonly='readonly' />";
 
@@ -91,7 +91,7 @@ $fxVrUnit			= "fxInversion( '$idObjCantidad_2' , " .
 									" '$idDivIVA_2' , " . 
 									" '$idDivGranTotal_2' )";
 
-$objPrecioUnit_2	= "<input type='text' name='" . $idObjVrUnit_2 . "' id='" . $idObjVrUnit_2 . "' maxlength='10' value='$vbVrDirEstudio' class='txt' style='width:80px; text-align:right;' onkeypress='return esNumero(event);' onkeyup=\"$fxVrUnit;\" />";			
+$objPrecioUnit_2	= "<input type='text' name='" . $idObjVrUnit_2 . "' id='" . $idObjVrUnit_2 . "' maxlength='10' value='$vbVrDirEstudio' class='txt' style='width:80px; text-align:right;' onkeypress='return esNumero(event);'/>";			
 $objVrTotalItem_2	= "<input type='text' name='" . $nomObjVrTotalItem_2 . "' id='" . $idObjVrTotalItem_2 . "' value='$vbVrDirEstudio' style='width:90px; text-align:right; border:none;' readonly='readonly' />";			
 
 
@@ -102,6 +102,15 @@ $filasInversion_2	= " <tr>
       <td align='right' class='borderBR'><div class='padding5'>$objPrecioUnit_2</div></td>
       <td align='right' class='borderBR'><div class='padding5'>$objVrTotalItem_2</div></td>
      </tr> ";
+
+$script .= "
+	$( '#" . $idObjVrUnit_2 . "' ).keyup( function( ){
+		$fxVrUnit
+	});
+	$( '#" . $idObjVrUnit_2 . "' ).change( function( ){
+		$fxVrUnit
+	});
+";
 
 
 //---- consulta las metodologías de la propuesta
@@ -239,13 +248,29 @@ while($campos			= mysql_fetch_array($con)){
 			$idObjCant		= 'item'.$contItems;
 			$fxVrUnit		= "fxInversion('" . $idObjCant . "','" . porcentajeIVA . "','" . $idObjVrUnit . "','" . $nomObjVrTotalItem . "','" . $idObjVrTotalItem . "','" . $idDivSubTotal . "','" . $idDivIVA . "','" . $idDivGranTotal . "')";
 		
-			$objCantidad	= "<input type='text' name='" . $nameObjCant . "' id='" . $idObjCant . "' maxlength='10' value='$vbMuestra' class='txt' style='width:60px; text-align:center;' onkeypress='return esNumero(event);' onkeyup=\"$fxVrUnit\" onchange=\"$fxVrUnit\" />";
+			$objCantidad	= "<input type='text' name='" . $nameObjCant . "' id='" . $idObjCant . "' maxlength='10' value='$vbMuestra' class='txt' style='width:60px; text-align:center;' onkeypress='return esNumero(event);' />";
 			
-			$fxVrUnit			= "fxInversion('$idObjCantidad','" . porcentajeIVA . "','$idObjVrUnit','$nomObjVrTotalItem','$idObjVrTotalItem','$idDivSubTotal','$idDivIVA','$idDivGranTotal')";
 
-			$objPrecioUnit	= "<input type='text' name='" . $idObjVrUnit . "' id='" . $idObjVrUnit . "' maxlength='10' value='$vbVrUnitario' class='txt' style='width:80px; text-align:right;' onkeypress='return esNumero(event);' onkeyup=\"$fxVrUnit;\" onchange=\"$fxVrUnit;\" />";			
+			$objPrecioUnit	= "<input type='text' name='" . $idObjVrUnit . "' id='" . $idObjVrUnit . "' maxlength='10' value='$vbVrUnitario' class='txt' style='width:80px; text-align:right;' onkeypress='return esNumero(event);'  />";			
 			//----
-			$objVrTotalItem	= "<input type='text' name='" . $nomObjVrTotalItem . "' id='" . $idObjVrTotalItem . "' value='$vbVrTotal' style='width:90px; text-align:right; border:none;' readonly='readonly' />";			
+			$objVrTotalItem	= "<input type='text' name='" . $nomObjVrTotalItem . "' id='" . $idObjVrTotalItem . "' value='$vbVrTotal' style='width:90px; text-align:right; border:none;' readonly='readonly' />";
+
+			$script .= "
+					$( '#" . $idObjVrUnit . "' ).keyup( function( ){
+						$fxVrUnit
+					});
+					$( '#" . $idObjVrUnit . "' ).change( function( ){
+						$fxVrUnit
+					});
+					
+					$( '#" . $idObjCant . "' ).keyup( function( ){
+						$fxVrUnit
+					});
+					$( '#" . $idObjCant . "' ).change( function( ){
+						$fxVrUnit
+					});
+					
+				";
 			
 			$areas = '<option value="" >Seleccione...</option>';
 			foreach( $Contenidos->getAreas() as $area ){
