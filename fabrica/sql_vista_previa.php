@@ -36,7 +36,7 @@ while($campos				= mysql_fetch_array($con)){
 $sql = "SELECT * FROM ".tablaEquipo." WHERE id=$elaborada_por";
 //echo '<BR>'.$sql;
 $con				= mysql_query($sql);
-while($campos		= mysql_fetch_array($con)){
+while(@$campos		= mysql_fetch_array($con)){
 	$id				= $campos["id"];
 	$nombreE		= $campos["nombre"];
 	$cargoE			= $campos["cargo"];
@@ -56,7 +56,7 @@ while($campos		= mysql_fetch_array($con)){
 $sql = "SELECT * FROM ".tablaEquipo." WHERE id=$revisada_por";
 //echo '<BR>'.$sql;
 $con				= mysql_query($sql);
-while($campos		= mysql_fetch_array($con)){
+while(@$campos		= mysql_fetch_array($con)){
 	$id				= $campos["id"];
 	$nombreR		= $campos["nombre"];
 	$cargoR			= $campos["cargo"];
