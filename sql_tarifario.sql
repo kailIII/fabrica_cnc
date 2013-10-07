@@ -77,3 +77,4 @@ update prop_tarifario SET operador_muestra = 'BETWEEN' WHERE muestra LIKE '%Entr
 update prop_tarifario SET valor_muestra = '301,600'  WHERE muestra LIKE '%Entre 301 y 600%';
 update prop_tarifario SET valor_muestra = '6,10'  WHERE muestra LIKE '%Entre 6 y 10%';
 update prop_tarifario SET valor_muestra = '13,24' WHERE muestra LIKE '%Entre 13 y 24%';
+UPDATE prop_tarifario SET id_metodologia = 18 WHERE id_metodologia = 0

@@ -114,6 +114,7 @@ Class Propuesta extends SqlConnections{
 		$universo			= $camposR["universo"];
 		$muestra			= $camposR["muestra"];
 		$precioUnitario		= $camposR["precio_unitario"];
+		$id_metodologia 	= $camposR["id_metodologia"];
 
 		$cond				= NULL;
 		$vrUnitario			= 0;
@@ -134,6 +135,10 @@ Class Propuesta extends SqlConnections{
 			}
 			if(!empty($id_origen_db)){
 				$cond	.= " AND id_origen_db='$id_origen_db'";
+			}
+			
+			if( !empty( $id_metodologia ) ){
+				$cond .= " AND id_metodologia = '{$id_metodologia}' ";
 			}
 		}
 

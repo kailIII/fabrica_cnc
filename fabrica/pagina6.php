@@ -155,6 +155,7 @@ while($campos			= mysql_fetch_array($con)){
 			$universo			= $camposR["universo"];
 			$muestra			= $camposR["muestra"];
 			$precioUnitario		= $camposR["precio_unitario"];
+			$id_metodologia 	= $camposR['id_metodologia'];
 
 			$cond				= NULL;
 			$vrUnitario			= 0;
@@ -176,12 +177,18 @@ while($campos			= mysql_fetch_array($con)){
 					$cond	.= " AND id_origen_db='$id_origen_db'";
 				}
 
+				if( !empty( $id_metodologia ) ){
+					$cond .= " AND id_metodologia = '{$id_metodologia}' ";
+				}
+
 				//----
 				$sqlT = "SELECT * FROM " . tablaTarifario . "
 				 WHERE id_tipo_metodologia='$idTipoMetodologia' $cond";
 				// echo '<BR>'.$sqlT;
 				$conT					= mysql_query($sqlT);
 				while($camposT			= mysql_fetch_array($conT)){
+
+
 					$precio				= $camposT["precio"];
 					$operador_muestra	= $camposT["operador_muestra"];
 					$valor_muestra		= $camposT["valor_muestra"];
