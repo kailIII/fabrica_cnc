@@ -199,7 +199,7 @@ if(!empty($id_row_metodologia_new_seg)){
 									<td><?=$met['titulo_tecnica_recoleccion']?>:</td>
 									<td>
 										<select name="met_poblacion[<?=$id_r_met?>]" class="tecnica-recoleccion" id_met="<?=$id_r_met?>" >
-											<option value="">Selecione...</option>
+											<option value="">Seleccione...</option>
 											<?php foreach( $Contenidos->getTecnicasRecoleccion( $met['ids_pob_objetivo'] ) as $pob ){ ?>
 											<option value="<?=$pob['id_pob_objetivo']?>" <?php if( $met['id_pob_objetivo'] == $pob['id_pob_objetivo'] ){ ?> selected <?php } ?> ><?=$pob['des_pob_objetivo']?></option>
 											<?php } ?>
@@ -239,7 +239,7 @@ if(!empty($id_row_metodologia_new_seg)){
 									<td>Metodo de selección de la muestra:</td>
 									<td>
 										<select name="met_tipo[<?=$id_r_met?>]" class="met_tipo" id_met="<?=$id_r_met?>" >
-											<option value="">Selecione...</option>
+											<option value="">Seleccione...</option>
 											<?php foreach( $Contenidos->getTiposMetCuant( $met['exclude_tipo_cuant'] ) as $met_tipo ){ ?>
 											<option <?php if( $met['id_tipo_cuantitativo'] == $met_tipo['id_tipo_cuantitativo'] ){ ?> selected <?php } ?> probabilistico="<?=$met_tipo['probabilistico']?>" value="<?=$met_tipo['id_tipo_cuantitativo']?>"><?=$met_tipo['descripcion']?></option>
 											<?php } ?>
@@ -278,7 +278,7 @@ if(!empty($id_row_metodologia_new_seg)){
 									<td>
 										<?php if( $met['id_pob_objetivo'] != '' && $met['id_origen_db'] != '' ){ ?>
 										<select  class="met_duracion" name="met_tiempo[<?=$id_r_met?>]" id="met_timpo_<?=$id_r_met?>" id_met="<?=$id_r_met?>" >
-											<option value="">Selecione...</option>
+											<option value="">Seleccione...</option>
 											<?php foreach( $Metodologia->getAvailableDuracion( $id_r_met, $met['id_pob_objetivo'], $met['id_origen_db'] ) as $dur_met ){ ?>
 											<option <?php if( $met['id_duracion'] == $dur_met['id_duracion'] ){ ?> selected <?php } ?> value="<?=$dur_met['id_duracion']?>"><?=$dur_met['duracion']?></option>
 											<?php } ?>
@@ -312,7 +312,7 @@ if(!empty($id_row_metodologia_new_seg)){
 									<td>
 										<?php if( $met['id_pob_objetivo'] != '' && $met['id_origen_db'] != '' && $met['id_duracion'] != '' ){ ?>
 										<select name="nivel_aceptacion[<?=$id_r_met?>]" >
-											<option value="">Selecione...</option>
+											<option value="">Seleccione...</option>
 											<?php foreach( $Metodologia->getAvailableDificultad( $id_r_met, $met['id_pob_objetivo'], $met['id_origen_db'], $met['id_duracion'] ) as $contenido ){ ?>
 											<option <?php if( $met['id_nivel_aceptacion'] == $contenido['id_nivel_aceptacion'] ){ ?> selected <?php } ?> value="<?=$contenido['id_nivel_aceptacion']?>"><?=$contenido['des_nivel_aceptacion']?></option>
 											<?php } ?>
