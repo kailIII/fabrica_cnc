@@ -341,6 +341,12 @@ Class Propuesta extends SqlConnections{
 	public function setEstadoFinal( $estado_final ){
 		$query = "UPDATE prop_propuesta SET estado_final = {$estado_final} WHERE id_propuesta = {$this->id_propuesta} ";
 		$this->adoDbFab->Execute($query);
+		
+		// coloca fecha de inicio de proyecto si el estado es vendido
+		if( $estado_final == 3 ){
+			$query = "UPDATE prop_propuesta SET fecha_inicio = CURDATE() ";
+			$this->adoDbFab->Execute( $query );
+		}
 	}
 
 	public function setRutaCritica(){
