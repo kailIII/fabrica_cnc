@@ -1,3 +1,23 @@
+## update titulos metodologias
+
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `nom_metodologia`='Café conversación ' WHERE `id_metodologia`='1';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `nom_metodologia`='Grupo focal' WHERE `id_metodologia`='2';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `nom_metodologia`='Historia de vida' WHERE `id_metodologia`='3';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `nom_metodologia`='Etnografía' WHERE `id_metodologia`='4';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `nom_metodologia`='Entrevista en profundidad' WHERE `id_metodologia`='5';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `nom_metodologia`='Procesos en U' WHERE `id_metodologia`='8';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `nom_metodologia`='Tormenta de ideas' WHERE `id_metodologia`='9';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `nom_metodologia`='Colgada en página web' WHERE `id_metodologia`='10';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `nom_metodologia`='Direct mailing o correo directo' WHERE `id_metodologia`='11';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `nom_metodologia`='Entrevista cita previa en empresa' WHERE `id_metodologia`='12';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `nom_metodologia`='Entrevista presencial en hogar' WHERE `id_metodologia`='13';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `nom_metodologia`='Locación central' WHERE `id_metodologia`='14';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `nom_metodologia`='Solo preguntas cerradas' WHERE `id_metodologia`='15';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `nom_metodologia`='Telefónica en hogar' WHERE `id_metodologia`='16';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `nom_metodologia`='Telefónico empresa' WHERE `id_metodologia`='17';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `nom_metodologia`='Reunión' WHERE `id_metodologia`='18';
+
+## brief 2
 ALTER TABLE `ab1255_fabrica`.`prop_nivel_aceptacion` 
 ADD COLUMN `min` TINYINT(1) NULL AFTER `activo`,
 ADD COLUMN `max` TINYINT(1) NULL AFTER `min`;
