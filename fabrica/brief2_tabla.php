@@ -266,7 +266,10 @@
 
 			<div id="tabs-sin-especificar">
 				<table width="100%" class="brief2Table" border="0" cellspacing="0" cellpadding="0" >
-				<?php foreach( $Brief->getPropuestas() as $prop ){ ?>
+				<?php 
+					foreach( $Brief->getPropuestas() as $prop ){
+						$id_propuesta = $prop['id_propuesta'];
+				?>
 					<tr>
 						<td width="350" valign="top" ><a target="_BLANK" href="brief_1.php?idPropuesta=<?php echo $id_propuesta; ?>"><?php echo $prop['titulo'] ?></a></td>
 						<td class="no-padding" >
