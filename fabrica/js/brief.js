@@ -10,6 +10,49 @@ $(window).load(function(){
 
 $(document).ready(function(){
 
+	// calcula produccion
+	$(".produccion-calcular").click(function(){
+
+		id_row_segmento 	= $(this).attr('id_row_segmento');
+		num_encuestadores 	= parseInt( $("#produccion-num-encu-"+id_row_segmento).val() );
+		efectividad 		= parseInt( $("#produccion-efectividad-"+id_row_segmento).val() );
+		goal 				= parseInt( $("#produccion-goal-"+id_row_segmento).val() );
+		dias_semana 		= parseInt( $("#produccion-diashab-"+id_row_segmento).val() ); // dias habiles semana
+
+		efectividad *= dias_semana // efectividad en la semana
+
+		// si en una semana se hace X encuestas
+		encuestas_por_semana = goal / efectividad;
+
+		// se dilata el resultado segun el num de encuestadores
+		semanas_de_demora = Math.ceil(encuestas_por_semana / num_encuestadores);
+
+		msg = num_encuestadores + ' encuestador/es demorarían ' + semanas_de_demora + ' semana/s';
+
+
+		$("#produccion-resultado-"+id_row_segmento).html( msg );
+
+	});
+
+	// cambia porcentaje proyecto
+	$(".toggle-porcentaje-proyecto").change(function(){
+
+		porcentaje 		= $(this).find('option:selected').attr('porcentaje');
+		id_propuesta 	= $(this).attr('id_propuesta');
+
+		$("#porcentaje-proyecto-"+id_propuesta).html( porcentaje+'%' );
+	});
+
+	// cambia porcentaje proceso (AREA)
+	$(".toggle-porcentaje-proceso").change(function(){
+
+		porcentaje 		= $(this).find('option:selected').attr('porcentaje');
+		id_propuesta 	= $(this).attr('id_propuesta');
+
+		$("#porcentaje-proceso-"+id_propuesta).html( porcentaje+'%' );
+
+	});
+
 	// global listener de interacciones ajax
 	var ajax_requests = 0;
 	$(document).ajaxSend(function(){
@@ -316,10 +359,7 @@ function setEntragadoProductoCustom( data ){
 		data 	: ({
 			opc 	: 'set-entregado-producto-custom',
 			data 	: data
-		}),
-		success:function(result){
-			 // console.log(result);
-		}
+		})
 	});
 }
 
@@ -396,10 +436,7 @@ function setEntragadoProducto( data ){
 		data 	: ({
 			opc 	: 'set-entregado-productos',
 			data 	: data
-		}),
-		success:function(result){
-			 // console.log(result);
-		}
+		})
 	});
 }
 
@@ -411,10 +448,7 @@ function setEntregaTabulados( data ){
 		data 	: ({
 			opc 	: 'set-entrega-tabulados',
 			data 	: data
-		}),
-		success:function(result){
-			 // console.log(result);
-		}
+		})
 	});
 }
 
@@ -426,10 +460,7 @@ function setDigitacion( data ){
 		data 	: ({
 			opc 	: 'set-digitacion',
 			data 	: data
-		}),
-		success:function(result){
-			 // console.log(result);
-		}
+		})
 	});
 }
 
@@ -441,10 +472,7 @@ function setCriticaYCod( data ){
 		data 	: ({
 			opc 	: 'set-critica-y-cod',
 			data 	: data
-		}),
-		success:function(result){
-			 // console.log(result);
-		}
+		})
 	});
 }
 
@@ -456,10 +484,7 @@ function setTipoCaptura( data ){
 		data 	: ({
 			opc 	: 'set-tipo-captura',
 			data 	: data
-		}),
-		success:function(result){
-			 // console.log(result);
-		}
+		})
 	});
 }
 
@@ -470,10 +495,7 @@ function setCompletadoProductosC( data ){
 		data 	: ({
 			opc 	: 'set-completado-productos-c',
 			data 	: data
-		}),
-		success:function(result){
-			 // console.log(result);
-		}
+		})
 	});
 }
 
@@ -485,10 +507,7 @@ function setCompletadoProductos( data ){
 		data 	: ({
 			opc 	: 'set-completado-productos',
 			data 	: data
-		}),
-		success:function(result){
-			 // console.log(result);
-		}
+		})
 	});
 }
 

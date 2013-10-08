@@ -480,7 +480,7 @@ $vbGranTotal_2 	= number_format( $granTotal_2 );
 	<input type='hidden' name='contItems' id='contItems' value='<?php echo $contItems?>'>
 	<table id="tabla_inversion" width="60%" border="0" cellspacing="0" cellpadding="0" align="center" class="borderTL">
 	 <tr>
-	  <td align='center' class='borderBR' colspan="6" style="background-color:#369;"><div class='padding5 colorBlanco'><B>Productos</B></div></td>
+	  <td align='center' class='borderBR' colspan="6" style="background-color:#369;"><div class='padding5 colorBlanco'><B>Cantidades</B></div></td>
 	 </tr>
 	 <tr>
 	  <td width='1%' align='right' class='bb divInstruccion'>&nbsp;</td>

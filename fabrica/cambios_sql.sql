@@ -1,3 +1,22 @@
+ALTER TABLE `ab1255_fabrica`.`prop_nivel_aceptacion` 
+ADD COLUMN `min` TINYINT(1) NULL AFTER `activo`,
+ADD COLUMN `max` TINYINT(1) NULL AFTER `min`;
+
+UPDATE `ab1255_fabrica`.`prop_nivel_aceptacion` SET `min`='3' WHERE `id_nivel_aceptacion`='1';
+UPDATE `ab1255_fabrica`.`prop_nivel_aceptacion` SET `min`='3' WHERE `id_nivel_aceptacion`='2';
+UPDATE `ab1255_fabrica`.`prop_nivel_aceptacion` SET `min`='3' WHERE `id_nivel_aceptacion`='3';
+UPDATE `ab1255_fabrica`.`prop_nivel_aceptacion` SET `min`='6' WHERE `id_nivel_aceptacion`='4';
+UPDATE `ab1255_fabrica`.`prop_nivel_aceptacion` SET `min`='6' WHERE `id_nivel_aceptacion`='5';
+UPDATE `ab1255_fabrica`.`prop_nivel_aceptacion` SET `min`='6' WHERE `id_nivel_aceptacion`='6';
+UPDATE `ab1255_fabrica`.`prop_nivel_aceptacion` SET `min`='3', `max`='6' WHERE `id_nivel_aceptacion`='7';
+UPDATE `ab1255_fabrica`.`prop_nivel_aceptacion` SET `min`='3', `max`='6' WHERE `id_nivel_aceptacion`='8';
+UPDATE `ab1255_fabrica`.`prop_nivel_aceptacion` SET `min`='3', `max`='6' WHERE `id_nivel_aceptacion`='9';
+UPDATE `ab1255_fabrica`.`prop_nivel_aceptacion` SET `min`='0', `max`='0' WHERE `id_nivel_aceptacion`='10';
+
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `a_tam_poblacion`='0' WHERE `id_metodologia`='18';
+
+
+## --- 
 UPDATE prop_metodologia SET titulo_marco_muestral = 'Método de selección del informante' WHERE titulo_marco_muestral = 'Método de selección del cliente'
 
 ## LISTO :D

@@ -14,6 +14,7 @@
 				<li><a href="#tabs-<?php echo $area['id_area'] ?>"><?php echo $area['nom_area'] ?></a></li>
 				<?php } ?>
 				<li><a href="#tabs-sin-especificar">Sin especificar</a></li>
+				<li><a href="#tabs-analisis">Estado del proyecto</a></li>
 			</ul>
 
 			<?php foreach( $Contenidos->getAreas() as $area ){ ?>
@@ -32,7 +33,7 @@
 									 if( count( $procesos ) > 0 ){
 								?>
 								<div class="brief-procesos-container">
-									<h3>Procesos</h3>
+									<h3>Actividades calendario</h3>
 									<table width="100%" class="brief2Table innerTable" border="0" cellspacing="0" cellpadding="0" >
 										<tr>
 											<th width="50%" >Nombre</th>
@@ -78,12 +79,13 @@
 									if( count( $productos ) > 0 || count( $productos_custom ) > 0 ){
 								?>
 								<div class="brief-procesos-container">
-									<h3>Productos</h3>
+									<h3>Cantidades</h3>
 
 									<table width="100%"  class="brief2Table innerTable" border="0" cellspacing="0" cellpadding="0" >
 										<tr>
-											<th width="85%" >Nombre</th>
+											<th width="50%" >Nombre</th>
 											<th width="15%" >Completado</th>
+											<th width="35%">Producción</th>
 										</tr>
 										
 										<?php
@@ -95,6 +97,36 @@
 											<td>
 												<input type="number" min="<?php echo $producto['completado'] ?>" max="<?php echo $producto['muestra'] ?>" id="producto_completado_<?php echo $id_row_segmento ?>" class="completado only-numbers" value="<?php echo $producto['completado'] ?>" > de <?php echo $producto['muestra'] ?>
 												<a href="javascript:void(0);" class="set-completado-productos btn btn-mini pull-right" id_row_segmento="<?php echo $id_row_segmento ?>" >Guardar</a>
+											</td>
+											<td>
+												<?php
+													if( $producto['id_nivel_aceptacion'] != 0 && !empty( $producto['id_nivel_aceptacion'] ) ){
+														$nivel_a = $Contenidos->getNivelAceptacionById( $producto['id_nivel_aceptacion'] );
+												?>
+
+												<div class="produccion-data">
+
+													<div class="produccion-dificultad" >Dificultad : <?php echo $nivel_a['des_nivel_aceptacion']; ?></div>
+
+													<div class="produccion-controls">
+														<div><label>Número encuestadores: </label><input type="number" min="1" value="1" id="produccion-num-encu-<?php echo $id_row_segmento ?>" > </div>
+														<div><label>Efectividad: </label><input type="number" min="<?php echo $nivel_a['min'] ?>" max="<?php echo $nivel_a['max'] ?>" id="produccion-efectividad-<?php echo $id_row_segmento; ?>" value="<?php echo $nivel_a['min'] ?>" > </div>
+														<div><label>Días habiles semana: </label><input type="number" min="1" max="7" value="5" id="produccion-diashab-<?php echo $id_row_segmento; ?>" ></div>
+													</div>
+													<div class="calcular-wrapper" >
+														<a href="javascript:void(0);" class="btn btn-mini produccion-calcular " id_row_segmento="<?php echo $id_row_segmento; ?>" >Calcular</a>
+													</div>
+
+													<input type="hidden" id="produccion-goal-<?php echo $id_row_segmento ?>" value="<?php echo $producto['muestra'] ?>" >
+
+													<div id="produccion-resultado-<?php echo $id_row_segmento ?>">
+														1 encuestador demoraría <?php echo $Brief->getEfectividad( 1, $nivel_a['min'], 5, $producto['muestra'] ) ?> semanas
+													</div>
+												</div>
+
+												<?php } else { ?>
+												N/A
+												<?php } ?>
 											</td>
 										</tr>
 										<?php } ?>
@@ -109,6 +141,7 @@
 												<input type="number" min="<?php echo $producto['completado'] ?>" max="<?php echo $producto['cantidad'] ?>" id="producto_completado_c_<?php echo $id_producto; ?>" class="completado only-numbers" id_producto="<?php echo $id_producto; ?>" value="<?php echo $producto['completado'] ?>" > de <?php echo $producto['cantidad'] ?>
 												<a href="javascript:void(0);" id_producto="<?php echo $id_producto ?>" class="set-completado-productos-c btn btn-mini pull-right">Guardar</a>
 											</td>
+											<td valign="middle" >N/A</td>
 										</tr>
 										<?php } ?>
 
@@ -116,6 +149,8 @@
 
 									
 								</div>
+
+								<?php } // fin if productos count ?>
 
 								<?php if( strtolower($area['nom_area']) == 'procesamiento' ){ // solo aplica a procesamientio ?>
 								<div class="brief-procesos-container">
@@ -133,7 +168,7 @@
 													<?php } ?>
 												</select>
 											</td>
-											<td>Tipo de procesamiento: <select name="" id=""></select></td>
+											<!-- <td>Tipo de procesamiento: <select name="" id=""></select></td> -->
 											<td>Crítica y codificación: 
 												
 												<?php
@@ -175,8 +210,6 @@
 
 								</div>
 								<?php } // fin procesamiento ?>
-
-								<?php } // fin if productos count ?>
 
 								<?php
 
@@ -243,7 +276,7 @@
 								if( count( $procesos ) > 0 ){
 							?>
 							<div class="brief-procesos-container">
-								<h3>Procesos</h3>
+								<h3>Actividades calendario</h3>
 								<table width="100%"  class="brief2Table innerTable" border="0" cellspacing="0" cellpadding="0" >
 									<tr>
 										<th width="50%" >Nombre</th>
@@ -291,7 +324,7 @@
 								if( count( $productos ) > 0 || count( $productos_custom ) > 0 ){
 							?>
 							<div class="brief-procesos-container">
-								<h3>Productos</h3>
+								<h3>Cantidades</h3>
 
 								<table width="100%"  class="brief2Table innerTable" border="0" cellspacing="0" cellpadding="0" >
 									<tr>
@@ -329,6 +362,96 @@
 				<?php } ?>
 				</table>
 			</div>
+
+			<div id="tabs-analisis">
+				<table width="100%" class="brief2Table" border="0" cellspacing="0" cellpadding="0" >
+					<?php 
+						foreach( $Brief->getPropuestas() as $prop ){
+							$id_propuesta = $prop['id_propuesta'];
+					?>
+					<tr>
+						<td width="350" valign="top" ><a target="_BLANK" href="brief_1.php?idPropuesta=<?php echo $id_propuesta; ?>"><?php echo $prop['titulo'] ?></a></td>
+						<td class="no-padding" >
+							<div class="brief-procesos-container">
+								<table width="100%" class="brief2Table innerTable" border="0" cellspacing="0" cellpadding="0" >
+									<tr>
+										<th>% Avance por proceso</th>
+										<th>% Avance del proyecto</th>
+										<th>% Avance tiempo </th>
+									</tr>
+
+									<tr class="text-center" >
+										<td width="30%" >
+
+											<div class="porcentaje-proceso" id="porcentaje-proceso-<?php echo $id_propuesta; ?>" >
+												<?php 
+													$porcentaje = $Brief->getPercentProceso( $id_propuesta );
+													echo $porcentaje.'%';
+												?>
+											</div>
+											<select class="toggle-porcentaje-proceso" id_propuesta="<?php echo $id_propuesta; ?>" >
+												<option value="*" porcentaje="<?php echo $porcentaje; ?>" >Todas las areas</option>
+												<?php 
+													foreach( $Contenidos->getAreas() as $area ){
+														$porcentaje = $Brief->getPercentProcesoArea( $area['id_area'] ,$id_propuesta);
+
+														// si porcentaje es falso es porq la cantidad de productos en esa area es 0
+														if( $porcentaje !== false ):
+												?>
+												<option value="<?php echo $area['id_area'] ?>" porcentaje="<?php echo $porcentaje ?>" ><?php echo $area['nom_area'] ?></option>
+												<?php endif; } ?>
+											</select>
+										</td>
+										<td width="30%" >
+											<div class="porcentaje-proyecto" id="porcentaje-proyecto-<?php echo $id_propuesta; ?>" >
+												<?php 
+													$porcentaje = $Brief->getPercentProyecto( $id_propuesta );
+													echo $porcentaje.'%';
+												?>
+											</div>
+
+											<select class="toggle-porcentaje-proyecto" id_propuesta="<?php echo $id_propuesta; ?>" >
+												<option value="*" porcentaje="<?php echo $porcentaje; ?>" >Global</option>
+												<?php 
+													foreach( $Contenidos->getAreas() as $area ){
+													$porcentaje = $Brief->getPercentProyectoArea( $area['id_area'] , $id_propuesta );
+
+													// si porcentaje es falso es porq la cantidad de procesos en esa area es 0
+													if( $porcentaje !== false ):
+												?>
+												<option value="<?php echo $area['id_area'] ?>" porcentaje="<?php echo $porcentaje ?>" ><?php echo $area['nom_area'] ?></option>
+												<?php endif; } ?>
+											</select>
+										</td>
+
+										<td width="35%" >
+											<?php $avance_tiempo = $Brief->getAvanceTiempo( $id_propuesta ); ?>
+											<div class="porcentaje-proyecto avance-percent">
+												<?php echo $avance_tiempo['porcentaje'].'%' ?>
+											</div>
+
+											<div class="avance-values">
+												<ul>
+													<li>Fecha de inicio: <?php echo $avance_tiempo['fecha_inicio'] ?></li>
+													<li>Fecha de limite: <?php echo $avance_tiempo['fecha_finalizacion'] ?></li>
+													<li>Duración: <?php echo $avance_tiempo['num_semanas_que_toma'] ?> semanas</li>
+													<li>Recorrido hasta la fecha: <?php echo $avance_tiempo['num_semanas_pasadas'] ?> semana/s</li>
+												</ul>
+											</div>
+											
+										</td>
+
+									</tr>
+
+								</table>
+							</div>
+						</td>
+					</tr>
+
+					<?php } ?>
+				</table>
+			</div>
+
 		</div>
 	</div>
 

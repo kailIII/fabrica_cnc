@@ -631,3 +631,65 @@ a.button{
 	display: block;
 	top: 250px;
 }
+
+.brief-procesos-container .porcentaje-proceso,
+.brief-procesos-container .porcentaje-proyecto {
+	font-size: 35px;
+	margin-bottom: 3px;
+}
+
+.brief-procesos-container .toggle-porcentaje-proceso,
+.brief-procesos-container .toggle-porcentaje-proyecto {
+	padding: 3px;
+	border: 1px solid #CCC;
+	border-radius: 4px;
+}
+
+.avance-percent{
+	width:50%;
+	float:left;
+	/* padding-bottom: 28px; */
+}
+
+.avance-values{
+	float:right;
+	text-align: left;
+}
+
+.avance-values ul{
+	padding:0;
+}
+
+.avance-values ul li{
+	list-style: none;
+}
+
+.produccion-data label {
+	width: 166px;
+	display: inline-block;
+}
+
+.produccion-data{
+	position: relative;
+}
+
+.produccion-data input[type=number]{
+	width:35px;
+	border:border: 1px solid #CCC;
+	padding: 1px;;
+}
+
+.produccion-data .calcular-wrapper{
+	padding: 25px 0;
+	text-align: center;
+}
+
+.produccion-data .produccion-controls,
+.produccion-data .calcular-wrapper{
+	width:50%;	
+	float:left;
+}
+
+.produccion-data .produccion-dificultad{
+	margin-bottom: 5px;
+}
