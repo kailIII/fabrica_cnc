@@ -587,7 +587,7 @@ class Metodologia extends Propuesta{
 		
 		$cons = substr_replace($cons, "", -3);
 		
-		$query = "SELECT * FROM prop_duracion WHERE {$cons} ";
+		$query = "SELECT * FROM prop_duracion WHERE {$cons} ORDER BY orden";
 		$result = $this->adoDbFab->GetAll($query);
 		
 		return $result;	

@@ -1,4 +1,23 @@
-#### 
+#orden de duracion
+ALTER TABLE `ab1255_fabrica`.`prop_duracion` 
+ADD COLUMN `orden` TINYINT(1) NULL AFTER `activo`;
+
+UPDATE `ab1255_fabrica`.`prop_duracion` SET `orden`='0' WHERE `id_duracion`='1';
+UPDATE `ab1255_fabrica`.`prop_duracion` SET `orden`='1' WHERE `id_duracion`='2';
+UPDATE `ab1255_fabrica`.`prop_duracion` SET `orden`='2' WHERE `id_duracion`='3';
+UPDATE `ab1255_fabrica`.`prop_duracion` SET `orden`='3' WHERE `id_duracion`='4';
+UPDATE `ab1255_fabrica`.`prop_duracion` SET `orden`='4' WHERE `id_duracion`='5';
+UPDATE `ab1255_fabrica`.`prop_duracion` SET `orden`='8' WHERE `id_duracion`='6';
+UPDATE `ab1255_fabrica`.`prop_duracion` SET `orden`='9' WHERE `id_duracion`='7';
+UPDATE `ab1255_fabrica`.`prop_duracion` SET `orden`='5' WHERE `id_duracion`='13';
+UPDATE `ab1255_fabrica`.`prop_duracion` SET `orden`='6' WHERE `id_duracion`='10';
+UPDATE `ab1255_fabrica`.`prop_duracion` SET `orden`='10' WHERE `id_duracion`='9';
+UPDATE `ab1255_fabrica`.`prop_duracion` SET `orden`='7' WHERE `id_duracion`='12';
+UPDATE `ab1255_fabrica`.`prop_duracion` SET `orden`='11' WHERE `id_duracion`='11';
+UPDATE `ab1255_fabrica`.`prop_duracion` SET `orden`='12' WHERE `id_duracion`='14';
+UPDATE `ab1255_fabrica`.`prop_duracion` SET `orden`='13' WHERE `id_duracion`='8';
+
+#### ajustes tarifario
 
 DELETE FROM `ab1255_fabrica`.`prop_cobertura` WHERE `id_cobertura`='1';
 DELETE FROM `ab1255_fabrica`.`prop_cobertura` WHERE `id_cobertura`='5';
