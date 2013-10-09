@@ -30,7 +30,7 @@ if( ! isset( $_SESSION['filtros'] ) ){
 	   ORDER BY id_propuesta DESC  ";
 } else {
 
-	// aplica filtros ...	
+	// aplica filtros ...
 	$cond = '';
 	$fil = $_SESSION['filtros'];
 
@@ -38,7 +38,7 @@ if( ! isset( $_SESSION['filtros'] ) ){
 
 		$cond.=' AND ( ';
 		foreach(  (array) $fil['tipo'] as $tipo ){
-			$cond.=" prp.id_tipo_prop = $tipo OR";	
+			$cond.=" prp.id_tipo_prop = $tipo OR";
 		}
 
 		$cond = substr_replace($cond, "", -2); // remueve el OR sobrante
@@ -49,7 +49,7 @@ if( ! isset( $_SESSION['filtros'] ) ){
 
 		$cond.=' AND ( ';
 		foreach(  (array) $fil['estado'] as $estado ){
-			$cond.=" prp.estado_final = $estado OR";	
+			$cond.=" prp.estado_final = $estado OR";
 		}
 		$cond = substr_replace($cond, "", -2); // remueve el OR sobrante
 		$cond.=' ) ';
@@ -61,14 +61,14 @@ if( ! isset( $_SESSION['filtros'] ) ){
 	}
 
 	if( $fil['presentada'] != '' ){
-		$cond.= " AND prc.nombre LIKE '%{$fil['presentada']}%' ";	
+		$cond.= " AND prc.nombre LIKE '%{$fil['presentada']}%' ";
 	}
 
 
-	$sql = "SELECT * FROM ". tablaPropuesta ." prp 
-	LEFT JOIN prop_clientes prc ON prp.id_propuesta = prc.id_propuesta 
-	WHERE prp.titulo LIKE '%{$fil['titulo']}%' AND 
-	prp.empresa_cliente LIKE '%{$fil['cliente']}%' 
+	$sql = "SELECT * FROM ". tablaPropuesta ." prp
+	LEFT JOIN prop_clientes prc ON prp.id_propuesta = prc.id_propuesta
+	WHERE prp.titulo LIKE '%{$fil['titulo']}%' AND
+	prp.empresa_cliente LIKE '%{$fil['cliente']}%'
 	{$cond} {$limit_usuario}
 	GROUP BY prp.id_propuesta
 	ORDER BY prp.id_propuesta DESC ";
@@ -77,7 +77,8 @@ if( ! isset( $_SESSION['filtros'] ) ){
 $filasPropuesta			= NULL;
 $con					= mysql_query($sql);
 while($campos			= mysql_fetch_array($con)){
-	$id_propuesta		= $campos["id_propuesta"];
+
+	$id_propuesta		= $campos[0];
 	$titulo				= $campos["titulo"];
 	$nom_cliente		= $campos["nom_cliente"];
 	$empresa_cliente	= $campos["empresa_cliente"];
@@ -171,9 +172,9 @@ a:hover {
 
 
 <?php if( $fabrica_dev == 'fabrica_dev' ){
-		include("../menu_admin_dev.php"); 
+		include("../menu_admin_dev.php");
 	} else {
-		include("../menu_admin.php"); 
+		include("../menu_admin.php");
 	} ?>
 
 
@@ -189,7 +190,7 @@ a:hover {
    </TABLE>
   </TD>
  </TR>
- 
+
  <tr>
  	<td>
  		<div id="filtersWraper">
@@ -200,14 +201,14 @@ a:hover {
  					<td>Cliente: <input type="text" name="filter_cliente" value="<?=$_SESSION['filtros']['cliente']?>" /> </td>
  					<td>Presentada a: <input type="text" name="filter_presentada" value="<?=$_SESSION['filtros']['presentada']?>" /> </td>
  					<td>Cargo: <input type="text" name="filter_cargo" value="<?=$_SESSION['filtros']['cargo']?>" /> </td>
- 					<td>Tipo: 
+ 					<td>Tipo:
  						<select data-placeholder="Cualquiera" name="filter_tipo[]" multiple class="makemeAwesome"  >
  							<?php foreach( $Contenidos->getTipoProp() as $tipo ){ ?>
  							<option <?php if( in_array($tipo['id_tipo_prop'], (array) $_SESSION['filtros']['tipo']) ){ ?> selected <?php } ?> value="<?=$tipo['id_tipo_prop']?>"><?=$tipo['descripcion']?></option>
  							<?php } ?>
  						</select>
  					</td>
- 					<td>Estado: 
+ 					<td>Estado:
  						<select data-placeholder="Cualquiera" name="filter_estado[]" multiple class="makemeAwesome"  >
  							<?php foreach( $Contenidos->getEstadosPropuesta() as $est_prop ){ ?>
  							<option value="<?=$est_prop['id_est_prop']?>" <?php if( in_array( $est_prop['id_est_prop'] , (array)$_SESSION['filtros']['estado']) ){ ?> selected <?php } ?> ><?=$est_prop['nombre_estado']?></option>
@@ -272,7 +273,7 @@ a:hover {
  </TR>
 
 <?php } else { ?>
-	
+
 	<tr>
 		<td colspan="6" >
 			<div id="noResult" >Ningún Resultado</div>
