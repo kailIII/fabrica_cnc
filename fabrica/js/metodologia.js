@@ -17,7 +17,10 @@ $(document).ready(function(){
 					id_propuesta: $("#idPropuesta").val()
 				}),
 				success:function(data){
-					fxUbicarPag(5);
+					var pagina = 5;
+
+					$( "#cPagina" ).val( pagina );
+					$( "#mainForm" ).submit(); 
 				}
 			});
 		}

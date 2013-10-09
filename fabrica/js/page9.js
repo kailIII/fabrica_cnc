@@ -14,7 +14,10 @@ $(document).ready(function(){
 					id_proceso  : id_proceso
 				}),
 				success:function(data){
-					fxUbicarPag(9);
+					var pagina = 9;
+
+					$( "#cPagina" ).val( pagina );
+					$( "#mainForm" ).submit(); 
 				}
 
 			});
@@ -36,7 +39,10 @@ $(document).ready(function(){
 					opc 		 : 'add_proceso'
 				}),
 				success:function(data){
-					fxUbicarPag(9);
+					var pagina = 9;
+
+					$( "#cPagina" ).val( pagina );
+					$( "#mainForm" ).submit(); 
 				}
 			});
 		}
