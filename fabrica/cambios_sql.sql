@@ -1,3 +1,5 @@
+
+DELETE FROM `ab1255_fabrica`.`empleado` WHERE `id_empleado`='jmazorco';
 #orden de duracion
 ALTER TABLE `ab1255_fabrica`.`prop_duracion` 
 ADD COLUMN `orden` TINYINT(1) NULL AFTER `activo`;
