@@ -525,7 +525,7 @@ while($campos	= mysql_fetch_array($con)){
 $section->addTextBreak(1);
 
 
-	$section->addText('OBJETIVOS', 'titleStyle');
+	$section->addText('OBJETIVO', 'titleStyle');
 	$section->addTextBreak(2);
 	$cellStyle = array('name'=>'Arial', 'size'=>14);
 	$section->addText($objetivo_general, $cellStyle, 'pjustify' );
