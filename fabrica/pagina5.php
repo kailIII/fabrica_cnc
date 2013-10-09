@@ -264,7 +264,7 @@ if(!empty($id_row_metodologia_new_seg)){
 								</tr>
 
 								<tr>
-									<td>Especificación de la muestra:</td>
+									<td>Especificación: </td>
 									<td>
 										<input class="only-numbers" min="0" type="number" name="met_filas[<?=$id_r_met?>]" id="met_filas_<?=$id_r_met?>" placeholder="segmentos (filas)" value="<?=$met['rows']?>" >
 										<input class="only-numbers" min="0" type="number" name="met_cols[<?=$id_r_met?>]" id="met_cols_<?=$id_r_met?>" placeholder="cantidad (columnas)" value="<?=$met['cols']?>" >

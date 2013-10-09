@@ -16,6 +16,8 @@ update prop_tarifario SET id_metodologia = 14 WHERE nom_metodologia = 'Locación
 update prop_tarifario SET id_metodologia = 15 WHERE nom_metodologia = 'Solo preguntas cerradas';
 update prop_tarifario SET id_metodologia = 16 WHERE nom_metodologia = 'Telefónica en Hogares';
 update prop_tarifario SET id_metodologia = 17 WHERE nom_metodologia = 'Telefónico empresas';
+update prop_tarifario SET id_metodologia = 19 WHERE nom_metodologia LIKE '%auditoria%';
+update prop_tarifario SET id_metodologia = 18 WHERE nom_metodologia = 'reunión';
 
 update prop_tarifario SET id_duracion = 13 WHERE duracion = 'En promedio de duración de 1 hora';
 update prop_tarifario SET id_duracion = 6 WHERE duracion = 'Entre 3 y 4';
@@ -47,11 +49,9 @@ update prop_tarifario SET id_origen_db = 2 WHERE origen_db = 'BDD provista por c
 update prop_tarifario SET id_origen_db = 4 WHERE origen_db = 'Colgada en página web';
 update prop_tarifario SET id_origen_db = 3 WHERE origen_db = '';
 
-update prop_tarifario SET id_cobertura = 1 WHERE nom_cobertura = 'Bogotá';
 update prop_tarifario SET id_cobertura = 3 WHERE nom_cobertura = 'Ciudades Intermedias';
 update prop_tarifario SET id_cobertura = 2 WHERE nom_cobertura = 'Ciudades Principales';
 update prop_tarifario SET id_cobertura = 4 WHERE nom_cobertura = 'Municipios';
-update prop_tarifario SET id_cobertura = 5 WHERE nom_cobertura = 'Otras ciudades';
 update prop_tarifario SET id_cobertura = 6 WHERE nom_cobertura = '';
 
 update prop_tarifario SET id_pob_objetivo = 23 WHERE des_pob_objetivo = 'Entrevistas Cara A Cara';
@@ -77,4 +77,4 @@ update prop_tarifario SET operador_muestra = 'BETWEEN' WHERE muestra LIKE '%Entr
 update prop_tarifario SET valor_muestra = '301,600'  WHERE muestra LIKE '%Entre 301 y 600%';
 update prop_tarifario SET valor_muestra = '6,10'  WHERE muestra LIKE '%Entre 6 y 10%';
 update prop_tarifario SET valor_muestra = '13,24' WHERE muestra LIKE '%Entre 13 y 24%';
-UPDATE prop_tarifario SET id_metodologia = 18 WHERE id_metodologia = 0
+update prop_tarifario SET operador_muestra = '>', valor_muestra = '0' WHERE muestra = '';

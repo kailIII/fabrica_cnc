@@ -1,3 +1,11 @@
+#### 
+
+DELETE FROM `ab1255_fabrica`.`prop_cobertura` WHERE `id_cobertura`='1';
+DELETE FROM `ab1255_fabrica`.`prop_cobertura` WHERE `id_cobertura`='5';
+
+INSERT INTO `ab1255_fabrica`.`prop_metodologia` (`id_metodologia`, `nom_metodologia`, `estado`, `id_tipo_metodologia`, `des_metodologia`, `r_reunion`, `r_entrega_material`, `r_elab_instrumento`, `r_aprob_instrumento`, `r_aprob_analisis`, `r_recoleccion_info`, `r_procesamiento`, `r_analisis`, `r_resultados`, `t_reunion`, `t_entrega_material`, `t_elab_instrumento`, `t_aprob_instrumento`, `t_recoleccion_info`, `t_procesamiento`, `t_resultados`, `e_guias_formularios`, `e_grabaciones`, `e_db`, `e_tabulados`, `e_informe`, `e_presentacion`, `is_presencial`, `a_tecnica_recoleccion`, `a_marco_muestral`, `a_duracion`, `a_dificultad`, `titulo_tecnica_recoleccion`, `titulo_marco_muestral`, `titulo_duracion`, `titulo_dificultad`, `titulo_universo`, `titulo_tam_poblacion`, `a_incidencia`, `a_tam_poblacion`, `ids_pob_objetivo`, `ids_cobertura`, `id_subnivel`, `exclude_tipo_cuant`) VALUES ('19', 'Auditoría', '1', '2', 'Las etnografías sirven para estudiar los comportamientos del consumidor mediante una observación en el sitio que permite ubicar lo que ocurre con la vida cotidiana con los productos o servicios a partir de cinco dimensiones: las personas, las familias, las acciones, los lugares y los objetos. Esta información es de una inmensa utilidad para ir más allá de las palabras y comprender las acciones en el contexto en que se dan.', 'CNC-Entidad Cliente', 'Entidad Cliente', 'CNC-Entidad Cliente', 'CNC-Entidad Cliente', 'CNC-Entidad Cliente', 'CNC', '', 'CNC', 'CNC', '1', '1', '1', '1', '2', '2', '1', '', '', '', '', '', '', '1', '1', '1', '1', '1', 'Tamaño del grupo', 'Método de captación de los participantes', 'Periodo de tiempo', 'Dificultad', 'Perfil del informante', 'Tamaño de la población', '1', '1', '21', '2,1,5', '2', '');
+
+
 ## update titulos metodologias
 
 UPDATE `ab1255_fabrica`.`prop_metodologia` SET `nom_metodologia`='Café conversación ' WHERE `id_metodologia`='1';
