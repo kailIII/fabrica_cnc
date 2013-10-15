@@ -296,7 +296,7 @@ a.button{
 }
 
 #filtersWraper #filter_titulo{
-	width:453px;
+	width:400px;
 }
 
 .clients-list{
@@ -433,11 +433,19 @@ a.button{
 	cursor: pointer;
 }
 
-#filtersWraper #reportBtnWrapper{
+#reportBtnWrapper{
 	float: right;
+	margin-right: 21px;
+}
+
+#reportBtnWrapper input[type=text]{
+	width: 90px;
+	text-align: center;
+}
+
+#reportBtnWrapper .btn{
 	position: relative;
-	right: 21px;
-	bottom: 88px;
+	bottom: 4px;
 }
 
 .btn-success {
@@ -651,7 +659,7 @@ a.button{
 }
 
 .avance-percent{
-	width:50%;
+	width:45%;
 	float:left;
 	/* padding-bottom: 28px; */
 }

@@ -185,7 +185,23 @@ a:hover {
     <TR>
 	 <TD width="10%" align="left"><img src="/imagenes/logo_cnc.gif" title="Centro Nacional de consultoría" height="81" border='0'></TD>
      <TD align="left" width="40%" nowrap="nowrap" valign="bottom"><div class="padding5 subtitulos_azules"><?=$vbNroPagina?></div></TD>
-	 <TD align='left' valign='middle'><!--<div style='font-family: Arial, Helvetica, sans-serif; font-size: 20px; color:#336666; font-weight: bold; padding-left:40px;'>F&aacute;brica de Propuestas</div>--></TD>
+	 <TD align='left' valign='middle'>
+	 	<?php
+	 	if( $info_usuario['super'] == 1 ){
+
+ 				// calculo fecha 7 dias atras desde la fecha actual
+	 		$dias_atras 	= time() - (7*24*60*60);
+	 		$fecha_previa 	= date('Y-m-d', $dias_atras );
+	 		?>
+	 		<div id="reportBtnWrapper" >
+	 			<form action="reporte_semanal.php" method="POST" >
+	 				<label>Desde: <input type="text" name="fecha_desde" class="fab-datepicker" value="<?php echo $fecha_previa; ?>" /></label>
+	 				<label>Hasta: <input type="text" name="fecha_hasta" class="fab-datepicker" value="<?php echo date('Y-m-d') ?>" /></label>
+	 				<button type="submit" class="btn btn-success" >Generar Reporte</button>
+	 			</form>
+	 		</div>
+	 	<?php } ?>
+	 </TD>
 	</TR>
    </TABLE>
   </TD>
@@ -194,8 +210,8 @@ a:hover {
  <tr>
  	<td>
  		<div id="filtersWraper">
+ 			<form action="aplicar_filtros_listadoprop.php" id="filtersForm" method="POST" >
  			<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center" >
- 				<form action="aplicar_filtros_listadoprop.php" id="filtersForm" method="POST" >
  				<tr>
  					<td>Titulo: <input type="text" name="filter_titulo" id="filter_titulo" value="<?=$_SESSION['filtros']['titulo']?>" /> </td>
  					<td>Cliente: <input type="text" name="filter_cliente" value="<?=$_SESSION['filtros']['cliente']?>" /> </td>
@@ -215,28 +231,13 @@ a:hover {
  							<?php } ?>
  						</select>
  					</td>
- 					<td>
+ 					<td width="70" >
  						<button type="submit" class="btn" >Filtrar</button>
  					</td>
- 				</form>
- 					<td> <a href="limpiar_filtros_listado.php" class="btn">Limpiar filtros</a> </td>
+ 					<td width="120" > <a href="limpiar_filtros_listado.php" class="btn">Limpiar filtros</a> </td>
  				</tr>
  			</table>
- 			<?php
- 				if( $info_usuario['super'] == 1 ){
-
- 				// calculo fecha 7 dias atras desde la fecha actual
- 				$dias_atras 	= time() - (7*24*60*60);
- 				$fecha_previa 	= date('Y-m-d', $dias_atras );
- 			?>
- 				<div id="reportBtnWrapper" >
- 					<form action="reporte_semanal.php" method="POST" >
- 						<label>Desde: <input type="text" name="fecha_desde" class="fab-datepicker" value="<?php echo $fecha_previa; ?>" /></label>
- 						<label>Hasta: <input type="text" name="fecha_hasta" class="fab-datepicker" value="<?php echo date('Y-m-d') ?>" /></label>
- 						<button type="submit" class="btn btn-success" >Generar Reporte</button>
- 					</form>
- 				</div>
- 			<?php } ?>
+ 			</form>
  		</div>
  	</td>
  </tr>
