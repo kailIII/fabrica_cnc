@@ -153,7 +153,7 @@ if(!empty($id_row_metodologia_new_seg)){
         <?php  $id_r_met = $met['id_row_metodologia'];  ?>
 	        <tr>
 				<td>
-					<div class="met-container" >
+					<div class="met-container" id="met_container_<?php echo $id_r_met; ?>" >
 						<div class="met-title"><?=$met['nom_metodologia']?> <a title="eliminar metodología" id_met="<?php echo $id_r_met ?>" class="delete-met-selected"><img src="../imagenes/ico3_error.png" ></a> </div>
 						<div class="met-fields">
 							<table cellSpacing='0' cellPadding='0' width='100%' align='center' border='0' >

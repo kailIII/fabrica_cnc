@@ -6,22 +6,21 @@ $(document).ready(function(){
 
 	$(".delete-met-selected").click(function(){
 
-		if( ! confirm('Desea eliminar esta metodología?\nEsta acción no se puede deshacer.') ){
+		var id_met = $(this).attr('id_met');
+
+		if( ! confirm('Desea eliminar esta metodología? (no perderas los cambios que tengas sin guardar).\nEsta acción no se puede deshacer.') ){
 			return false;
 		} else {
+
+			$("#met_container_"+id_met).slideUp('slow');
+
 			$.ajax({
 				url 	: 'ajax/delete_met_selected.php',
 				type 	: 'post',
 				data 	: ({
-					id_met 		: $(this).attr('id_met'),
+					id_met 		: id_met,
 					id_propuesta: $("#idPropuesta").val()
-				}),
-				success:function(data){
-					var pagina = 5;
-
-					$( "#cPagina" ).val( pagina );
-					$( "#mainForm" ).submit(); 
-				}
+				})
 			});
 		}
 	});
@@ -53,7 +52,7 @@ $(document).ready(function(){
 	// handler opcion marco muestral "otro"
 	$(".met_marco").change(function(){
 		id_met = $(this).attr('id_met');
-		
+
 		$(this).val() == 3 ? $("#met_other_marco_"+id_met).show() : $("#met_other_marco_"+id_met).hide();
 	});
 
@@ -126,18 +125,18 @@ function init_calculator(){
 
 		});
 
-		
+
 		if( isProbabilistico(id_met) ){
 
 			if( $("#met_nivel_confianza_"+id_met).val() == '' ){
 				alert('No has seleccionado un nivel de confianza!\nSelecciona uno primero!');
 				return false;
-			} 
+			}
 
 			// E = sqrt( (s^2*p*q)/n )
 			error = calcularError(s,n);
 			$("#error_"+row+"_"+id_met).val(error);
-			
+
 		}
 
 		$("#total_"+row+"_"+id_met).val(n);
@@ -204,7 +203,7 @@ function generateTable(id_met, is_presencial, rows, cols){
 	if( isProbabilistico(id_met) ){
 		html+='<td>Error</td>';
 	}
-		
+
 	if( is_presencial == 1 ){
 		html+='<td class="met_zonas_wraper" >&nbsp;</td>';
 	}
@@ -234,13 +233,13 @@ function generateTable(id_met, is_presencial, rows, cols){
 				html+='<option value="'+ $(this).val() +'">'+ $(this).attr('label') +'</option>';
 
 			});
-			
+
 			html+='</select>';
 			html+='</td>';
 		}
 
 		html+='</tr>';
-	}	
+	}
 
 	/* -- fase 3 results --- */
 	html+='<tr>';
@@ -252,9 +251,9 @@ function generateTable(id_met, is_presencial, rows, cols){
 
 	html+='<td><input type="text" readonly id_met="'+ id_met +'"  name="final_var_tot['+id_met+']" id="final_var_tot_'+ id_met +'" /></td>';
 	if( isProbabilistico(id_met) ){
-		html+='<td><input type="text" readonly id_met="'+ id_met +'" id="final_error_tot_'+ id_met +'" name="final_error_tot['+id_met+']" /></td>';	
+		html+='<td><input type="text" readonly id_met="'+ id_met +'" id="final_error_tot_'+ id_met +'" name="final_error_tot['+id_met+']" /></td>';
 	}
-	
+
 	if( is_presencial == 1 ){
 		html+='<td class="met_zonas_wraper" >&nbsp;</td>';
 	}
@@ -266,12 +265,12 @@ function generateTable(id_met, is_presencial, rows, cols){
 		for( j = 1; j<= cols; j++ ){
 			html+='<td><input type="text" class="error_col" readonly="" name="error_val['+id_met+'][]" id_met="'+ id_met +'" col="'+ j +'" id="error_col_'+j+'_'+ id_met +'"></td>';
 		}
-		
+
 		html+='<td><input type="text" id="final_total_error_col_'+ id_met +'" id_met="'+ id_met +'" readonly  name="final_total_error['+id_met+']" /></td>';
-		
+
 		html+='<td>&nbsp;</td>';// no hay total de errores
 		if( is_presencial == 1 ){
-			html+='<td class="met_zonas_wraper" >&nbsp;</td>';	
+			html+='<td class="met_zonas_wraper" >&nbsp;</td>';
 		}
 		html+='</tr>';
 	}
@@ -279,7 +278,7 @@ function generateTable(id_met, is_presencial, rows, cols){
 
 	//----------//
 
-	html+='</table>'; // end 
+	html+='</table>'; // end
 
 	$("#metTableWrapper_"+id_met).html( html );
 }
@@ -301,7 +300,7 @@ function calcularError(s,n){
 	error = Math.sqrt( ( Math.pow(s,2) * p * q ) / n );
 	error *= 100;
 	return error.toFixed(2);
-	
+
 }
 
 function init_filters(){
@@ -341,7 +340,7 @@ function init_filters(){
 				opc 			: 'get_origen_db'
 			}),
 			success:function(data){
-				
+
 				$("select[name='met_marco["+id_met+"]']").html( data );
 			}
 		});
@@ -377,7 +376,7 @@ function init_filters(){
 				opc 			: 'get_duracion'
 			}),
 			success:function(data){
-				
+
 				$("select[name='met_tiempo["+id_met+"]']").html( data );
 			}
 		});
@@ -414,7 +413,7 @@ function init_filters(){
 				opc 			: 'get_dificultad'
 			}),
 			success:function(data){
-				
+
 				$("select[name='nivel_aceptacion["+id_met+"]']").html( data );
 			}
 		});
