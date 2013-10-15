@@ -158,7 +158,7 @@ if(!empty($id_row_metodologia_new_seg)){
 						<div class="met-fields">
 							<table cellSpacing='0' cellPadding='0' width='100%' align='center' border='0' >
 									
-								<?php if( $met['id_sub_metodologia'] != ''){ ?>
+								<?php if( $met['id_sub_metodologia'] != '' &&  $met['id_sub_metodologia'] != 0 ){ ?>
 								<tr>
 									<td>Herramienta:</td>
 									<td>

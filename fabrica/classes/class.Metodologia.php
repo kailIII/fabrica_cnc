@@ -19,71 +19,82 @@ class Metodologia extends Propuesta{
 	public function getListMetodologias(){
 		$query = "SELECT * FROM prop_tipo_metodologia ORDER BY id_tipo_metodologia";
 		$result = array();
-		
 
-		
+
+
 		foreach( $this->adoDbFab->GetAll($query) as $tipo_met ){
 
 			$query = "SELECT * FROM prop_metodologia WHERE id_tipo_metodologia = {$tipo_met['id_tipo_metodologia']} ";
-			
-			
+
+
 			foreach( $this->adoDbFab->GetAll($query) as $met ){
-				
+
 				$query_subnivel = "SELECT * FROM prop_metodologia_subnivel WHERE id_subnivel = {$met['id_subnivel']} ";
 				$sub_nivel = $this->adoDbFab->GetRow($query_subnivel);
-				
+
 				$result[ $tipo_met['nom_tipo_metodologia'] ][$sub_nivel['nom_subnivel']][] = array(
 					'value' => $met['id_metodologia'],
 					'label' => $met['nom_metodologia']
 				);
-				
+
 			}
 		}
-		
+
 		return $result;
-		
+
 	}
 
 	// inserta una metodologia a una propuesta en especifico
 	public function insertMetodologia( $id_metodologia , $sub_metodologia = false ){
-			
+
 		$ins_submet = '';
 		if( $sub_metodologia ){
 			$ins_submet = ' ,id_sub_metodologia = '.$sub_metodologia;
 		}
-			
+
 		$query = "INSERT INTO prop_metodologia_selected SET id_metodologia = {$id_metodologia}, id_propuesta = {$this->id_propuesta} {$ins_submet} ";
 		$this->adoDbFab->Execute($query);
 	}
 
 	// obtiene las metodologias aplicadas a una propuesta
 	public function getPropMetodologias(){
-		$query = "SELECT * FROM prop_metodologia_selected pms 
-		INNER JOIN prop_metodologia pme ON pme.id_metodologia = pms.id_metodologia 
+		$query = "SELECT * FROM prop_metodologia_selected pms
+		INNER JOIN prop_metodologia pme ON pme.id_metodologia = pms.id_metodologia
 		INNER JOIN prop_tipo_metodologia ptm ON ptm.id_tipo_metodologia = pme.id_tipo_metodologia
 		WHERE pms.id_propuesta = {$this->id_propuesta}
 		ORDER BY pms.id_row_metodologia";
-	
+
 		return $this->adoDbFab->GetAll($query);
 	}
-	
+
+	// obtiene las metodologias aplicadas a una propuesta sin joins
+	public function getPropMetodologiasNoJoins(){
+
+		$query = "SELECT * FROM prop_metodologia_selected pms
+		WHERE pms.id_propuesta = {$this->id_propuesta}
+		ORDER BY pms.id_row_metodologia";
+
+		return $this->adoDbFab->GetAll($query);
+
+	}
+
 	// obtiene UNA metodologia aplicada a una propuesta
 	public function getPropMetodologia( $id_row_metodologia ){
-		$query = "SELECT * FROM prop_metodologia_selected pms 
-		INNER JOIN prop_metodologia pme ON pme.id_metodologia = pms.id_metodologia 
+		$query = "SELECT * FROM prop_metodologia_selected pms
+		INNER JOIN prop_metodologia pme ON pme.id_metodologia = pms.id_metodologia
 		INNER JOIN prop_tipo_metodologia ptm ON ptm.id_tipo_metodologia = pme.id_tipo_metodologia
 		WHERE pms.id_propuesta = {$this->id_propuesta}
 		AND pms.id_row_metodologia = {$id_row_metodologia}
 		ORDER BY pms.id_row_metodologia";
-	
+
 		return $this->adoDbFab->GetRow($query);
 	}
-	
+
 
 	// obtiene metodologia propuesta
 	public function getPropMet($id_row_metodologia){
 		$query = "SELECT * FROM prop_metodologia_selected pms
-		INNER JOIN prop_metodologia prm ON prm.id_metodologia = pms.id_metodologia 
+		INNER JOIN prop_metodologia prm ON prm.id_metodologia = pms.id_metodologia
 		INNER JOIN prop_tipo_cuantitativo ptc ON ptc.id_tipo_cuantitativo = pms.id_tipo_cuantitativo
 		WHERE pms.id_row_metodologia = {$id_row_metodologia}";
 
@@ -124,7 +135,7 @@ class Metodologia extends Propuesta{
 		// limia bd antigua -- condicion: new_id_row_metodologia IS NOT NULL asegura que solo se borren registros asociados al nuevo metodo de ingreso de metodologia
 		$query = "DELETE FROM prop_metodologia_rta WHERE id_propuesta = {$this->id_propuesta} AND old_register = 0";
 		$this->adoDbFab->Execute($query);
-		
+
 		$query = "DELETE FROM prop_seg_metodologia_rta WHERE id_propuesta = {$this->id_propuesta}";
 		$this->adoDbFab->Execute($query);
 	}
@@ -147,7 +158,7 @@ class Metodologia extends Propuesta{
 	public function tableSetVarianzas( $id_row_met, $varianzas ){
 
 		foreach( (array) $varianzas as $order => $varianza ){
-			$query = "INSERT INTO prop_metselected_varianzas SET 
+			$query = "INSERT INTO prop_metselected_varianzas SET
 			id_row_metodologia = {$id_row_met},
 			nombre_var = '{$varianza}',
 			order_var = {$order}";
@@ -162,7 +173,7 @@ class Metodologia extends Propuesta{
 	public function tableSetSegmentos( $id_row_met, $segmento ){
 
 
-		$query = "INSERT INTO prop_metselected_segmentos SET 
+		$query = "INSERT INTO prop_metselected_segmentos SET
 		nombre_segmento = '{$segmento['nombre_segmento']}',
 		total_segmento = '{$segmento['total_segmento']}',
 		error_segmento = '{$segmento['error_segmento']}',
@@ -185,8 +196,8 @@ class Metodologia extends Propuesta{
 	// almacena los totales de la tabla
 	public function tableSetTotales( $id_row_met, $total ){
 
-		$query = "INSERT INTO prop_metselected_total SET 
-		total = '{$total['total']}', 
+		$query = "INSERT INTO prop_metselected_total SET
+		total = '{$total['total']}',
 		error = '{$total['error']}',
 		id_row_metodologia = {$id_row_met}";
 
@@ -194,22 +205,22 @@ class Metodologia extends Propuesta{
 		$id_total = $this->adoDbFab->Insert_ID();
 
 		foreach( (array) $total['values'] as $key_tot => $tot_val )  {
-			$query = "INSERT INTO prop_totales_values SET 
-			value = '{$tot_val}', 
-			order_tot_val = {$key_tot}, 
+			$query = "INSERT INTO prop_totales_values SET
+			value = '{$tot_val}',
+			order_tot_val = {$key_tot},
 			id_total = {$id_total} ";
 
 			$this->adoDbFab->Execute($query);
 		}
 	}
 
-	// almacena 
+	// almacena
 	public function tableSetErrores( $id_row_met, $total, $error_values ){
 		$query = "INSERT INTO prop_selected_error SET total = '{$total}', id_row_metodologia = {$id_row_met}";
 		$this->adoDbFab->Execute($query);
 
 		$id_error = $this->adoDbFab->Insert_ID();
-		
+
 
 		foreach( (array) $error_values as $key => $val ){
 			$query = "INSERT INTO prop_errores_values SET id_error = {$id_error}, value = '{$val}', order_error_val = {$key}";
@@ -219,7 +230,7 @@ class Metodologia extends Propuesta{
 
 	// obtiene un metodo seleccionado en especifico
 	public function getMetSelected($id_row_met){
-		$query = "SELECT * FROM prop_metodologia_selected pms 
+		$query = "SELECT * FROM prop_metodologia_selected pms
 		INNER JOIN prop_metodologia pme ON pme.id_metodologia = pms.id_metodologia
 		INNER JOIN prop_tipo_metodologia ptm ON ptm.id_tipo_metodologia = pme.id_tipo_metodologia
 		WHERE pms.id_row_metodologia = {$id_row_met}";
@@ -254,16 +265,16 @@ class Metodologia extends Propuesta{
 		if( $is_probabilistico == 1 ){
 			$html.='<td>Error</td>';
 		}
-		
+
 		if( $is_presencial == 1 ){
 			$html.='<td class="met_zonas_wraper" >&nbsp;</td>';
 		}
 
 		$html.='</tr>';
 
-		// fase 2 body -- segmentos // 
+		// fase 2 body -- segmentos //
 
-		$i = 1; // represntando las filas		
+		$i = 1; // represntando las filas
 		foreach( $this->getTableSegmentos($id_row_met) as $seg_info ){
 			$j = 1; // representado las columnas
 			$html.='<tr>';
@@ -334,12 +345,12 @@ class Metodologia extends Propuesta{
 				$html.='<td><input type="text" value="'. $error['value'] .'" class="error_col" readonly="" name="error_val['. $id_row_met .'][]" id_met="'. $id_row_met .'" col="'. $j .'" id="error_col_'. $j .'_'. $id_row_met .'"></td>';
 				$j++;
 			}
-			
+
 			$html.='<td><input value="'. $error['total'] .'" type="text" id="final_total_error_col_'. $id_row_met .'" id_met="'. $id_row_met .'"  name="final_total_error['. $id_row_met .']" /></td>';
-			
+
 			$html.='<td>&nbsp;</td>';// no hay total de errores
 			if( $is_presencial == 1 ){
-				$html.='<td class="met_zonas_wraper" >&nbsp;</td>';	
+				$html.='<td class="met_zonas_wraper" >&nbsp;</td>';
 			}
 			$html.='</tr>';
 		}
@@ -354,7 +365,7 @@ class Metodologia extends Propuesta{
 
 
 	public function getTableVarianzas( $id_row_met ){
-		
+
 		$query = "SELECT * FROM prop_metselected_varianzas WHERE id_row_metodologia = {$id_row_met} ORDER BY order_var";
 		return $this->adoDbFab->GetAll($query);
 	}
@@ -362,9 +373,9 @@ class Metodologia extends Propuesta{
 	// obtiene segmentos - valores y cobertura si la hay
 	public function getTableSegmentos( $id_row_met ){
 
-		$query = "SELECT * FROM prop_metselected_segmentos pms 
-		LEFT JOIN prop_cobertura pco ON pms.`id_cobertura` = pco.`id_cobertura` 
-		WHERE pms.id_row_metodologia = {$id_row_met} 
+		$query = "SELECT * FROM prop_metselected_segmentos pms
+		LEFT JOIN prop_cobertura pco ON pms.`id_cobertura` = pco.`id_cobertura`
+		WHERE pms.id_row_metodologia = {$id_row_met}
 		ORDER BY pms.order_seg ";
 		$segmentos = $this->adoDbFab->GetAll($query);
 
@@ -377,10 +388,10 @@ class Metodologia extends Propuesta{
 		return $segmentos;
 	}
 
-	// obtien totales 
+	// obtien totales
 	public function getTableTotales( $id_row_met ){
 		$query = "SELECT * FROM prop_metselected_total pmt
-		INNER JOIN prop_totales_values ptv ON pmt.id_total = ptv.id_total 
+		INNER JOIN prop_totales_values ptv ON pmt.id_total = ptv.id_total
 		WHERE pmt.id_row_metodologia = {$id_row_met} ORDER BY  ptv.order_tot_val";
 
 		return $this->adoDbFab->GetAll($query);
@@ -390,7 +401,7 @@ class Metodologia extends Propuesta{
 	public function getTableErrores( $id_row_met ){
 
 		$query = "SELECT * FROM prop_selected_error pse
-		INNER JOIN prop_errores_values pev ON pse.id_error = pev.id_error 
+		INNER JOIN prop_errores_values pev ON pse.id_error = pev.id_error
 		WHERE id_row_metodologia = {$id_row_met} ORDER BY pev.order_error_val";
 
 		return $this->adoDbFab->GetAll($query);
@@ -411,7 +422,7 @@ class Metodologia extends Propuesta{
 		$id_duracion		= $camposR["id_duracion"];
 		$id_nivel_aceptacion= $camposR["id_nivel_aceptacion"];
 		$id_origen_db		= $camposR["id_origen_db"];
-		
+
 
 		$cond				= NULL;
 		$vrUnitario			= 0;
@@ -482,9 +493,9 @@ class Metodologia extends Propuesta{
 					}
 				} // end foreach
 
-				
 
-			} 
+
+			}
 
 			$query = "UPDATE prop_metselected_segmentos SET valor_unitario = '{$vrUnitario}' WHERE id_segmento = {$segmento['id_segmento']} ";
 			$this->adoDbFab->Execute($query);
@@ -501,7 +512,7 @@ class Metodologia extends Propuesta{
 
 		foreach( $metodologias as $met ){
 
-			$query = "INSERT INTO prop_metodologia_rta SET 
+			$query = "INSERT INTO prop_metodologia_rta SET
 			id_propuesta = {$this->id_propuesta},
 			id_metodologia = {$met['id_metodologia']},
 			titulo = '{$met['titulo']}',
@@ -516,7 +527,7 @@ class Metodologia extends Propuesta{
 			$segmentos = $this->getTableSegmentos($met['id_row_metodologia']);
 
 			foreach( $segmentos as $seg ){
-				$query = "INSERT INTO prop_seg_metodologia_rta SET 
+				$query = "INSERT INTO prop_seg_metodologia_rta SET
 				id_propuesta = '{$this->id_propuesta}',
 				id_row_metodologia = '{$id_row_metodologia}',
 				id_tipo_metodologia =  '{$met['id_tipo_metodologia']}',
@@ -536,111 +547,111 @@ class Metodologia extends Propuesta{
 			}
 		}
 	}
-	
-	
+
+
 	// obtiene los origines db disponibles segun el tipo de metodologia y la pob objetivo
 	public function getAvailableOrigenDb( $id_row_met, $id_pob_objetivo ){
 		$met_selected = $this->getMetSelected($id_row_met);
-		
-		$query = "SELECT *  FROM  prop_tarifario 
+
+		$query = "SELECT *  FROM  prop_tarifario
 		WHERE  id_metodologia = '{$met_selected['id_metodologia']}' AND  id_pob_objetivo = '{$id_pob_objetivo}'";
-		
+
 		$ids = array();
 		foreach( $this->adoDbFab->GetAll($query) as $result ){
 			if( !in_array( $result['id_origen_db'], $ids ) ){
 				$ids[] = $result['id_origen_db'];
 			}
 		}
-		
+
 		$cons = '';
 		foreach( (array) $ids as $id ){
 			$cons.= " id_origen_db = {$id} OR ";
 		}
-		
+
 		$cons = substr_replace($cons, "", -3);
-		
+
 		$query = "SELECT * FROM prop_origen_db WHERE {$cons} ";
-		$result = $this->adoDbFab->GetAll($query);	
-		
-		return $result;	
-		
+		$result = $this->adoDbFab->GetAll($query);
+
+		return $result;
+
 	}
-	
+
 	public function getAvailableDuracion( $id_row_met, $id_pob_objetivo, $id_origen_db ){
 		$met_selected = $this->getMetSelected($id_row_met);
-		
-		$query = "SELECT *  FROM  prop_tarifario 
+
+		$query = "SELECT *  FROM  prop_tarifario
 		WHERE  id_metodologia = '{$met_selected['id_metodologia']}' AND  id_pob_objetivo = '{$id_pob_objetivo}'
 		AND id_origen_db = '{$id_origen_db}' ";
-		
+
 		$ids = array();
 		foreach( $this->adoDbFab->GetAll($query) as $result ){
 			if( !in_array( $result['id_duracion'], $ids ) ){
 				$ids[] = $result['id_duracion'];
 			}
 		}
-		
+
 		$cons = '';
 		foreach( (array) $ids as $id ){
 			$cons.= " id_duracion = {$id} OR ";
 		}
-		
+
 		$cons = substr_replace($cons, "", -3);
-		
+
 		$query = "SELECT * FROM prop_duracion WHERE {$cons} ORDER BY orden";
 		$result = $this->adoDbFab->GetAll($query);
-		
-		return $result;	
-		
+
+		return $result;
+
 	}
-	
+
 	public function getAvailableDificultad( $id_row_met, $id_pob_objetivo, $id_origen_db, $id_duracion ){
 		$met_selected = $this->getMetSelected($id_row_met);
-		
-		$query = "SELECT *  FROM  prop_tarifario 
+
+		$query = "SELECT *  FROM  prop_tarifario
 		WHERE  id_metodologia = '{$met_selected['id_metodologia']}' AND  id_pob_objetivo = '{$id_pob_objetivo}'
 		AND id_origen_db = '{$id_origen_db}' AND id_duracion = '{$id_duracion}' ";
-		
+
 		$ids = array();
 		foreach( $this->adoDbFab->GetAll($query) as $result ){
 			if( !in_array( $result['id_nivel_aceptacion'], $ids ) ){
 				$ids[] = $result['id_nivel_aceptacion'];
 			}
 		}
-		
+
 		$cons = '';
 		foreach( (array) $ids as $id ){
 			$cons.= " id_nivel_aceptacion = {$id} OR ";
 		}
-		
+
 		$cons = substr_replace($cons, "", -3);
-		
+
 		$query = "SELECT * FROM prop_nivel_aceptacion WHERE {$cons} ";
 		$result = $this->adoDbFab->GetAll($query);
-		
-		return $result;	
-		
+
+		return $result;
+
 	}
-	
+
 	/* Consultas respuesta metodologia (tabla inverson) */
 	public function getMetodologiaRta(){
-		
+
 		$idPropuesta = $this->id_propuesta;
-		
+
 		$sql = "SELECT *
 		 FROM ".tablaMetodologia." M INNER JOIN ".tablaMetodologiaRTA." R USING(id_metodologia)
 		  WHERE R.id_propuesta=$idPropuesta
 		   ORDER BY 1";
-		
+
 		return $this->adoDbFab->GetAll($sql);
 	}
-	
+
 	public function getMetologiaSegmentoRta($idRowMetodologia){
 		$sqlR = "SELECT *
 		 FROM ".tablaSegmentoMetodologiaRTA." R
 		  WHERE R.id_row_metodologia=$idRowMetodologia
 		   ORDER BY 1";
-		   
+
 		return $this->adoDbFab->GetAll($sqlR);
 	}
 }
