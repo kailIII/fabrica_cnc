@@ -1,7 +1,12 @@
+#Ajuste tarifario
+UPDATE prop_metodologia SET a_tam_poblacion = 0 WHERE id_subnivel = 1;
+INSERT INTO `ab1255_fabrica`.`prop_nivel_aceptacion` (`des_nivel_aceptacion`, `min`, `max`) VALUES ('No aplica', '0', '0');
 
+
+###
 DELETE FROM `ab1255_fabrica`.`empleado` WHERE `id_empleado`='jmazorco';
 #orden de duracion
-ALTER TABLE `ab1255_fabrica`.`prop_duracion` 
+ALTER TABLE `ab1255_fabrica`.`prop_duracion`
 ADD COLUMN `orden` TINYINT(1) NULL AFTER `activo`;
 
 UPDATE `ab1255_fabrica`.`prop_duracion` SET `orden`='0' WHERE `id_duracion`='1';
@@ -47,7 +52,7 @@ UPDATE `ab1255_fabrica`.`prop_metodologia` SET `nom_metodologia`='Telefónico em
 UPDATE `ab1255_fabrica`.`prop_metodologia` SET `nom_metodologia`='Reunión' WHERE `id_metodologia`='18';
 
 ## brief 2
-ALTER TABLE `ab1255_fabrica`.`prop_nivel_aceptacion` 
+ALTER TABLE `ab1255_fabrica`.`prop_nivel_aceptacion`
 ADD COLUMN `min` TINYINT(1) NULL AFTER `activo`,
 ADD COLUMN `max` TINYINT(1) NULL AFTER `min`;
 
@@ -65,7 +70,7 @@ UPDATE `ab1255_fabrica`.`prop_nivel_aceptacion` SET `min`='0', `max`='0' WHERE `
 UPDATE `ab1255_fabrica`.`prop_metodologia` SET `a_tam_poblacion`='0' WHERE `id_metodologia`='18';
 
 
-## --- 
+## ---
 UPDATE prop_metodologia SET titulo_marco_muestral = 'Método de selección del informante' WHERE titulo_marco_muestral = 'Método de selección del cliente'
 
 ## LISTO :D
@@ -124,48 +129,48 @@ INSERT INTO `ab1255_fabrica`.`prop_incumplimiento` (`id_area`, `des_incu`) VALUE
 INSERT INTO `ab1255_fabrica`.`prop_incumplimiento` (`id_area`, `des_incu`) VALUES ('4', 'Impresión / cds entregados / estudio finalizado');
 
 
-ALTER TABLE `ab1255_fabrica`.`prop_calendario` 
+ALTER TABLE `ab1255_fabrica`.`prop_calendario`
 ADD COLUMN `completado` TINYINT(1) NULL DEFAULT 0 AFTER `fecha_fin`,
 ADD COLUMN `id_incu` INT NULL AFTER `completado`;
 
 
-ALTER TABLE `ab1255_fabrica`.`prop_calendario` 
+ALTER TABLE `ab1255_fabrica`.`prop_calendario`
 ADD INDEX `fk_prop_calendario_prop_incumplimiento_id_incu_idx` (`id_incu` ASC);
-ALTER TABLE `ab1255_fabrica`.`prop_calendario` 
+ALTER TABLE `ab1255_fabrica`.`prop_calendario`
 ADD CONSTRAINT `fk_prop_calendario_prop_incumplimiento_id_incu`
   FOREIGN KEY (`id_incu`)
   REFERENCES `ab1255_fabrica`.`prop_incumplimiento` (`id_incu`)
   ON DELETE SET NULL
   ON UPDATE CASCADE;
 
-ALTER TABLE `ab1255_fabrica`.`prop_seg_metodologia_rta` 
+ALTER TABLE `ab1255_fabrica`.`prop_seg_metodologia_rta`
 ADD COLUMN `completado` INT NULL AFTER `id_area`;
 
-ALTER TABLE `ab1255_fabrica`.`prop_seg_metodologia_rta` 
+ALTER TABLE `ab1255_fabrica`.`prop_seg_metodologia_rta`
 CHANGE COLUMN `completado` `completado` INT(11) NULL DEFAULT 0 ;
 
 UPDATE prop_seg_metodologia_rta SET completado = 0;
 
-ALTER TABLE `ab1255_fabrica`.`prop_inversion` 
+ALTER TABLE `ab1255_fabrica`.`prop_inversion`
 ADD COLUMN `completado` INT NULL DEFAULT 0 AFTER `id_area`;
 
 
-ALTER TABLE `ab1255_fabrica`.`prop_propuesta` 
+ALTER TABLE `ab1255_fabrica`.`prop_propuesta`
 ADD COLUMN `id_pob_objetivo` INT NULL COMMENT 'tipo_captura_brief' AFTER `fecha_inicio`,
 ADD COLUMN `critica_codificacion` TINYINT(1) NULL DEFAULT 0 AFTER `id_pob_objetivo`,
 ADD COLUMN `digitacion` TINYINT(1) NULL DEFAULT 0 AFTER `critica_codificacion`,
 ADD COLUMN `entrega_tabulados` TINYINT(1) NULL DEFAULT 0 AFTER `digitacion`;
 
-ALTER TABLE `ab1255_fabrica`.`prop_propuesta` 
+ALTER TABLE `ab1255_fabrica`.`prop_propuesta`
 DROP COLUMN `entrega_tabulados`;
 
-ALTER TABLE `ab1255_fabrica`.`prop_propuesta` 
+ALTER TABLE `ab1255_fabrica`.`prop_propuesta`
 ADD COLUMN `entrega_tabulados` DATE NULL AFTER `digitacion`;
 
-ALTER TABLE `ab1255_fabrica`.`prop_seg_metodologia_rta` 
+ALTER TABLE `ab1255_fabrica`.`prop_seg_metodologia_rta`
 ADD COLUMN `entregado` TINYINT(1) NULL DEFAULT 0 AFTER `completado`;
 
-ALTER TABLE `ab1255_fabrica`.`prop_inversion` 
+ALTER TABLE `ab1255_fabrica`.`prop_inversion`
 ADD COLUMN `entregado` TINYINT(1) NULL DEFAULT 0 AFTER `completado`;
 
 
@@ -180,12 +185,12 @@ INSERT INTO `ab1255_fabrica`.`prop_areas` (`nom_area`) VALUES ('Campo');
 INSERT INTO `ab1255_fabrica`.`prop_areas` (`nom_area`) VALUES ('Procesamiento');
 INSERT INTO `ab1255_fabrica`.`prop_areas` (`nom_area`) VALUES ('Análisis');
 
-ALTER TABLE `ab1255_fabrica`.`prop_calendario` 
+ALTER TABLE `ab1255_fabrica`.`prop_calendario`
 ADD COLUMN `id_area` INT NULL AFTER `estado`;
 
-ALTER TABLE `ab1255_fabrica`.`prop_calendario` 
+ALTER TABLE `ab1255_fabrica`.`prop_calendario`
 ADD INDEX `fk_prop_areas_id_area_idx` (`id_area` ASC);
-ALTER TABLE `ab1255_fabrica`.`prop_calendario` 
+ALTER TABLE `ab1255_fabrica`.`prop_calendario`
 ADD CONSTRAINT `fk_prop_areas_id_area`
   FOREIGN KEY (`id_area`)
   REFERENCES `ab1255_fabrica`.`prop_areas` (`id_area`)
@@ -193,28 +198,28 @@ ADD CONSTRAINT `fk_prop_areas_id_area`
   ON UPDATE CASCADE;
 
 
-  ALTER TABLE `ab1255_fabrica`.`prop_seg_metodologia_rta` 
+  ALTER TABLE `ab1255_fabrica`.`prop_seg_metodologia_rta`
 ADD COLUMN `id_area` INT NULL AFTER `duracion`;
 
 
-ALTER TABLE `ab1255_fabrica`.`prop_seg_metodologia_rta` 
+ALTER TABLE `ab1255_fabrica`.`prop_seg_metodologia_rta`
 ADD INDEX `fk_prop_areas_id_area_idx` (`id_area` ASC);
-ALTER TABLE `ab1255_fabrica`.`prop_seg_metodologia_rta` 
+ALTER TABLE `ab1255_fabrica`.`prop_seg_metodologia_rta`
 ADD CONSTRAINT `fk_propareas_id_area`
   FOREIGN KEY (`id_area`)
   REFERENCES `ab1255_fabrica`.`prop_areas` (`id_area`)
   ON DELETE SET NULL
   ON UPDATE CASCADE;
 
-ALTER TABLE `ab1255_fabrica`.`prop_inversion` 
+ALTER TABLE `ab1255_fabrica`.`prop_inversion`
 ADD COLUMN `id_area` INT NULL AFTER `tabla`;
 
-ALTER TABLE `ab1255_fabrica`.`prop_inversion` 
+ALTER TABLE `ab1255_fabrica`.`prop_inversion`
 ENGINE = InnoDB ;
 
-ALTER TABLE `ab1255_fabrica`.`prop_inversion` 
+ALTER TABLE `ab1255_fabrica`.`prop_inversion`
 ADD INDEX `fk_prop_areas_id_areas_idx` (`id_area` ASC);
-ALTER TABLE `ab1255_fabrica`.`prop_inversion` 
+ALTER TABLE `ab1255_fabrica`.`prop_inversion`
 ADD CONSTRAINT `fk_prop_areas_id_areas`
   FOREIGN KEY (`id_area`)
   REFERENCES `ab1255_fabrica`.`prop_areas` (`id_area`)
@@ -232,40 +237,40 @@ ADD CONSTRAINT `fk_prop_areas_id_areas`
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-ALTER TABLE `ab1255_fabrica`.`prop_reg_cambios` 
+ALTER TABLE `ab1255_fabrica`.`prop_reg_cambios`
 CHANGE COLUMN `id_equipo_cnc` `id_equipo_cnc` SMALLINT(1) UNSIGNED NULL ;
 
-ALTER TABLE `ab1255_fabrica`.`prop_reg_cambios` 
+ALTER TABLE `ab1255_fabrica`.`prop_reg_cambios`
 ADD COLUMN `nombre_responsable` VARCHAR(255) NOT NULL AFTER `id_equipo_cnc`;
 
-ALTER TABLE `ab1255_fabrica`.`prop_reg_cambios` 
+ALTER TABLE `ab1255_fabrica`.`prop_reg_cambios`
 ADD INDEX `fk_prop_equipo_cnc_id_idx` (`id_equipo_cnc` ASC);
-ALTER TABLE `ab1255_fabrica`.`prop_reg_cambios` 
+ALTER TABLE `ab1255_fabrica`.`prop_reg_cambios`
 ADD CONSTRAINT `fk_prop_equipo_cnc_id`
   FOREIGN KEY (`id_equipo_cnc`)
   REFERENCES `ab1255_fabrica`.`prop_equipo_cnc` (`id`)
   ON DELETE SET NULL
   ON UPDATE CASCADE;
 
-ALTER TABLE `ab1255_fabrica`.`prop_reg_cambios` 
+ALTER TABLE `ab1255_fabrica`.`prop_reg_cambios`
 ADD INDEX `fk_prop_propuesta_id_propuesta_idx` (`id_propuesta` ASC);
-ALTER TABLE `ab1255_fabrica`.`prop_reg_cambios` 
+ALTER TABLE `ab1255_fabrica`.`prop_reg_cambios`
 ADD CONSTRAINT `fk_prop_propuesta_id_propuesta`
   FOREIGN KEY (`id_propuesta`)
   REFERENCES `ab1255_fabrica`.`prop_propuesta` (`id_propuesta`)
   ON DELETE CASCADE
   ON UPDATE CASCADE;
 
-ALTER TABLE `ab1255_fabrica`.`prop_reg_cambios` 
+ALTER TABLE `ab1255_fabrica`.`prop_reg_cambios`
 ADD COLUMN `fecha_cambio` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `nombre_responsable`;
 
 ##commit se registra la fecha de inicio de la propuesta
-ALTER TABLE `ab1255_fabrica`.`prop_propuesta` 
+ALTER TABLE `ab1255_fabrica`.`prop_propuesta`
 ADD COLUMN `fecha_inicio` DATE NULL AFTER `fecha_creacion`;
 
 UPDATE prop_propuesta SET fecha_inicio = fecha_creacion;
 
 ## commit registro fecha de inicio y fecha final por proceso de calendario
-ALTER TABLE `ab1255_fabrica`.`prop_calendario` 
+ALTER TABLE `ab1255_fabrica`.`prop_calendario`
 ADD COLUMN `fecha_ini` DATE NULL AFTER `id_area`,
 ADD COLUMN `fecha_fin` DATE NULL AFTER `fecha_ini`;

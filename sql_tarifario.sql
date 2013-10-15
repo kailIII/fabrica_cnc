@@ -43,6 +43,7 @@ update prop_tarifario SET id_nivel_aceptacion = 2 WHERE des_nivel_aceptacion LIK
 update prop_tarifario SET id_nivel_aceptacion = 6 WHERE des_nivel_aceptacion LIKE '%Facíl (Mas de 6 encuestas de cada 10 contactos)%';
 update prop_tarifario SET id_nivel_aceptacion = 10 WHERE des_nivel_aceptacion LIKE '%Logradas sin refuerzo telefónico %';
 update prop_tarifario SET id_nivel_aceptacion = 9 WHERE des_nivel_aceptacion LIKE '%Media (De 3 a 6 encuestas efectivas de cada 10 contactos)%';
+update prop_tarifario SET id_nivel_aceptacion = 11 WHERE des_nivel_aceptacion = '';
 
 update prop_tarifario SET id_origen_db = 1 WHERE origen_db = 'BDD del CNC Confecamaras y/o Directorio Telefonico';
 update prop_tarifario SET id_origen_db = 2 WHERE origen_db = 'BDD provista por cliente';
@@ -74,7 +75,7 @@ update prop_tarifario SET valor_muestra = '6' WHERE muestra LIKE '%hasta 6 sesio
 update prop_tarifario SET valor_muestra = '5' WHERE muestra LIKE '%hasta 5%';
 update prop_tarifario SET valor_muestra = '12' WHERE muestra LIKE '%hasta 12 entrevistas%';
 update prop_tarifario SET operador_muestra = 'BETWEEN' WHERE muestra LIKE '%Entre %';
-update prop_tarifario SET valor_muestra = '301,600'  WHERE muestra LIKE '%Entre 301 y 600%';
+update prop_tarifario SET valor_muestra = '300,600'  WHERE muestra LIKE '%Entre 300 y 600%';
 update prop_tarifario SET valor_muestra = '6,10'  WHERE muestra LIKE '%Entre 6 y 10%';
 update prop_tarifario SET valor_muestra = '13,24' WHERE muestra LIKE '%Entre 13 y 24%';
 update prop_tarifario SET operador_muestra = '>', valor_muestra = '0' WHERE muestra = '';
