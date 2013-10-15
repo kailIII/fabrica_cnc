@@ -74,9 +74,9 @@ $(document).ready(function(){
 
 	// entregado productos custom (inversion en BD)
 	$(".entregado-producto-c").click(function(){
-		
+
 		data = new Object;
-		
+
 		$(this).is(':checked') ? data.val = 1 : data.val = 0;
 		data.id_producto = $(this).attr( 'id_producto' );
 
@@ -88,7 +88,7 @@ $(document).ready(function(){
 	$(".entregado-producto").click(function(){
 
 		data = new Object;
-		
+
 		$(this).is(':checked') ? data.val = 1 : data.val = 0;
 		data.id_row_segmento = $(this).attr( 'id_row_segmento' );
 
@@ -96,10 +96,6 @@ $(document).ready(function(){
 
 	});
 
-	$(".completado").select(function(){
-
-		$(this).blur();
-	});
 
 	$(".completado").keydown(function(e){
 
@@ -162,7 +158,7 @@ $(document).ready(function(){
 	$(".tipo-captura").change(function(){
 
 		data = new Object;
-		
+
 		data.id_propuesta 	= $(this).attr('id_propuesta');
 		data.val 			= $(this).val();
 
@@ -243,12 +239,12 @@ $(document).ready(function(){
 		data = new Object;
 
 		$(this).is(':checked') ? data.val = 1 : data.val = 0;
-		
+
 		data.id_propuesta 	= $(this).attr('id_propuesta');
 		data.id_proceso 	= $(this).attr('id_proceso');
 
 		cambiarProcesoCompletado( data );
-		
+
 	});
 
 	$(window).scroll(function(){
@@ -298,7 +294,7 @@ $(document).ready(function(){
 
 		$("#toolTipProceso").css('top', posY+'px' );
 		$("#toolTipProceso").css('left', posX+'px' );
-		
+
 		$("#toolTipProceso").removeClass('hide');
 		$("#toolTipProceso").addClass('show');
 
@@ -322,7 +318,7 @@ $(document).ready(function(){
 
 	// modal box metodologia
 	$(".requi-ver-metodologia").colorbox({
-		iframe		: true, width:"970px", 
+		iframe		: true, width:"970px",
 		height		: "80%",
 		onClosed	:function(){
 			if( $("#refreshOnClose").val() == 1 ){
@@ -423,9 +419,9 @@ function getKeyCodeNumber( keycode ){
 	if( number != null ){
 		return number.toString();
 	}
-	
+
 	return number;
-	
+
 }
 
 function setEntragadoProducto( data ){
