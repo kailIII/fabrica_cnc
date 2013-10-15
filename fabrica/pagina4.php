@@ -18,14 +18,14 @@ while($campos			= mysql_fetch_array($con)){
 
 $objetosObjEsp			= NULL;
 if(empty($objetivos_especificos)){
-		$objetosObjEsp = "<TEXTAREA name='objetivos_especificos[]' class='borderBlue' style='width:99%; height:40px; padding:5px; margin-top:5px;'>$vbObjetivo</TEXTAREA>";
+		$objetosObjEsp = "<TEXTAREA name='objetivos_especificos[]' class='borderBlue obj-especificos' style='width:99%; height:40px; padding:5px; margin-top:5px;'>$vbObjetivo</TEXTAREA>";
 }
 else{
 	$objetivos_especificos	= explode('||',$objetivos_especificos);
 	foreach($objetivos_especificos as $ind => $vbObjetivo){
 		//echo '<BR>ind: '.$ind.' vbObjetivo: '.$vbObjetivo;
 	
-		$objetosObjEsp .= "<TEXTAREA name='objetivos_especificos[]' class='borderBlue' style='width:99%; height:40px; padding:5px; margin-top:5px;'>$vbObjetivo</TEXTAREA>";
+		$objetosObjEsp .= "<TEXTAREA name='objetivos_especificos[]' class='borderBlue obj-especificos' style='width:99%; height:40px; padding:5px; margin-top:5px;'>$vbObjetivo</TEXTAREA>";
 	}
 }
 ?>

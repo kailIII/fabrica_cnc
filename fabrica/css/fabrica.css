@@ -100,12 +100,17 @@
 	width:250px;
 }
 
-.generateTable{
+/* .generateTable{
 	background: #828282;
 	padding: 4px 5px;
 	color: #FFF !important;
 	font-weight: bold;
 	border: 1px solid #000;
+} */
+
+.generateTable{
+	position: relative;
+	bottom: 2px;
 }
 
 .metTableWrapper{
@@ -180,7 +185,7 @@
 
 #empresa_cliente{
 	padding: 3px 5px;
-	width:350px;	
+	width:350px;
 }
 
 a.button{
@@ -320,7 +325,7 @@ a.button{
 #sub_metodologia{
 	padding: 5px;
 	width: 100%;
-	display:none;	
+	display:none;
 }
 
 #sub_metodologia_label{
@@ -533,7 +538,7 @@ a.button{
 }
 
 .brief-procesos-container{
-	
+
 	width:100%;
 	overflow: hidden;
 }
@@ -686,10 +691,24 @@ a.button{
 
 .produccion-data .produccion-controls,
 .produccion-data .calcular-wrapper{
-	width:50%;	
+	width:50%;
 	float:left;
 }
 
 .produccion-data .produccion-dificultad{
 	margin-bottom: 5px;
+}
+
+.table-specs input[type=number],
+.table-specs input[type=text]{
+	width:40px;
+	text-align: center;
+}
+
+.btn-primary{
+	color:#FFF !important;
+}
+
+.obj-especificos{
+	height: 200px !important;
 }

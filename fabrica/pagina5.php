@@ -265,10 +265,10 @@ if(!empty($id_row_metodologia_new_seg)){
 
 								<tr>
 									<td>Especificación: </td>
-									<td>
-										<input class="only-numbers" min="0" type="number" name="met_filas[<?=$id_r_met?>]" id="met_filas_<?=$id_r_met?>" placeholder="segmentos (filas)" value="<?=$met['rows']?>" >
-										<input class="only-numbers" min="0" type="number" name="met_cols[<?=$id_r_met?>]" id="met_cols_<?=$id_r_met?>" placeholder="cantidad (columnas)" value="<?=$met['cols']?>" >
-										<a href="javascript:void(0);" class="generateTable" id_met="<?=$id_r_met?>" is_presencial="<?=$met['is_presencial']?>" >Generar Tabla</a>
+									<td class="table-specs" >
+										<label>Segmentos (filas): <input class="only-numbers" min="0" type="number" name="met_filas[<?=$id_r_met?>]" id="met_filas_<?=$id_r_met?>" placeholder="segmentos (filas)" value="<?=$met['rows']?>" ></label>
+										<label>Cantidad (columnas): <input class="only-numbers" min="0" type="number" name="met_cols[<?=$id_r_met?>]" id="met_cols_<?=$id_r_met?>" placeholder="cantidad (columnas)" value="<?=$met['cols']?>" ></label>
+										<a href="javascript:void(0);" class="generateTable btn btn-primary btn-mini" id_met="<?=$id_r_met?>" is_presencial="<?=$met['is_presencial']?>" >Generar Tabla</a>
 									</td>
 								</tr>
 								
