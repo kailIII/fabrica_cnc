@@ -14,7 +14,7 @@
 				<li><a href="#tabs-<?php echo $area['id_area'] ?>"><?php echo $area['nom_area'] ?></a></li>
 				<?php } ?>
 				<li><a href="#tabs-sin-especificar">Sin especificar</a></li>
-				<li><a href="#tabs-analisis">Estado del proyecto</a></li>
+				<li><a href="#tabs-analisis" class="tabs-analisis" >Estado del proyecto</a></li>
 			</ul>
 
 			<?php foreach( $Contenidos->getAreas() as $area ){ ?>

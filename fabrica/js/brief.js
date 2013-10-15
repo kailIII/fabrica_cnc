@@ -10,6 +10,13 @@ $(window).load(function(){
 
 $(document).ready(function(){
 
+	$(".tabs-analisis").click(function(){
+
+		window.location.href = "brief_2.php#tabs-analisis";
+		window.location.reload();
+
+	});
+
 	// calcula produccion
 	$(".produccion-calcular").click(function(){
 

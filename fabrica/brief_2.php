@@ -131,7 +131,7 @@ a:hover {
 <link rel="stylesheet" href="js/tooltipster-master/css/themes/tooltipster-light.css" />
 <script src="js/tooltipster-master/js/jquery.tooltipster.min.js" ></script>
 
-<script src="js/brief.js" ></script>
+<script src="js/brief.js?<?php echo time(); ?>" ></script>
 
 </HEAD>
 <BODY style="margin-top:0px !important; padding-top:0px; background-color:#FFFFFF;">
