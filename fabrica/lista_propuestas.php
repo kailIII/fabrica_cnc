@@ -141,6 +141,10 @@ while($campos			= mysql_fetch_array($con)){
 
 <link rel="stylesheet" href="css/fabrica.css" />
 
+<!--[if lte IE 8]>
+	<link rel="stylesheet" href="css/fabrica-ie8.css" />
+<![endif]-->
+
 <style>
 .textLabel	{
 	color:#5F5F5F;
