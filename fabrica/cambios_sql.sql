@@ -1,3 +1,51 @@
+#ajuste tarifario 15 - 10 - 2013
+INSERT INTO `ab1255_fabrica`.`prop_metodologia_subnivel` (`nom_subnivel`) VALUES ('Observación');
+
+UPDATE `ab1255_fabrica`.`prop_nivel_aceptacion` SET `des_nivel_aceptacion`='Difícil (3 o menos aceptación de cada 10 contactos)\r ' WHERE `id_nivel_aceptacion`='1';
+UPDATE `ab1255_fabrica`.`prop_nivel_aceptacion` SET `des_nivel_aceptacion`='Fácil (Mas de 6 aceptación de cada 10 contactos)' WHERE `id_nivel_aceptacion`='5';
+UPDATE `ab1255_fabrica`.`prop_nivel_aceptacion` SET `des_nivel_aceptacion`='Media (De 3 a 6 aceptación  de cada 10 contactos)' WHERE `id_nivel_aceptacion`='8';
+UPDATE `ab1255_fabrica`.`prop_origen_db` SET `nom_origen_db`='Base de datos entregada por el cliente' WHERE `id_origen_db`='2';
+UPDATE `ab1255_fabrica`.`prop_origen_db` SET `nom_origen_db`='BDD del CNC, Confecamaras, Directorio Telefonico, etc.' WHERE `id_origen_db`='1';
+
+INSERT INTO `ab1255_fabrica`.`prop_pob_objetivo` (`des_pob_objetivo`, `activo`) VALUES ('Acompañamientos', '1');
+INSERT INTO `ab1255_fabrica`.`prop_pob_objetivo` (`des_pob_objetivo`, `activo`) VALUES ('Entrevistas exploratorias', '1');
+UPDATE `ab1255_fabrica`.`prop_pob_objetivo` SET `des_pob_objetivo`='Grupo(Entre 7 y 10 personas)' WHERE `id_pob_objetivo`='20';
+
+INSERT INTO `ab1255_fabrica`.`prop_pob_objetivo` (`des_pob_objetivo`, `activo`) VALUES ('Inmersiones / Convivencias', '1');
+INSERT INTO `ab1255_fabrica`.`prop_pob_objetivo` (`des_pob_objetivo`, `activo`) VALUES ('Observación', '1');
+
+INSERT INTO `ab1255_fabrica`.`prop_pob_objetivo` (`des_pob_objetivo`, `activo`) VALUES ('Internet con preguntas abiertas para codificar', '1');
+INSERT INTO `ab1255_fabrica`.`prop_pob_objetivo` (`des_pob_objetivo`, `activo`) VALUES ('Internet sin preguntas para codificar', '1');
+
+INSERT INTO `ab1255_fabrica`.`prop_metodologia` (`id_metodologia`, `nom_metodologia`, `estado`, `id_tipo_metodologia`, `is_presencial`, `a_tecnica_recoleccion`, `a_marco_muestral`, `a_duracion`, `a_dificultad`, `titulo_tecnica_recoleccion`, `titulo_marco_muestral`, `titulo_duracion`, `titulo_dificultad`, `titulo_universo`, `titulo_tam_poblacion`, `a_incidencia`, `a_tam_poblacion`, `ids_pob_objetivo`, `ids_cobertura`, `id_subnivel`, `exclude_tipo_cuant`) VALUES ('20', 'Internet', '1', '3', '1', '1', '1', '1', '1', 'Técnica de recolección', 'Método de selección del informante', 'Duración', 'Nivel de aceptación', 'Universo', 'Tamaño de la población', '1', '1', '25', '6', '5', '4,6');
+
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `id_subnivel`='6' WHERE `id_metodologia`='19';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `id_subnivel`='6' WHERE `id_metodologia`='4';
+
+DELETE FROM `ab1255_fabrica`.`prop_nivel_aceptacion` WHERE `id_nivel_aceptacion`='10';
+DELETE FROM `ab1255_fabrica`.`prop_nivel_aceptacion` WHERE `id_nivel_aceptacion`='3';
+DELETE FROM `ab1255_fabrica`.`prop_nivel_aceptacion` WHERE `id_nivel_aceptacion`='4';
+DELETE FROM `ab1255_fabrica`.`prop_nivel_aceptacion` WHERE `id_nivel_aceptacion`='7';
+
+
+DELETE FROM `ab1255_fabrica`.`prop_metodologia` WHERE `id_metodologia`='10';
+DELETE FROM `ab1255_fabrica`.`prop_metodologia` WHERE `id_metodologia`='11';
+DELETE FROM `ab1255_fabrica`.`prop_metodologia` WHERE `id_metodologia`='15';
+
+
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `ids_pob_objetivo`='27', `ids_cobertura`='3,2' WHERE `id_metodologia`='3';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `ids_pob_objetivo`='27', `ids_cobertura`='3,2' WHERE `id_metodologia`='5';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `ids_pob_objetivo`='29', `ids_cobertura`='3,2' WHERE `id_metodologia`='19';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `ids_pob_objetivo`='26,28,29', `ids_cobertura`='3,2' WHERE `id_metodologia`='4';
+
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `titulo_tecnica_recoleccion`='Tipología' WHERE `id_metodologia`='19';
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `titulo_tecnica_recoleccion`='Tipología' WHERE `id_metodologia`='4';
+
+UPDATE `ab1255_fabrica`.`prop_metodologia` SET `ids_pob_objetivo`='30,31' WHERE `id_metodologia`='20';
+
+
+
+
 #Ajuste tarifario
 UPDATE prop_metodologia SET a_tam_poblacion = 0 WHERE id_subnivel = 1;
 INSERT INTO `ab1255_fabrica`.`prop_nivel_aceptacion` (`des_nivel_aceptacion`, `min`, `max`) VALUES ('No aplica', '0', '0');
