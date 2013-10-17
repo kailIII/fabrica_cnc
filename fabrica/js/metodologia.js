@@ -355,6 +355,9 @@ function init_filters(){
 		var id_pob_objetivo = $( "select[name='met_poblacion["+id_met+"]']" ).val();
 		var id_origen_db = $(this).val();
 
+		$("select[name='nivel_aceptacion["+id_met+"]']").html( '<option value="" >Completa los campos anteriores...</option>' );
+		$("select[name='nivel_aceptacion["+id_met+"]']").attr('disabled','disabled');
+
 		if( id_origen_db == '' ){
 			$("select[name='met_tiempo["+id_met+"]']").html( '<option value="" >Completa los campos anteriores...</option>' );
 			$("select[name='met_tiempo["+id_met+"]']").attr('disabled','disabled');
