@@ -228,11 +228,11 @@ $table->addCell($longLinea)->addText('');
 $tamano_titulo = strlen( $titulo );
 
 if( $tamano_titulo <= 50 ){
-	$PHPWord->addFontStyle('mainTitleStyle', array('name'=>'Arial', 'size'=>35, 'color'=>'000000', 'bold' => true ));
+	$PHPWord->addFontStyle('mainTitleStyle', array('name'=>'Arial', 'size'=>35, 'color'=>'000000', 'bold' => false ));
 } else if( $tamano_titulo <= 82 ){
-	$PHPWord->addFontStyle('mainTitleStyle', array('name'=>'Arial', 'size'=>28, 'color'=>'000000', 'bold' => true ));
+	$PHPWord->addFontStyle('mainTitleStyle', array('name'=>'Arial', 'size'=>28, 'color'=>'000000', 'bold' => false ));
 } else {
-	$PHPWord->addFontStyle('mainTitleStyle', array('name'=>'Arial', 'size'=>14, 'color'=>'000000', 'bold' => true ));
+	$PHPWord->addFontStyle('mainTitleStyle', array('name'=>'Arial', 'size'=>14, 'color'=>'000000', 'bold' => false ));
 }
 
 //$section->addTextBreak();
@@ -420,10 +420,10 @@ $texto1	= utf8_decode("El Centro Nacional de Consultoría es una firma de invest
 
 $texto2	= utf8_decode("El Centro se compromete con un nuevo liderazgo de servicio construido sobre cuatro dimensiones: el sentido de realidad, la ética, la visión y el coraje para hacer siempre la tarea.");
 //----
-$section->addTextBreak(2);
+$section->addTextBreak(1);
 $textStyle = array('bold'=>true, 'name'=>'Arial', 'size'=>21, 'color'=>'000000');
 $section->addText(utf8_decode('Investigación + conversación = acción'), $textStyle);
-$section->addTextBreak(2);
+$section->addTextBreak(3);
 $textStyle = array('name'=>'Arial', 'size'=>14, 'color'=>'000000');
 
 
@@ -472,7 +472,7 @@ $section->addTextBreak(1);
 //----
 //$section->addTextBreak(1);
 $section->addText('CONTEXTO', 'titleStyle');
-$section->addTextBreak(2);
+$section->addTextBreak(3);
 //----
 $cellStyle = array('name'=>'Arial', 'size'=>14);
 //$arrayLiTexto	= nl2br($introduccion_met);
@@ -526,7 +526,7 @@ $section->addTextBreak(1);
 
 
 	$section->addText('OBJETIVO', 'titleStyle');
-	$section->addTextBreak(2);
+	$section->addTextBreak(3);
 	$cellStyle = array('name'=>'Arial', 'size'=>14);
 	$section->addText($objetivo_general, $cellStyle, 'pjustify' );
 	$section->addTextBreak(1);
@@ -561,7 +561,7 @@ if( !empty( $objetivos_especificos ) ):
 	$section->addTextBreak(1);
 	
 	$section->addText('OBJETIVOS ESPECIFICOS', 'titleStyle' );
-	$section->addTextBreak(2);
+	$section->addTextBreak(3);
 	
 	$cellStyle = array('name'=>'Arial', 'size'=>14);
 	if(!empty($objetivos_especificos)){
@@ -615,7 +615,7 @@ while($campos	= mysql_fetch_array($con)){
 $section->addTextBreak(1);
 //----
 $section->addText('METODOLOGIAS', 'titleStyle');
-$section->addTextBreak(2);
+$section->addTextBreak(3);
 //----
 $cellStyle = array('name'=>'Arial', 'size'=>14);
 //$arrayLiTexto	= nl2br($introduccion_met);
@@ -1011,7 +1011,7 @@ while($campos	= mysql_fetch_array($con)){
 }
 $section->addTextBreak(1);
 $section->addText('CALENDARIO', 'titleStyle');
-$section->addTextBreak(2);
+$section->addTextBreak(3);
 //---- consulta las semanas del calendario para el proceso actual
 $sqlR = "SELECT * FROM ".tablaCalendario." WHERE id_propuesta=".$idPropuesta;
 //echo '<BR>'.$sqlR;
@@ -1163,7 +1163,7 @@ while($campos	= mysql_fetch_array($con)){
 $section->addTextBreak(1);
 
 $section->addText('EQUIPO DE TRABAJO', 'titleStyle');
-$section->addTextBreak(2);
+$section->addTextBreak(3);
 
 $sql = "SELECT *
  FROM ".tablaEquipoTrabajo." A INNER JOIN ".tablaEquipoTrabajoRTA." B USING(id_persona)
@@ -1597,7 +1597,7 @@ while($campos	= mysql_fetch_array($con)){
 }
 $section->addTextBreak(1);
 $section->addText('PRODUCTOS', 'titleStyle');
-$section->addTextBreak(1);
+$section->addTextBreak(3);
 
 $cellStyle = array('name'=>'Arial', 'size'=>14);
 $section->addText($vb_productos, $cellStyle);
@@ -1646,7 +1646,7 @@ while($campos	= mysql_fetch_array($con)){
 }
 $section->addTextBreak(1);
 $section->addText('CONTROL DE CALIDAD', 'titleStyle');
-$section->addTextBreak(2);
+$section->addTextBreak(3);
 
 $cellStyle = array('name'=>'Arial', 'size'=>11);
 $section->addText(utf8_decode('El Centro Nacional de Consultoría:'), $cellStyle);
