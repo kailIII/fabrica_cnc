@@ -895,10 +895,11 @@ foreach( $metodologias_prop as $met_selected ){
 	$id_row_met 		= $met_selected["id_row_metodologia"];
 
 	$is_presencial = FALSE; // anula la cobertura
+
 	
 
 	// si la tabla es de 1 x 1 no se muestra en el output
-	if( count( $Metodologia->getTableVarianzas($id_row_met) ) > 1  && count( $Metodologia->getTableSegmentos($id_row_met) > 1) ){
+	if( count( $Metodologia->getTableVarianzas($id_row_met) ) >= 1  && count( $Metodologia->getTableSegmentos($id_row_met) ) > 1 ){
 
 		$section->addText( $met_selected["nom_metodologia"].': '.$met_selected["titulo"] );
 		$table = $section->addTable('tablaSegmentosStyle');		
